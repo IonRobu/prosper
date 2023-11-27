@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Prosper.MVVM.Views.TransactionCategoryPage"
+             NavigationPage.HasNavigationBar="False"
+             Title="TransactionCategoryPage">
+
+    <Grid RowDefinitions=".15*, .15*, .70*">
+        <RoundRectangle Grid.RowSpan="2" StyleClass="TopRectangle"/>
+        <VerticalStackLayout StyleClass="Header">
+            <Label StyleClass="HeaderSubTitle"
+                   Text="Add Transaction Category"/>
+        </VerticalStackLayout>
+
+        <Grid
+            Grid.Row="1"
+            Grid.RowSpan="2"
+            StyleClass="BalanceGrid">
+            <RoundRectangle StyleClass="BalanceRectangle"/>
+
+
+            <!-- Aici mai audau campurile pe care le mai vreau eu-->
+            <VerticalStackLayout Spacing="5" StyleClass="Padding25">
+                <Label Text="Category Name"/>
+                <Frame StyleClass="FrameBorder">
+					<Entry Text="{Binding TransactionCategory.Name}"/>
+                </Frame>
+
+                <Button StyleClass="MarginT15" Text="Save" x:Name="Save"
+                        Clicked="Save_Clicked"/>
+                <Button StyleClass="MarginT15, RedControl" Text="Cancel"
+                        x:Name="Cancel"
+                        Clicked="Cancel_Clicked"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
