@@ -1,11 +1,17 @@
-﻿using Prosper.MVVM.ViewModels;
+﻿using Prosper.MVVM.Models;
+using Prosper.MVVM.ViewModels;
 namespace Prosper.MVVM.Views;
 public partial class TransactionCategoryPage : ContentPage
 {
-	public TransactionCategoryPage()
+	public TransactionCategoryPage(TransactionCategory item = null)
 	{
 		InitializeComponent();
-		BindingContext = new SettingsViewModel();
+		var model = new SettingsViewModel();
+		if(item != null)
+		{
+			model.TransactionCategory = item;
+		}
+		BindingContext = model;
 	}
 
 	private async void Save_Clicked(object sender, EventArgs e)

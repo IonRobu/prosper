@@ -1,12 +1,18 @@
-﻿using Prosper.MVVM.ViewModels;
+﻿using Prosper.MVVM.Models;
+using Prosper.MVVM.ViewModels;
 
 namespace Prosper.MVVM.Views;
 public partial class CardPage : ContentPage
 {
-	public CardPage()
+	public CardPage(Card item = null)
 	{
 		InitializeComponent();
-		BindingContext = new SettingsViewModel();
+		var model = new SettingsViewModel();
+		if (item != null)
+		{
+			model.Card = item;
+		}
+		BindingContext = model;
 	}
 
 	private async void Save_Clicked(object sender, EventArgs e)

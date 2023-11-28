@@ -5,9 +5,9 @@
              NavigationPage.HasNavigationBar="False"
              Title="TransactionsPage">
 
-	<Grid RowDefinitions=".15*, .15*, .70*">
+	<Grid RowDefinitions=".10*, .10*, .80*">
 		<RoundRectangle Grid.RowSpan="2" StyleClass="TopRectangle"/>
-		<VerticalStackLayout StyleClass="Header">
+		<VerticalStackLayout StyleClass="Header" Grid.Row="0">
 			<Label StyleClass="HeaderSubTitle"
                    Text="Add Transactions"/>
 		</VerticalStackLayout>

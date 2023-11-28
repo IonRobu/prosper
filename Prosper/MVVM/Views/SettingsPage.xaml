@@ -10,78 +10,7 @@
 		<converters:AmountToCurencyConverter x:Key="AmountConverter"/>
 		<converters:AmountToColorConverter x:Key="ColorConverter"/>
 	</ContentPage.Resources>
-	<!--Primul Grid imi creaza ecranul mov-->
-	<!--<Grid RowDefinitions=".5*, .5*">
-		-->
-	<!--<RoundRectangle StyleClass="TopRectangle"/>-->
-	<!--
-		<VerticalStackLayout StyleClass="Header" Grid.Row="1">
-			<Label StyleClass="HeaderSubTitle"
-                          Text="Transaction categories"/>
-			<CollectionView 
-                EmptyView="NoData"
-                ItemsSource="{Binding TransactionCategories}">
-				<CollectionView.ItemsLayout>
-					<LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
-				</CollectionView.ItemsLayout>
-				<CollectionView.EmptyViewTemplate>
-					<DataTemplate>
-						<Grid>
-							<Label StyleClass="NoDataText" Text="No Data Found, click on the + button to add a new transaction"/>
-						</Grid>
-					</DataTemplate>
-				</CollectionView.EmptyViewTemplate>
-				<CollectionView.ItemTemplate>
-					<DataTemplate>
-						<Grid ColumnDefinitions="*" RowDefinitions="*">
-							<Label StyleClass="SmallFont" Text="{Binding Name}"/>
-						</Grid>
-					</DataTemplate>
-				</CollectionView.ItemTemplate>
-			</CollectionView>
-			<Button x:Name="AddTransactionCategory" Clicked="AddTransactionCategory_Clicked" StyleClass="CircularButton" Text="+"/>
-		</VerticalStackLayout>
-
-
-		-->
-	<!-- CollectionView for Transactions -->
-	<!--
-
-
-		<VerticalStackLayout StyleClass="Header" Grid.Row="2">
-			<CollectionView Grid.Row="3"
-			EmptyView="NoData"
-			ItemsSource="{Binding Accounts}">
-				<CollectionView.ItemsLayout>
-					<LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
-				</CollectionView.ItemsLayout>
-				<CollectionView.EmptyViewTemplate>
-					<DataTemplate>
-						<Grid>
-							<Label StyleClass="NoDataText" Text="No Data Found, click on the + button to add a new transaction"/>
-						</Grid>
-					</DataTemplate>
-				</CollectionView.EmptyViewTemplate>
-				<CollectionView.ItemTemplate>
-					<DataTemplate>
-						<Grid ColumnDefinitions="*,*" RowDefinitions="*,*">
-							<Label StyleClass="StrongMediumTitle" Text="{Binding Name}"/>
-						</Grid>
-					</DataTemplate>
-				</CollectionView.ItemTemplate>
-			</CollectionView>
-
-			<Button x:Name="AddAccountCategory" Clicked="AddAccount_Clicked" StyleClass="CircularButton" Text="+"/>
-		</VerticalStackLayout>
-
-		-->
-	<!-- CollectionView for Accounts -->
-	<!--
-
-	</Grid>-->
-
-
-
+	
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"  />
@@ -123,8 +52,15 @@
 									<RowDefinition Height="Auto"  />
 									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
-								<Label Grid.Row="0" StyleClass="SmallFont" Text="{Binding Name}" Margin="10,10,0,0"/>
-								<BoxView  Grid.Row="1" HeightRequest="1" Color="LightGray"  Margin ="10, 0, 40, 0"/>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"  />
+									<ColumnDefinition Width="80" />
+									<ColumnDefinition Width="90" />
+								</Grid.ColumnDefinitions>
+								<Label Grid.Row="0" Grid.Column="0" StyleClass="SmallFont" Text="{Binding Name}" Margin="10,10,0,0"/>
+								<Button Grid.Row="0" Grid.Column="1" Text="Edit" CommandParameter="{Binding Id}" WidthRequest="75" StyleClass="ListButton" x:Name="Edit" Clicked="EditTransactionCategory_Clicked"/>
+								<Button Grid.Row="0" Grid.Column="2" Text="Delete" CommandParameter="{Binding Id}" WidthRequest="85" x:Name="Delete" StyleClass="ListButton" Clicked="DeleteTransactionCategory_Clicked"/>
+								<BoxView Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Color="LightGray"  Margin ="10, 0, 40, 0"/>
 							</Grid>
 						</DataTemplate>
 					</CollectionView.ItemTemplate>
@@ -165,8 +101,15 @@
 									<RowDefinition Height="Auto"  />
 									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"  />
+									<ColumnDefinition Width="80" />
+									<ColumnDefinition Width="90" />
+								</Grid.ColumnDefinitions>
 								<Label Grid.Row="0" StyleClass="SmallFont" Text="{Binding Name}" Margin="10,10,0,0"/>
-								<BoxView  Grid.Row="1" HeightRequest="1" Color="LightGray"  Margin ="10, 0, 40, 0"/>
+								<Button Grid.Row="0" Grid.Column="1" Text="Edit" CommandParameter="{Binding Id}" WidthRequest="75" StyleClass="ListButton" x:Name="Edit" Clicked="EditAccount_Clicked"/>
+								<Button Grid.Row="0" Grid.Column="2" Text="Delete" CommandParameter="{Binding Id}" WidthRequest="85" x:Name="Delete" StyleClass="ListButton" Clicked="DeleteAccount_Clicked"/>
+								<BoxView  Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Color="LightGray"  Margin ="10, 0, 40, 0"/>
 							</Grid>
 						</DataTemplate>
 					</CollectionView.ItemTemplate>
@@ -208,12 +151,14 @@
 									<RowDefinition Height="Auto" />
 								</Grid.RowDefinitions>
 								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="50*"  />
-									<ColumnDefinition Width="50*" />
+									<ColumnDefinition Width="*"  />
+									<ColumnDefinition Width="80" />
+									<ColumnDefinition Width="90" />
 								</Grid.ColumnDefinitions>
 								<Label Grid.Row="0" Grid.Column="0" StyleClass="SmallFont" Text="{Binding Name}" Margin="10,10,0,0"/>
-								<Label Grid.Row="0" Grid.Column="1" StyleClass="SmallFont" Text="{Binding Number}" Margin="10,10,0,0"/>
-								<BoxView  Grid.Row="1" Grid.RowSpan="2" HeightRequest="1" Color="LightGray"  Margin ="10, 0, 40, 0"/>
+								<Button Grid.Row="0" Grid.Column="1" Text="Edit" CommandParameter="{Binding Id}" WidthRequest="75" StyleClass="ListButton" x:Name="Edit" Clicked="EditCard_Clicked"/>
+								<Button Grid.Row="0" Grid.Column="2" Text="Delete" CommandParameter="{Binding Id}" WidthRequest="85" x:Name="Delete" StyleClass="ListButton" Clicked="DeleteCard_Clicked"/>
+								<BoxView  Grid.Row="1" Grid.ColumnSpan="3" HeightRequest="1" Color="LightGray"  Margin ="10, 0, 40, 0"/>
 							</Grid>
 						</DataTemplate>
 					</CollectionView.ItemTemplate>

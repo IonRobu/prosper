@@ -13,77 +13,89 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Prosper
-build_property.ProjectDir = Y:\OneDrive\Work\Projects\_support\Prosper\Prosper\Prosper\
+build_property.ProjectDir = X:\Projects\misc\prosper\master\src\Prosper\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/App.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/AppShell.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/MainPage.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MainPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/MVVM/Views/AppContainer.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/AccountPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.AccountPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MVVM\Views\AccountPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MVVM\Views\AccountPage.xaml
+
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/AppContainer.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.AppContainer.xaml
 build_metadata.AdditionalFiles.TargetPath = MVVM\Views\AppContainer.xaml
 build_metadata.AdditionalFiles.RelativePath = MVVM\Views\AppContainer.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/MVVM/Views/DashboardPage.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/CardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.CardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MVVM\Views\CardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MVVM\Views\CardPage.xaml
+
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/DashboardPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.DashboardPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MVVM\Views\DashboardPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MVVM\Views\DashboardPage.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/MVVM/Views/SettingsPage.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/SettingsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.SettingsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MVVM\Views\SettingsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MVVM\Views\SettingsPage.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/MVVM/Views/StatisticsPage.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/StatisticsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.StatisticsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MVVM\Views\StatisticsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MVVM\Views\StatisticsPage.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/MVVM/Views/TransactionCategoryPage.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/TransactionCategoryPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.TransactionCategoryPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MVVM\Views\TransactionCategoryPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MVVM\Views\TransactionCategoryPage.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/MVVM/Views/TransactionsPage.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/MVVM/Views/TransactionsPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.MVVM.Views.TransactionsPage.xaml
 build_metadata.AdditionalFiles.TargetPath = MVVM\Views\TransactionsPage.xaml
 build_metadata.AdditionalFiles.RelativePath = MVVM\Views\TransactionsPage.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/Resources/Styles/AppStyles.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/Resources/Styles/AppStyles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.Resources.Styles.AppStyles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\AppStyles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\AppStyles.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/Resources/Styles/Colors.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
 
-[Y:/OneDrive/Work/Projects/_support/Prosper/Prosper/Prosper/Resources/Styles/Styles.xaml]
+[X:/Projects/misc/prosper/master/src/Prosper/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Prosper.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml

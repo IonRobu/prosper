@@ -22,8 +22,11 @@ public partial class StatisticsPage : ContentPage
 		var picker = (Picker)sender;
 		int selectedIndex = picker.SelectedIndex;
 		var curentVM = (StatisticsViewModel)BindingContext;
-		var selected = curentVM.Accounts[selectedIndex];
-		curentVM.Account = selected;
+		if (selectedIndex != -1)
+		{
+			var selected = curentVM.Accounts[selectedIndex];
+			curentVM.Account = selected;
+		}
 	}
 
 	private async void Filter_Clicked(object sender, EventArgs e)

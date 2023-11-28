@@ -34,6 +34,12 @@ public class SettingsViewModel
 		return App.TransactionsRepo.StatusMessage;
 	}
 
+	public string DeleteTransactionCategory(TransactionCategory item)
+	{
+		App.TransactionsCategoryRepo.DeleteItem(item);
+		return App.TransactionsRepo.StatusMessage;
+	}
+
 	public string SaveAccount(out bool succeeded)
 	{
 		if (Account.Name == null)
@@ -43,6 +49,12 @@ public class SettingsViewModel
 		}
 		App.AccountRepo.SaveItem(Account);
 		succeeded = true;
+		return App.TransactionsRepo.StatusMessage;
+	}
+
+	public string DeleteAccount(Account item)
+	{
+		App.AccountRepo.DeleteItem(item);
 		return App.TransactionsRepo.StatusMessage;
 	}
 
@@ -60,6 +72,12 @@ public class SettingsViewModel
 		}
 		App.CardRepo.SaveItem(Card);
 		succeeded = true;
+		return App.TransactionsRepo.StatusMessage;
+	}
+
+	public string DeleteCard(Card item)
+	{
+		App.CardRepo.DeleteItem(item);
 		return App.TransactionsRepo.StatusMessage;
 	}
 

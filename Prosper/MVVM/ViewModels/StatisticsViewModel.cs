@@ -8,9 +8,9 @@ namespace Prosper.MVVM.ViewModels;
 [AddINotifyPropertyChangedInterface]
 public class StatisticsViewModel
 {
-	public DateTime? StartDate { get; set; } = DateTime.UtcNow.AddMonths(-1);
+	public DateTime? StartDate { get; set; } = DateTime.UtcNow.AddMonths(-1).AddDays(1);
 
-	public DateTime? EndDate { get; set; } = DateTime.UtcNow;
+	public DateTime? EndDate { get; set; } = DateTime.UtcNow.AddDays(1);
 
 	public string Test { get; set; }
 
@@ -40,12 +40,12 @@ public class StatisticsViewModel
 	{
 		if (StartDate == null)
 		{
-			message = "Filed 'Start date' is required";
+			message = "Field 'Start date' is required";
 			return;
 		}
 		if (EndDate == null)
 		{
-			message = "Filed 'End date' is required";
+			message = "Field 'End date' is required";
 			return;
 		}
 

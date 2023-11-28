@@ -1,11 +1,17 @@
-﻿using Prosper.MVVM.ViewModels;
+﻿using Prosper.MVVM.Models;
+using Prosper.MVVM.ViewModels;
 namespace Prosper.MVVM.Views;
 public partial class AccountPage : ContentPage
 {
-	public AccountPage()
+	public AccountPage(Account item = null)
 	{
 		InitializeComponent();
-		BindingContext = new SettingsViewModel();
+		var model = new SettingsViewModel();
+		if (item != null)
+		{
+			model.Account = item;
+		}
+		BindingContext = model;
 	}
 
     private async void Save_Clicked(object sender, EventArgs e)

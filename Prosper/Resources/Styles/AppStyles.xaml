@@ -131,7 +131,11 @@
         <Setter Property="Clip" Value="{StaticResource circle}" />
     </Style>
 
-    <Style Class="NoDataText" TargetType="Label">
+	<Style Class="ListButton" TargetType="Button">
+		<Setter Property="BackgroundColor" Value="{StaticResource MainColor}" />
+	</Style>
+
+	<Style Class="NoDataText" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource Black}" />
         <Setter Property="VerticalOptions" Value="Center" />
