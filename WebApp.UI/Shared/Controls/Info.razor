@@ -1,0 +1,12 @@
+﻿@inherits MxControl
+<TelerikNotification @ref="Notification"
+					 Class="demo-notification"
+					 HorizontalPosition="@NotificationHorizontalPosition.Right"
+					 VerticalPosition="@NotificationVerticalPosition.Bottom">
+    <Template>
+        <div>
+			@(new MarkupString(context.Text))
+        </div>
+    </Template>
+</TelerikNotification>
+

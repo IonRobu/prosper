@@ -1,0 +1,28 @@
+﻿@inherits MxControl
+<span>&nbsp;</span>
+<div class="dropdown position-relative float-end @CssClass">
+	
+	@if (Header != null)
+	{
+		<span class="me-2">@Header</span>
+	}
+	<a href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+		@if (!IconButton)
+		{
+			<TelerikButton Rounded="@ThemeConstants.Button.Rounded.Full"
+					   FillMode="@ThemeConstants.Button.FillMode.Outline"
+					   ThemeColor="@ThemeConstants.Button.ThemeColor.Secondary"
+					   Icon="@FontIcon.ChevronDown">
+			</TelerikButton>
+		}
+		else
+		{
+			<TelerikFontIcon Icon="@FontIcon.MoreHorizontal"
+							 Size="@ThemeConstants.FontIcon.Size.Large"
+							 ThemeColor="@ThemeConstants.FontIcon.ThemeColor.Secondary" />
+		}
+	</a>
+	<div class="dropdown-menu dropdown-menu-end">
+		@Items
+	</div>
+</div>

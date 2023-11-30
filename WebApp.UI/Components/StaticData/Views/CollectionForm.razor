@@ -1,0 +1,99 @@
+﻿@inherits FormView<CollectionModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<Button CssClass="float-end"
+				Icon="FontIcon.Save"
+				OnClick="async () => await SaveAsync()" />
+	</Actions>
+	<Body>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_Name
+			</Cell>
+			<Cell Size="6">
+				<TelerikTextBox @bind-Value="Model.Name" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_Owner
+			</Cell>
+			<Cell Size="6">
+				<TelerikTextBox @bind-Value="Model.Owner" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_City
+			</Cell>
+			<Cell Size="4">
+				<TelerikTextBox @bind-Value="Model.City" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_Address
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Address" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_WebAddress
+			</Cell>
+			<Cell Size="6">
+				<TelerikTextBox @bind-Value="Model.WebAddress" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_Phone
+			</Cell>
+			<Cell Size="6">
+				<TelerikTextBox @bind-Value="Model.Phone" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_Email
+			</Cell>
+			<Cell Size="6">
+				<TelerikTextBox @bind-Value="Model.Email" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_InternationalCode
+			</Cell>
+			<Cell Size="6">
+				<TelerikTextBox @bind-Value="Model.InternationalCode" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_InventoryIdentifier
+			</Cell>
+			<Cell Size="6">
+				<TelerikTextBox @bind-Value="Model.InventoryIdentifier" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Collection_Type
+			</Cell>
+			<Cell Size="4">
+				<TelerikDropDownList @bind-Value="Model.Type.Id"
+									 Class="min-width"
+									 Data="TypeList"
+									 ValueField="Id"
+									 TextField="Name"
+									 DefaultText=""
+									 Width="70%">
+				</TelerikDropDownList>
+			</Cell>
+		</Row>
+	</Body>
+</MxView>

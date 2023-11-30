@@ -1,0 +1,43 @@
+﻿@inherits PageListView<MeasureUnitModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<OptionMenu>
+			<Items>
+				<OptionItem Text="Add" OnClick="() => Form()" />
+			</Items>			
+		</OptionMenu>
+	</Actions>
+	<Body>
+		<TelerikListView TItem="MeasureUnitModel"
+						 OnRead="ReadItemsAsync"
+						 Pageable="true"
+						 PageSize="Source.PageSize">
+			<Template>
+				<div class="d-flex align-items-start">
+					<div class="flex-grow-1">
+						<OptionMenu>
+							<Items>
+								<OptionItem Text="Edit" OnClick="() => Edit(context)" />
+							</Items>							
+						</OptionMenu>
+						<div class="mb-1">
+							<strong class="ms-2">@context.Name</strong>
+							@if (!string.IsNullOrEmpty(context.Code))
+							{
+								<strong class="ms-2 text-muted">(@context.Code)</strong>
+							}
+							@if (context.Inactive)
+							{
+								<Separator />
+								<small class="ms-2 text-muted">Inactive</small>
+							}
+						</div>
+					</div>
+				</div>
+				<hr />
+			</Template>
+		</TelerikListView>
+	</Body>
+</MxView>

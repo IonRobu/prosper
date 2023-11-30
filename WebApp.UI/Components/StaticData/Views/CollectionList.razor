@@ -1,0 +1,73 @@
+﻿@inherits PageListView<CollectionModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<OptionMenu>
+			<Items>
+				<OptionItem Text="Add" OnClick="() => Form()" />
+			</Items>
+		</OptionMenu>
+	</Actions>
+	<Body>
+		<TelerikListView @ref="list"
+						 TItem="CollectionModel"
+						 OnRead="ReadItemsAsync"
+						 Pageable="true"
+						 PageSize="Source.PageSize">
+			<HeaderTemplate>
+				<Row>
+					<Cell Size="12">
+						<OptionMenu IconButton="true">
+							<Header>
+								Sort field:
+								@if (SortInfo.Field != null)
+								{
+									<span class="text-info">@GetSortLabel(SortInfo.Field, SortInfo.IsAscending)</span>
+								}
+							</Header>
+							<Items>
+								<OptionItem Text="@GetSortLabel(nameof(CollectionModel.Name), true)" OnClick='() => SetSorter(nameof(CollectionModel.Name), true)' />
+								<OptionItem Text="@GetSortLabel(nameof(CollectionModel.Name), false)" OnClick='() => SetSorter(nameof(CollectionModel.Name), false)' />
+								@*<OptionItem Text="@GetSortLabel(nameof(CollectionModel.InternationalCode), true)" OnClick='() => SetSorter(nameof(CollectionModel.InternationalCode), true)' />
+								<OptionItem Text="@GetSortLabel(nameof(CollectionModel.InternationalCode), false)" OnClick='() => SetSorter(nameof(CollectionModel.InternationalCode), false)' />*@
+								<OptionItem Text="@GetSortLabel("Type.Name", true)" OnClick='() => SetSorter("Type.Name", true)' />
+								<OptionItem Text="@GetSortLabel("Type.Name", false)" OnClick='() => SetSorter("Type.Name", false)' />
+							</Items>
+						</OptionMenu>
+						<TelerikTextBox @bind-Value="QueryInfo.Text" Width="40%" Placeholder="Name, code, type..." />
+						<Button Icon="FontIcon.Filter" Size="@ThemeConstants.Button.Size.Small" OnClick="() => Filter()" />
+						<Button Icon="FontIcon.FilterClear" Size="@ThemeConstants.Button.Size.Small" OnClick="() => ResetFilter()" />
+					</Cell>
+				</Row>
+
+				<Separator Type="SeparatorType.Line" />
+			</HeaderTemplate>
+			<Template>
+				<div class="d-flex align-items-start">
+					<div class="flex-grow-1">
+						<OptionMenu>
+							<Items>
+								<OptionItem Text="Edit" OnClick="() => Edit(context)" />
+								<OptionItem Text="Delete" OnClick="async () => await DeleteAsync(context)" />
+							</Items>
+						</OptionMenu>
+						<div class="mb-1">
+							@*@if (!string.IsNullOrEmpty(context.InternationalCode))
+							{
+								<strong class="me-1 text-muted">[@context.InternationalCode]</strong>
+							}*@
+							<strong>@context.Name</strong>
+							@if (!string.IsNullOrEmpty(context.Type.Name))
+							{
+								<Separator />
+								<small class="text-muted">@context.Type.Name</small>
+							}
+						</div>
+					</div>
+				</div>
+				<hr />
+			</Template>
+		</TelerikListView>
+	</Body>
+</MxView>

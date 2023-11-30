@@ -1,0 +1,37 @@
+html, body {
+    font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
+}
+
+.login-page {
+    background-image: url('/images/home_bg.jpg')
+}
+
+.btn-common {
+    box-shadow: none !important;
+    color: #10c4b2 !important;
+    background-color: transparent !important;
+}
+
+    .btn-common btn-common-border {
+        border-color: currentColor !important;
+    }
+
+.k-card-header {
+    overflow: unset !important;
+}
+
+.k-card-list-item {
+    overflow: inherit !important;
+}
+
+.k-listview-content {
+    overflow: inherit !important;
+}
+
+.min-width {
+    min-width: 200px !important;
+}
+
+.min-col-width {
+    min-width: 30px !important;
+}

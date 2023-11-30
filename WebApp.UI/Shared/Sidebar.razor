@@ -1,0 +1,65 @@
+﻿@using Methodic.Blazor.UI.Components.Index.Pages;
+<nav id="sidebar" class="sidebar">
+	<div class="sidebar-content js-simplebar" data-simplebar="init">
+		<div class="simplebar-wrapper" style="margin: 0px;">
+			<div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask">
+				<div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+					<div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+						<div class="simplebar-content" style="padding: 0px;">
+							<a class="sidebar-brand">
+								<img src="/images/logo.jpg" width="50" height="50"/>
+
+								<span class="align-middle me-3">Nagoya</span>
+							</a>
+
+							<ul class="sidebar-nav">
+								<li class="sidebar-item">
+									<a class="sidebar-link">
+										<span class="align-middle" @onclick="async () => await GoToItemAsync(typeof(IndexPage))">Dashboard</span>
+									</a>
+								</li>
+								<li class="sidebar-item">
+									<a data-bs-target="#documentation" data-bs-toggle="collapse" class="sidebar-link" aria-expanded="true">
+										<span class="align-middle">Data</span>
+									</a>
+									<ul id="documentation" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar" style="">
+										<li class="sidebar-item">
+											<a class="sidebar-link">
+												@* <span class="align-middle" @onclick="async () => await GoToItemAsync(typeof(ApplicationPage))">Applications</span> *@
+											</a>
+										</li>
+									</ul>
+								</li>
+								<li class="sidebar-item">
+									<a data-bs-target="#documentation" data-bs-toggle="collapse" class="sidebar-link" aria-expanded="true">
+										<span class="align-middle">Configuration</span>
+									</a>
+									<ul id="documentation" class="sidebar-dropdown list-unstyled collapse show" data-bs-parent="#sidebar" style="">
+										<li class="sidebar-item">
+											<a class="sidebar-link">
+												<span class="align-middle" @onclick="async () => await GoToItemAsync(typeof(IndexPage))">Forms configuration</span>
+											</a>
+										</li>
+										<li class="sidebar-item">
+											<a class="sidebar-link">
+												<span class="align-middle" @onclick="async () => await GoToItemAsync(typeof(IndexPage))">Fields configuration</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="simplebar-placeholder" style="width: auto; height: 536px;"></div>
+		</div>
+		<div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+			<div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+		</div>
+		<div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+			<div class="simplebar-scrollbar" style="height: 275px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+		</div>
+	</div>
+</nav>

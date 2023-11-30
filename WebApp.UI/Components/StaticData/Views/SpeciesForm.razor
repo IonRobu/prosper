@@ -1,0 +1,98 @@
+﻿@inherits FormView<SpeciesModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<Button CssClass="float-end"
+				Icon="FontIcon.Save"
+				OnClick="async () => await SaveAsync()" />
+	</Actions>
+	<Body>
+		@*<TelerikForm Model="@Model"
+		OnValidSubmit="@SaveAsync">
+		<FormValidation>
+		<DataAnnotationsValidator></DataAnnotationsValidator>
+		</FormValidation>
+		<FormItems>
+		<FormItem Field="@nameof(CollectionTypeModel.Name)">
+		<Template>
+		<label for="Name" class="k-label k-form-label">@I18n.Model.FormModel_Name</label>
+		<TelerikTextBox Id="Name" @bind-Value="@Model.Name" Width="50%" ></TelerikTextBox>
+		</Template>
+		</FormItem>
+		</FormItems>
+		</TelerikForm>*@
+
+
+
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Species_Taxon
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Taxon" Width="50%" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Species_Group
+			</Cell>
+			<Cell Size="8">
+				@*<TelerikTextBox @bind-Value="Model.Type" Width="50%" />*@
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Species_Phylum
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Phylum" Width="50%" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Species_Class
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Class" Width="50%" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Species_Order
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Order" Width="50%" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Species_Family
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Family" Width="50%" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.Species_Genus
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Genus" Width="50%" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.CollectionType_Inactive
+			</Cell>
+			<Cell Size="8">
+				<TelerikSwitch @bind-Value="@Model.Inactive"
+							   TrackRounded="@ThemeConstants.Switch.TrackRounded.Full"
+							   ThumbRounded="@ThemeConstants.Switch.ThumbRounded.Full"
+							   Size="@ThemeConstants.Switch.Size.Medium">
+				</TelerikSwitch>
+			</Cell>
+		</Row>
+
+	</Body>
+</MxView>

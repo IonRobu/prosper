@@ -1,0 +1,41 @@
+﻿@inherits FormView<MeasureUnitModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<Button CssClass="float-end"
+				Icon="FontIcon.Save"
+				OnClick="async () => await SaveAsync()" />
+	</Actions>
+	<Body>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.MeasureUnit_Name
+			</Cell>
+			<Cell Size="4">
+				<TelerikTextBox @bind-Value="Model.Name" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.MeasureUnit_Code
+			</Cell>
+			<Cell Size="2">
+				<TelerikTextBox @bind-Value="Model.Code" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.MeasureUnit_Inactive
+			</Cell>
+			<Cell Size="8">
+				<TelerikSwitch @bind-Value="@Model.Inactive"
+							   TrackRounded="@ThemeConstants.Switch.TrackRounded.Full"
+							   ThumbRounded="@ThemeConstants.Switch.ThumbRounded.Full"
+							   Size="@ThemeConstants.Switch.Size.Small">
+				</TelerikSwitch>
+			</Cell>
+		</Row>
+
+	</Body>
+</MxView>

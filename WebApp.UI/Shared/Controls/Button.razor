@@ -1,0 +1,25 @@
+﻿@inherits ComponentBase
+
+@if (!string.IsNullOrEmpty(Text))
+{
+	<TelerikButton OnClick="() => OnClick?.Invoke()"
+				   Icon="@Icon"
+				   Class=@CssClass
+				   FillMode="@FillMode"
+				   Size="@Size"
+				   ThemeColor="@Color"
+				   Enabled="!Disabled">
+		@Text
+	</TelerikButton>
+}
+else
+{
+	<TelerikButton OnClick="() => OnClick?.Invoke()"
+				   Icon="@Icon"
+				   Class=@CssClass
+				   FillMode="@FillMode"
+				   Size="@Size"
+				   ThemeColor="@Color"
+				   Enabled="!Disabled">
+	</TelerikButton>
+}

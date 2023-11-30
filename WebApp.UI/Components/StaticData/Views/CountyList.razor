@@ -1,0 +1,25 @@
+﻿@inherits PageListView<CountyModel>
+
+<MxView>
+	<Body>
+		<TelerikListView TItem="CountyModel"
+						 OnRead="ReadItemsAsync"
+						 Pageable="true"
+						 PageSize="Source.PageSize">
+			<Template>
+				<div class="d-flex align-items-start">
+					<div class="flex-grow-1">
+						<div class="mb-1">
+							<strong class="ms-2">@context.Name</strong>
+							@if (!string.IsNullOrEmpty(context.Code))
+							{
+								<strong class="ms-2 text-muted">(@context.Code)</strong>
+							}
+						</div>
+					</div>
+				</div>
+				<hr />
+			</Template>
+		</TelerikListView>
+	</Body>
+</MxView>

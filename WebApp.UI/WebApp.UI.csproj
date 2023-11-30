@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+		<I18nTextFallBackLanguage>en-US</I18nTextFallBackLanguage>
+		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
+		<Version>1.0.0</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Components\Common\**" />
+	  <Compile Remove="Components\StaticData\**" />
+	  <Content Remove="Components\Common\**" />
+	  <Content Remove="Components\StaticData\**" />
+	  <EmbeddedResource Remove="Components\Common\**" />
+	  <EmbeddedResource Remove="Components\StaticData\**" />
+	  <None Remove="Components\Common\**" />
+	  <None Remove="Components\StaticData\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Services\ApplicationService.cs" />
+	  <Compile Remove="Services\AuthService.cs" />
+	  <Compile Remove="Services\DocumentService.cs" />
+	  <Compile Remove="Services\FormService.cs" />
+	  <Compile Remove="Services\IdentityService.cs" />
+	  <Compile Remove="Services\Service.cs" />
+	  <Compile Remove="Services\StaticDataService.cs" />
+	  <Compile Remove="Shared\NavMenu.razor.cs" />
+	  <Compile Remove="Validators\CollectionModelValidator.cs" />
+	  <Compile Remove="Validators\CollectionTypeModelValidator.cs" />
+	  <Compile Remove="Validators\FieldModelValidator.cs" />
+	  <Compile Remove="Validators\FormModelValidator.cs" />
+	  <Compile Remove="Validators\LoginModelValidator.cs" />
+	  <Compile Remove="Validators\MeasureUnitModelValidator.cs" />
+	  <Compile Remove="Validators\PasswordChangeModelValidator.cs" />
+	  <Compile Remove="Validators\PasswordRecoveryModelValidator.cs" />
+	  <Compile Remove="Validators\PasswordResetModelValidator.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="Shared\NavMenu.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Methodic.Blazor.UI" Version="1.0.0-preview3.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="8.0.0" />
+		<PackageReference Include="Telerik.UI.for.Blazor.Trial" Version="5.0.1" />
+		<PackageReference Include="Toolbelt.Blazor.I18nText" Version="12.0.2" />
+		<PackageReference Include="BlazorDownloadFile" Version="2.4.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Core.Common\Core.Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ServiceWorker Include="wwwroot\service-worker.js" PublishedContent="wwwroot\service-worker.published.js" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Components\Home\Views\" />
+	  <Folder Include="Services\" />
+	  <Folder Include="Validators\" />
+	</ItemGroup>
+
+</Project>
