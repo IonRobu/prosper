@@ -1,4 +1,4 @@
-﻿using Core.Data.Domain.Static;
+﻿using Data.Domain.Static;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Contexts;

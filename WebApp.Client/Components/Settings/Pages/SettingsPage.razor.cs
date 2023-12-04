@@ -8,7 +8,7 @@ namespace WebApp.Client.Components.Settings.Pages;
 public partial class SettingsPage
 {
 	[Parameter]
-	public long Id { get; set; }
+	public int Id { get; set; }
 
 	[RouteName]
 	public const string RouteCategoryList = "category-list";
@@ -67,7 +67,7 @@ public partial class SettingsPage
 		await Navigation.GoToAsync(route);
 	}
 
-	public async Task GoToFormAsync(string item, long id)
+	public async Task GoToFormAsync(string item, int id)
 	{
 		var route = "";
 		switch (item)

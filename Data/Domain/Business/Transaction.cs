@@ -1,7 +1,7 @@
 ﻿using Methodic.Data.Domain.Base;
-using Core.Data.Domain.Static;
+using Data.Domain.Static;
 
-namespace Core.Core.Data.Domain.Business;
+namespace Data.Domain.Business;
 
 public class Transaction: BusinessEntity<int>
 {

@@ -1,7 +1,7 @@
 using AutoMapper;
 using Core.Common.Models;
 using Core.Common.Queries;
-using Core.Data.Domain.Static;
+using Data.Domain.Static;
 using Core.Repositories;
 using Data.Contexts;
 using LinqKit;

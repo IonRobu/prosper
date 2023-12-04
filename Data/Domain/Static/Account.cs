@@ -1,6 +1,6 @@
 ﻿using Methodic.Data.Domain.Base;
 
-namespace Core.Data.Domain.Static;
+namespace Data.Domain.Static;
 
 public class Account : StaticEntity<int>
 {

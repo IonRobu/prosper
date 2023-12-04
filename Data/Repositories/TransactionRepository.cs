@@ -1,7 +1,7 @@
 using AutoMapper;
 using Core.Common.Models;
 using Core.Common.Queries;
-using Core.Core.Data.Domain.Business;
+using Data.Domain.Business;
 using Core.Repositories;
 using Data.Contexts;
 using LinqKit;

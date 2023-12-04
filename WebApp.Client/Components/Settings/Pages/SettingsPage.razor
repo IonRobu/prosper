@@ -9,8 +9,8 @@
 	<StaticDataPanel OnSelected="async (item) => await GoToListAsync(item)" />
 </ViewRoute>
 <ViewRoute Name="@RouteCategoryList">
-	<CategoryList OnAdd='async () => await GoToFormAsync("Collection", 0)'
-				  OnEdit='async(id) => await GoToFormAsync("Collection", id)' />
+	<CategoryList OnAdd='async () => await GoToFormAsync("Category", 0)'
+				  OnEdit='async(id) => await GoToFormAsync("Category", id)' />
 </ViewRoute>
 <ViewRoute Name="@RouteCategoryForm">
 	<CategoryForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
