@@ -13,6 +13,8 @@ public interface IStaticDataService : IService
 
 	Task<Result<CategoryModel>> SaveCategoryAsync(CategoryModel model);
 
+	Task<Result<bool>> DeleteCategoryAsync(CategoryModel model);
+
 	Result<PageList<CardModel>> GetCardPage(QueryInfo queryInfo);
 
 	Result<CardModel> GetCardById(int id);

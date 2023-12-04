@@ -6,6 +6,7 @@ using Telerik.Blazor;
 using Telerik.Blazor.Components;
 using Telerik.DataSource;
 using Telerik.FontIcons;
+using WebApp.Client.Configuration;
 using WebApp.Client.Services;
 
 namespace WebApp.Client.Components.Settings.Views;
@@ -66,7 +67,6 @@ public partial class CategoryList
 		{
 			OnEdit?.Invoke(item.Id);
 		}
-
 	}
 
 	protected void RebindGrid()
@@ -95,5 +95,19 @@ public partial class CategoryList
 			Field = "Name",
 			IsAscending = IsAscending
 		});
+	}
+
+	private async Task<bool> DeleteAsync(CategoryModel item)
+	{
+		var confirmed = await Dialogs.ConfirmAsync("Are you sure you want to delete?", "Confirm operation");
+		if (confirmed)
+		{
+			var result = await StaticDataService.DeleteCategoryAsync(item);
+			Console.Write(result);
+			RebindGrid();
+			StateHasChanged();
+			return result;
+		}
+		return false;
 	}
 }

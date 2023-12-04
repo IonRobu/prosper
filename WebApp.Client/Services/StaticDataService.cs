@@ -49,15 +49,15 @@ public class StaticDataService : HttpServiceBase
 		return result;
 	}
 
-	//public async Task<bool> DeleteCollectionAsync(CollectionModel model)
-	//{
-	//	var result = await RequestAsync(RouteHelper.StaticData.DeleteCollection, model, opts =>
-	//	{
-	//		opts.AsPostMethod();
-	//	})
-	//	.ResponseAsync<bool>();
-	//	return result;
-	//}
+	public async Task<bool> DeleteCategoryAsync(CategoryModel model)
+	{
+		var result = await RequestAsync(RouteHelper.StaticData.DeleteCategory, model, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<bool>();
+		return result;
+	}
 
 	public async Task<PageList<CardModel>> GetCardPageAsync(CardQueryInfo queryInfo)
 	{

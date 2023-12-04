@@ -43,6 +43,13 @@ public class StaticDataController : ApiController
 		return Result(result);
 	}
 
+	[HttpPost(RouteHelper.StaticData.DeleteCategory)]
+	public async Task<ActionResult> DeleteCategoryAsync(CategoryModel model)
+	{
+		var result = await _staticDataService.DeleteCategoryAsync(model);
+		return Result(result);
+	}
+
 
 	[HttpPost(RouteHelper.StaticData.GetCardPage)]
 	public ActionResult GetCardPage([FromBody] QueryInfo queryInfo)

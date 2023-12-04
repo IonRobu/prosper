@@ -52,6 +52,14 @@ internal class StaticDataComponent : Component
 		});
 	}
 
+	public async Task<Result<bool>> DeleteCategoryAsync(CategoryModel model)
+	{
+		return await ExecuteAsync<bool>(async result =>
+		{
+			result.Data = await _categoryRepository.DeleteAsync(model);
+		});
+	}
+
 
 	public Result<PageList<CardModel>> GetCardPage(QueryInfo queryInfo)
 	{

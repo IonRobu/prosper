@@ -32,6 +32,11 @@ internal class StaticDataService : Service, IStaticDataService
 		return await _staticDataComponent.SaveCategoryAsync(model);
 	}
 
+	public async Task<Result<bool>> DeleteCategoryAsync(CategoryModel model)
+	{
+		return await _staticDataComponent.DeleteCategoryAsync(model);
+	}
+
 
 	public Result<PageList<CardModel>> GetCardPage(QueryInfo queryInfo)
 	{

@@ -64,11 +64,11 @@
 										<span><strong>@context.Name</strong></span>
 										<Button Icon="FontIcon.Trash"
 												CssClass="float-end ms-2 button-purple"
-												OnClick="() => Edit(context)"
+												OnClick="async () => await DeleteAsync(context)"
 												Tooltip="Delete category" />
 										<Button Icon="FontIcon.Pencil"
 												CssClass="float-end button-purple"
-												OnClick="() => Edit(context)"
+												OnClick="() => Edit(context)"												
 												Tooltip="Edit category" />
 										<Separator Type="SeparatorType.Line" />
 									</Cell>

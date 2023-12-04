@@ -23,6 +23,8 @@ public class RouteHelper
 
 		public const string SaveCategory = "category_save";
 
+		public const string DeleteCategory = "category_delete";
+
 
 		public const string GetCardList = "card_get_list";
 
