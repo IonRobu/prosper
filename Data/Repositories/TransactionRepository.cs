@@ -8,6 +8,7 @@ using LinqKit;
 using Methodic.Common.Messages;
 using Methodic.Common.Util;
 using Methodic.Data.Repositories.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
 
@@ -22,7 +23,7 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 
 	}
 
-	public PageList<TransactionModel> GetCategoryPage(TransactionQueryInfo queryInfo)
+	public PageList<TransactionModel> GetPage(TransactionQueryInfo queryInfo)
 	{
 		var info = new QueryInfo<Transaction>(queryInfo);
 		info.AddSortInfo(nameof(Transaction.Name), x => x.Name);
@@ -31,7 +32,28 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Name));
 		}
 		return Query()
-			.QueryPage<Transaction, int, TransactionModel>(x => Translate(x), info);
+			.Include(x => x.Category)
+			.Include(x => x.Card)
+			.Include(x => x.Account)
+			.QueryPage<Transaction, int, TransactionModel>(Translate, info);
+	}
+
+	public TransactionStatisticsModel GetStatistics()
+	{
+		var model = new TransactionStatisticsModel
+		{
+			IncomeTotal = Query()
+				.Where(x => x.IsIncome)
+				.Sum(x => x.Amount),
+			ExpenseTotal = Query()
+				.Where(x => !x.IsIncome)
+				.Sum(x => x.Amount),
+			IncomeCount = Query()
+				.Count(x => x.IsIncome),
+			ExpenseCount = Query()
+				.Count(x => !x.IsIncome)
+		};
+		return model;
 	}
 }
 

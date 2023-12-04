@@ -65,5 +65,9 @@ public class Context : Methodic.Data.Contexts.Entities.Context
 			.Property(x => x.Name)
 			.IsRequired()
 			.HasMaxLength(250);
+
+		modelBuilder.Entity<Transaction>()
+			.Property(e => e.Amount)
+			.HasConversion<double>();
 	}
 }

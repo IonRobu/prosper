@@ -10,7 +10,11 @@ public class RouteHelper
 
 		public const string GetById = "transaction_get_by_id";
 
+		public const string GetStatistics = "transaction_get_statistics";
+
 		public const string Save = "transaction_save";
+
+		public const string Delete = "transaction_delete";
 	}
 
 	public class StaticData

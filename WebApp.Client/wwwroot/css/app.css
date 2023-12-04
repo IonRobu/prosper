@@ -2,6 +2,11 @@ html, body {
     font-family: 'Roboto', Helvetica, Arial, sans-serif !important;
 }
 
+.hr-small {
+    margin-top: 1px !important;
+    margin-bottom: 1px !important;
+}
+
 .login-page {
     background-image: url('/images/home_bg.jpg')
 }

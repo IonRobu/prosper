@@ -6,5 +6,7 @@
 	"SettingsPage_category_form": "Edit category",
 	"SettingsPage_account_list": "Account list",
 	"IndexPage_transaction_form": "Edit transaction",
-	"IndexPage_index":  "Dashboard page"
+	"IndexPage_index": "Dashboard page",
+	"TransactionPage_index": "Transactions page",
+	"TransactionPage_transaction_form": "Edit transaction"
 }

@@ -1,17 +1,141 @@
 ﻿@inherits PageListView<TransactionModel>
 
-<MxView Title="Transaction list">
-	<Actions>
-		<OptionMenu>
-			<Items>
-				<OptionItem Text="Add" OnClick="() => Form()" />
-			</Items>			
-		</OptionMenu>
-	</Actions>
+<MxView Title="Transaction list" LayoutStyle="ViewLayoutStyle.Simple">
 	<Body>
-		<div class="alert alert-primary alert-outline" role="alert">
-			<div class="alert-message">
+		<MxCard Bordered="true">
+			<CardBody>
+				<Row>
+					<Cell Size="12">
+						<Row>
+							<Cell Size="6">
+								<MxCard Bordered="true">
+									<CardBody >
+										<div class="text-center">
+											<h3>Total income: £ <span class="@GetAmountCss(Statistics.IncomeTotal)">@Statistics.IncomeTotal</span></h3>
+											<h4>Income count: <span class="text-muted"></span>@Statistics.IncomeCount</h4>
+										</div>										
+									</CardBody>
+								</MxCard>
+							</Cell>
+							<Cell Size="6">
+								<MxCard Bordered="true">
+									<CardBody>
+										<div class="text-center">
+											<h3>Total expense: £ <span class="@GetAmountCss(-Statistics.ExpenseTotal)">@Statistics.ExpenseTotal</span></h3>
+											<h4>Expense count: <span class="text-muted"></span>@Statistics.ExpenseCount</h4>
+										</div>										
+									</CardBody>
+								</MxCard>
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="12">
+								<MxCard Bordered="true">
+									<CardBody>
+										<div class="text-center">
+											<h3>Net/Loss total: £ <span class="font-weight-bold @GetAmountCss(Statistics.NetLossTotal)">@Statistics.NetLossTotal</span></h3>
+										</div>										
+									</CardBody>
+								</MxCard>
+							</Cell>
+						</Row>
 
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="1"></Cell>
+					<Cell Size="10">
+						<Row>
+							<Cell Size="12" CssClass="min-width">
+								<Button Icon="FontIcon.Plus"
+										CssClass="float-end ms-2"
+										OnClick="() => Edit()"
+										Tooltip="Add new transaction" />
+								<Button Icon="FontIcon.FilterClear"
+										CssClass="float-end ms-2"
+										OnClick="() => ResetFilter()" />
+								<Button Icon="FontIcon.Filter"
+										CssClass="float-end ms-2"
+										OnClick="() => ShowFilter()"
+										Tooltip="Filter list" />
+								<OptionMenu CssClass="ms-2">
+									<Items>
+										<OptionItem Text="@SortText" OnClick="() => SortList()" />
+									</Items>
+								</OptionMenu>
+								<span class="float-end pt-1">Sort by:</span>
+							</Cell>
+						</Row>
+
+						<Separator Type="SeparatorType.Line" />
+						<TelerikListView @ref="list"
+										 Class="mt-5"
+										 TItem="TransactionModel"
+										 OnRead="ReadItemsAsync"
+										 Pageable="true"
+										 PageSize="15">
+							<Template>
+								<Row Padding="0">
+									<Cell Size="12">
+										<Button Icon="FontIcon.Trash"
+												CssClass="float-end ms-2"
+												OnClick="async () => await DeleteAsync(context)"
+												Tooltip="Delete transaction" />
+										<Button Icon="FontIcon.Pencil"
+												CssClass="float-end"
+												OnClick="() => Edit(context)"
+												Tooltip="Edit transaction" />
+
+										<Row Padding="0">
+											<Cell Size="6">
+												<h4 class="font-weight-bold">
+													@context.Name
+													<Separator />
+													<small>
+														<TelerikFontIcon Icon="@GetIcon(context)" Size="@ThemeConstants.FontIcon.Size.Small" Class="me-2" />
+														@context.Category.Name
+														@if (context.Category.IsFixed)
+														{
+															<small class="text-muted mt-2 text-justify"> (fixed, @I18n.Enums.Get(context.Category.Frequency))</small>
+														}
+														: @context.OperationDate.ToLongDateString()
+													</small>
+												</h4>
+											</Cell>
+											<Cell Size="6">
+												<h4>
+													£ <span class="@GetAmountCss(context)">@GetAmountText(context)</span>
+												</h4>
+											</Cell>
+										</Row>
+										@if (!string.IsNullOrEmpty(context.Description))
+										{
+											<Separator />
+											<label><small class="text-muted mt-2 text-justify">@context.Description</small></label>
+										}
+										<Separator Type="SeparatorType.Line" CssClass="mt-1 mb-2" />
+									</Cell>
+								</Row>
+							</Template>
+						</TelerikListView>
+					</Cell>
+					<Cell Size="1"></Cell>
+				</Row>
+			</CardBody>
+		</MxCard>
+		<TelerikTooltip TargetSelector="button[title]" Position="TooltipPosition.Top" ShowOn="@TooltipShowEvent.Hover" Id="position-tooltip"></TelerikTooltip>
+		<TelerikWindow Class="demo-window"
+					   Width="50%"
+					   Height="auto"
+					   Modal="true"
+					   Visible="IsWindowVisible">
+			<WindowTitle>
+				<strong>Filter list</strong>
+			</WindowTitle>
+			<WindowActions>
+				<WindowAction Name="Close" OnClick="() => { IsWindowVisible = false; }"></WindowAction>
+			</WindowActions>
+			<WindowContent>
 				<Row>
 					<Cell Size="4" CssClass="min-width">
 						<label for="Name" class="k-label k-form-label">Name</label>
@@ -19,50 +143,18 @@
 										Id="Name" />
 					</Cell>
 				</Row>
+				<Separator Type="SeparatorType.Line" />
 				<Row>
 					<Cell Size="12" CssClass="min-width">
-						<Button Icon="FontIcon.FilterClear"
-								CssClass="float-end ms-1"
-								OnClick="() => ResetFilter()"
-								Text="Reset filter"
-								Color="@ThemeConstants.Button.ThemeColor.Dark"
-								Size="@ThemeConstants.Button.Size.Small" />
-						<Button Icon="FontIcon.Filter"
+						<Button Icon="FontIcon.Check"
 								CssClass="float-end"
 								OnClick="() => ApplyFilter()"
-								Text="Filter"
-								Color="@ThemeConstants.Button.ThemeColor.Dark"
-								Size="@ThemeConstants.Button.Size.Small" />
+								Tooltip="Filter list"
+								Size="@ThemeConstants.Button.Size.Large" />
 					</Cell>
 				</Row>
-			</div>
-		</div>
-		<TelerikGrid @ref="list"
-					 TItem="TransactionModel"
-					 OnRead="ReadItemsAsync"
-					 Resizable="true"
-					 Pageable="true"
-					 Sortable="true"
-					 PageSize="15">
-			<GridColumns>
-				<GridColumn Field=@nameof(TransactionModel.Name) Title="Name" Width="120px">
-					<Template>
-						@{
-							var item = context as TransactionModel;
-							<span class="cursor-pointer" @onclick="() => Edit(item)"><strong>@item.Name</strong></span>
-						}
-					</Template>
-				</GridColumn>
-				
-				@*<GridColumn Width="50px">
-					<Template>
-						@{
-							var item = context as SpeciesModel;
-							<Button Icon="FontIcon.Pencil" CssClass="float-end" OnClick="() => Edit(item)" />
-						}
-					</Template>
-				</GridColumn>*@
-			</GridColumns>
-		</TelerikGrid>
+
+			</WindowContent>
+		</TelerikWindow>
 	</Body>
 </MxView>

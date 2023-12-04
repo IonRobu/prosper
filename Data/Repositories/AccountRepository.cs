@@ -31,7 +31,7 @@ internal class AccountRepository : Repository<AccountModel, Account, int>, IAcco
 			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Name));
 		}
 		return Query()
-			.QueryPage<Account, int, AccountModel>(x => Translate(x), info);
+			.QueryPage<Account, int, AccountModel>(Translate, info);
 	}
 }
 

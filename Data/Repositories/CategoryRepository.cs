@@ -31,7 +31,7 @@ internal class CategoryRepository : Repository<CategoryModel, Category, int>, IC
 			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Name));
 		}
 		return Query()
-			.QueryPage<Category, int, CategoryModel>(x => Translate(x), info);
+			.QueryPage<Category, int, CategoryModel>(Translate, info);
 	}
 }
 

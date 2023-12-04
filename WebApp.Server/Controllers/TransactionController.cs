@@ -32,6 +32,13 @@ public class TransactionController : ApiController
 		return Result(result);
 	}
 
+	[HttpGet(RouteHelper.Transaction.GetStatistics)]
+	public ActionResult GetStatistics()
+	{
+		var result = _transactionService.GetStatistics();
+		return Result(result);
+	}
+
 	[HttpPost(RouteHelper.Transaction.Save)]
 	public async Task<ActionResult> SaveTransactionAsync(TransactionModel model)
 	{

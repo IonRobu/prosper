@@ -12,4 +12,6 @@ public interface ITransactionService : IService
 	Result<TransactionModel> GetTransactionById(int id);
 
 	Task<Result<TransactionModel>> SaveTransactionAsync(TransactionModel model);
+
+	Result<TransactionStatisticsModel> GetStatistics();
 }

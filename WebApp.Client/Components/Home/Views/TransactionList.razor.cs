@@ -1,9 +1,12 @@
 ﻿using Core.Common.Models;
 using Core.Common.Queries;
+using Methodic.Common.Util;
 using Microsoft.AspNetCore.Components;
 using Telerik.Blazor;
 using Telerik.Blazor.Components;
 using Telerik.DataSource;
+using Telerik.FontIcons;
+using WebApp.Client.Configuration;
 using WebApp.Client.Services;
 
 namespace WebApp.Client.Components.Home.Views;
@@ -23,31 +26,38 @@ public partial class TransactionList
 	public DialogFactory Dialogs { get; set; }
 
 	[Inject]
+	private I18n I18n { get; set; }
+
+	[Inject]
 	private StaticDataService StaticDataService { get; set; }
 
 	[Inject]
 	private TransactionService TransactionService { get; set; }
 
-
-
-	//[Inject]
-	//private EnumData EnumData { get; set; }
-
 	private TransactionQueryInfo QueryInfo { get; set; } = new();
 
-	private TelerikGrid<TransactionModel> list;
+	private TransactionStatisticsModel Statistics { get; set; } = new();
+
+	private TelerikListView<TransactionModel> list;
+
+	private bool IsAscending { get; set; } = true;
+
+	private bool IsWindowVisible { get; set; }
+
+	private string SortText => "Name " + (IsAscending ? "descending" : "ascending");
 
 	public TransactionList()
 	{
 		LazyBinding = true;
+		QueryInfo.PageSize = 0;
+		SetSortInfo();
 	}
 
-	protected async Task ReadItemsAsync(GridReadEventArgs args)
+	protected async Task ReadItemsAsync(ListViewReadEventArgs args)
 	{
 		var info = args.Request.GetQueryInfo<TransactionQueryInfo>();
-		QueryInfo.SortInfo = info.SortInfo;
 		QueryInfo.Page = info.Page;
-		QueryInfo.PageSize = info.PageSize;
+		QueryInfo.PageSize = 0;
 		await LoadAsync();
 		args.Data = Source.Items;
 		args.Total = Source.Filtered;
@@ -58,26 +68,98 @@ public partial class TransactionList
 		Source = await TransactionService.GetTransactionPageAsync(QueryInfo);
 	}
 
-	private void Edit(TransactionModel item)
+	protected async override Task OnLoadedAsync()
 	{
-		OnEdit?.Invoke(item.Id);
+		Statistics = await TransactionService.GetTransactionStatistics();
+		await base.OnLoadedAsync();
+	}
+
+	private void Edit(TransactionModel item = null)
+	{
+		if (item == null)
+		{
+			OnAdd?.Invoke();
+		}
+		else
+		{
+			OnEdit?.Invoke(item.Id);
+		}
+	}
+
+	protected void RebindGrid()
+	{
+		list.Rebind();
+	}
+
+	protected void ShowFilter()
+	{
+		IsWindowVisible = true;
+		StateHasChanged();
 	}
 
 	protected void ApplyFilter()
 	{
-		list.Rebind();
+		IsWindowVisible = false;
+		RebindGrid();
+		StateHasChanged();
 	}
 
 	private void ResetFilter()
 	{
 		QueryInfo.Name = null;
-		//QueryInfo.Type = null;
-		//QueryInfo.Phylum = null;
-		ApplyFilter();
+		RebindGrid();
 	}
 
-	private void Form()
+	private void SortList()
 	{
-		OnAdd?.Invoke();
+		IsAscending = !IsAscending;
+		SetSortInfo();
+		RebindGrid();
+	}
+
+	private void SetSortInfo()
+	{
+		QueryInfo.SortInfo.Clear();
+		QueryInfo.SortInfo.Add(new SortInfo
+		{
+			Field = "Name",
+			IsAscending = IsAscending
+		});
+	}
+
+	private async Task<bool> DeleteAsync(TransactionModel item)
+	{
+		var confirmed = await Dialogs.ConfirmAsync("Are you sure you want to delete?", "Confirm operation");
+		if (confirmed)
+		{
+			var result = await TransactionService.DeleteTransactionAsync(item);
+			RebindGrid();
+			StateHasChanged();
+			return result;
+		}
+		return false;
+	}
+
+	private string GetAmountText(TransactionModel item)
+	{
+		return item.IsIncome ? $"{item.Amount.ToString("#0.00")}" : $"-{item.Amount.ToString("#0.00")}";
+	}
+
+	private string GetAmountCss(TransactionModel item)
+	{
+		return item.IsIncome ? "text-success" : "text-danger";
+	}
+	private string GetAmountCss(decimal value)
+	{
+		if(value == 0)
+		{
+			return "text-primary";
+		}
+		return value > 0 ? "text-success" : "text-danger";
+	}
+
+	private FontIcon GetIcon(TransactionModel item)
+	{
+		return item.Category.IsFixed ? FontIcon.Pin : FontIcon.BorderRadius;
 	}
 }

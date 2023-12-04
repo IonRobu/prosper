@@ -39,6 +39,16 @@ public class TransactionService : HttpServiceBase
 		return result;
 	}
 
+	public async Task<TransactionStatisticsModel> GetTransactionStatistics()
+	{
+		var result = await RequestAsync(RouteHelper.Transaction.GetStatistics, opts =>
+		{
+			opts.AsGetMethod();
+		})
+		.ResponseAsync<TransactionStatisticsModel>();
+		return result;
+	}
+
 	public async Task<TransactionModel> SaveTransactionAsync(TransactionModel model)
 	{
 		var result = await RequestAsync(RouteHelper.Transaction.Save, model, opts =>
@@ -49,13 +59,13 @@ public class TransactionService : HttpServiceBase
 		return result;
 	}
 
-	//public async Task<bool> DeleteCollectionAsync(CollectionModel model)
-	//{
-	//	var result = await RequestAsync(RouteHelper.StaticData.DeleteCollection, model, opts =>
-	//	{
-	//		opts.AsPostMethod();
-	//	})
-	//	.ResponseAsync<bool>();
-	//	return result;
-	//}
+	public async Task<bool> DeleteTransactionAsync(TransactionModel model)
+	{
+		var result = await RequestAsync(RouteHelper.Transaction.Delete, model, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<bool>();
+		return result;
+	}
 }

@@ -7,5 +7,7 @@ namespace Core.Repositories;
 
 public interface ITransactionRepository : IRepository<TransactionModel, int>
 {
-	PageList<TransactionModel> GetCategoryPage(TransactionQueryInfo queryInfo);
+	PageList<TransactionModel> GetPage(TransactionQueryInfo queryInfo);
+
+	TransactionStatisticsModel GetStatistics();
 }

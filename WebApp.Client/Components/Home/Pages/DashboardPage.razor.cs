@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace WebApp.Client.Components.Home.Pages;
 
-public partial class IndexPage
+public partial class DashboardPage
 {
 	[Parameter]
 	public int Id { get; set; }

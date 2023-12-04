@@ -36,7 +36,7 @@ internal class CardRepository : Repository<CardModel, Card, int>, ICardRepositor
 			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Number));
 		}
 		return Query()
-			.QueryPage<Card, int, CardModel>(x => Translate(x), info);
+			.QueryPage<Card, int, CardModel>(Translate, info);
 	}
 }
 

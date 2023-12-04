@@ -45,4 +45,12 @@ internal class TransactionComponent : Component
 			result.Data = model;
 		});
 	}
+
+	public Result<TransactionStatisticsModel> GetStatistics()
+	{
+		return Execute<TransactionStatisticsModel>(result =>
+		{
+			result.Data = _transactionRepository.GetStatistics();
+		});
+	}
 }
