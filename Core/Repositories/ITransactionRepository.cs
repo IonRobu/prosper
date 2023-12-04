@@ -9,5 +9,5 @@ public interface ITransactionRepository : IRepository<TransactionModel, int>
 {
 	PageList<TransactionModel> GetPage(TransactionQueryInfo queryInfo);
 
-	TransactionStatisticsModel GetStatistics();
+	TransactionStatisticsModel GetStatistics(TransactionQueryInfo queryInfo);
 }

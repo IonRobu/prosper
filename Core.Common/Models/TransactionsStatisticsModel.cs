@@ -20,6 +20,10 @@ public class TransactionStatisticsModel : Model
 
 	public decimal FilteredExpenseTotal { get; set; }
 
+	public int FilteredIncomeCount { get; set; }
+
+	public int FilteredExpenseCount { get; set; }
+
 	public decimal NetLossTotal => IncomeTotal - ExpenseTotal;
 
 	public decimal FilteredNetLossTotal => FilteredIncomeTotal - FilteredExpenseTotal;

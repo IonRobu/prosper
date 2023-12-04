@@ -46,11 +46,11 @@ internal class TransactionComponent : Component
 		});
 	}
 
-	public Result<TransactionStatisticsModel> GetStatistics()
+	public Result<TransactionStatisticsModel> GetStatistics(TransactionQueryInfo queryInfo)
 	{
 		return Execute<TransactionStatisticsModel>(result =>
 		{
-			result.Data = _transactionRepository.GetStatistics();
+			result.Data = _transactionRepository.GetStatistics(queryInfo);
 		});
 	}
 }

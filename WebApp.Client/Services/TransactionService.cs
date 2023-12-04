@@ -39,11 +39,11 @@ public class TransactionService : HttpServiceBase
 		return result;
 	}
 
-	public async Task<TransactionStatisticsModel> GetTransactionStatistics()
+	public async Task<TransactionStatisticsModel> GetTransactionStatistics(TransactionQueryInfo queryInfo)
 	{
-		var result = await RequestAsync(RouteHelper.Transaction.GetStatistics, opts =>
+		var result = await RequestAsync(RouteHelper.Transaction.GetStatistics, queryInfo, opts =>
 		{
-			opts.AsGetMethod();
+			opts.AsPostMethod();
 		})
 		.ResponseAsync<TransactionStatisticsModel>();
 		return result;

@@ -32,8 +32,8 @@ internal class TransactionService : Service, ITransactionService
 		return await _transactionComponent.SaveTransactionAsync(model);
 	}
 
-	public Result<TransactionStatisticsModel> GetStatistics()
+	public Result<TransactionStatisticsModel> GetStatistics(TransactionQueryInfo queryInfo)
 	{
-		return _transactionComponent.GetStatistics();
+		return _transactionComponent.GetStatistics(queryInfo);
 	}
 }

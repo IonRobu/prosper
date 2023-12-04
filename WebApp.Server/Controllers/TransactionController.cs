@@ -32,10 +32,10 @@ public class TransactionController : ApiController
 		return Result(result);
 	}
 
-	[HttpGet(RouteHelper.Transaction.GetStatistics)]
-	public ActionResult GetStatistics()
+	[HttpPost(RouteHelper.Transaction.GetStatistics)]
+	public ActionResult GetStatistics([FromBody] TransactionQueryInfo queryInfo)
 	{
-		var result = _transactionService.GetStatistics();
+		var result = _transactionService.GetStatistics(queryInfo);
 		return Result(result);
 	}
 

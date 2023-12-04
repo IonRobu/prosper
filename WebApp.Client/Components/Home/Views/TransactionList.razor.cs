@@ -59,6 +59,7 @@ public partial class TransactionList
 		QueryInfo.Page = info.Page;
 		QueryInfo.PageSize = 0;
 		await LoadAsync();
+		await GetStatisticsAsync();
 		args.Data = Source.Items;
 		args.Total = Source.Filtered;
 	}
@@ -68,10 +69,9 @@ public partial class TransactionList
 		Source = await TransactionService.GetTransactionPageAsync(QueryInfo);
 	}
 
-	protected async override Task OnLoadedAsync()
+	protected async Task GetStatisticsAsync()
 	{
-		Statistics = await TransactionService.GetTransactionStatistics();
-		await base.OnLoadedAsync();
+		Statistics = await TransactionService.GetTransactionStatistics(QueryInfo);
 	}
 
 	private void Edit(TransactionModel item = null)

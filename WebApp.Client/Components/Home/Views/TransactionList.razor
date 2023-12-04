@@ -13,6 +13,8 @@
 										<div class="text-center">
 											<h3>Total income: £ <span class="@GetAmountCss(Statistics.IncomeTotal)">@Statistics.IncomeTotal</span></h3>
 											<h4>Income count: <span class="text-muted"></span>@Statistics.IncomeCount</h4>
+											<h3>Total income (filtered): £ <span class="@GetAmountCss(Statistics.FilteredIncomeTotal)">@Statistics.FilteredIncomeTotal</span></h3>
+											<h4>Income count (filtered): <span class="text-muted"></span>@Statistics.FilteredIncomeCount</h4>
 										</div>										
 									</CardBody>
 								</MxCard>
@@ -23,6 +25,8 @@
 										<div class="text-center">
 											<h3>Total expense: £ <span class="@GetAmountCss(-Statistics.ExpenseTotal)">@Statistics.ExpenseTotal</span></h3>
 											<h4>Expense count: <span class="text-muted"></span>@Statistics.ExpenseCount</h4>
+											<h3>Total expense (filtered): £ <span class="@GetAmountCss(-Statistics.FilteredExpenseTotal)">@Statistics.FilteredExpenseTotal</span></h3>
+											<h4>Expense count (filtered): <span class="text-muted"></span>@Statistics.FilteredExpenseCount</h4>
 										</div>										
 									</CardBody>
 								</MxCard>
@@ -33,7 +37,8 @@
 								<MxCard Bordered="true">
 									<CardBody>
 										<div class="text-center">
-											<h3>Net/Loss total: £ <span class="font-weight-bold @GetAmountCss(Statistics.NetLossTotal)">@Statistics.NetLossTotal</span></h3>
+											<h3>Total Net/Loss: £ <span class="font-weight-bold @GetAmountCss(Statistics.NetLossTotal)">@Statistics.NetLossTotal</span></h3>
+											<h3>Total net/Loss (filtered): £ <span class="font-weight-bold @GetAmountCss(Statistics.FilteredNetLossTotal)">@Statistics.FilteredNetLossTotal</span></h3>
 										</div>										
 									</CardBody>
 								</MxCard>
