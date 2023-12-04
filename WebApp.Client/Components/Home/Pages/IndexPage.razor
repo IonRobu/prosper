@@ -1,5 +1,14 @@
 ﻿@inherits Page
 @page "/home"
 @page "/home/{Route}"
+@page "/home/{Route}/{Id:int}"
 
-<h3>Dashboard</h3>
+<MxPage Title="Dashboard">
+	<ViewRoute Name="@RouteIndex">
+		<TransactionList OnAdd='async () => await GoToFormAsync(0)'
+					  OnEdit='async(id) => await GoToFormAsync(id)' />
+	</ViewRoute>
+	<ViewRoute Name="@RouteTransactionForm">
+		<TransactionForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+</MxPage>

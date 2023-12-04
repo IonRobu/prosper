@@ -1,13 +1,27 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Methodic.Blazor.UI.Configuration;
 using Microsoft.AspNetCore.Components;
 
 namespace WebApp.Client.Components.Home.Pages;
 
-[Authorize]
 public partial class IndexPage
 {
 	[Parameter]
-	public long Id { get; set; }
+	public int Id { get; set; }
 
-	private int StepIndex = 0;
+	[RouteName]
+	public const string RouteTransactionList = "transaction-list";
+
+	[RouteName]
+	public const string RouteTransactionForm = "transaction-form";
+
+	public async Task GoToListAsync()
+	{
+		await Navigation.GoToAsync(RouteTransactionForm);
+
+	}
+
+	public async Task GoToFormAsync(int id)
+	{
+		await Navigation.GoToAsync(RouteTransactionForm, 0);
+	}
 }

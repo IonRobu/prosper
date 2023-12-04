@@ -16,6 +16,7 @@
 	  <Compile Remove="Components\Form\**" />
 	  <Compile Remove="Components\Identity\**" />
 	  <Compile Remove="Components\Reports\**" />
+	  <Compile Remove="Components\StaticData\**" />
 	  <Compile Remove="Configuration\Models\**" />
 	  <Compile Remove="i18ntext\**" />
 	  <Content Remove="Components\Application\**" />
@@ -23,6 +24,7 @@
 	  <Content Remove="Components\Form\**" />
 	  <Content Remove="Components\Identity\**" />
 	  <Content Remove="Components\Reports\**" />
+	  <Content Remove="Components\StaticData\**" />
 	  <Content Remove="Configuration\Models\**" />
 	  <Content Remove="i18ntext\**" />
 	  <EmbeddedResource Remove="Components\Application\**" />
@@ -30,6 +32,7 @@
 	  <EmbeddedResource Remove="Components\Form\**" />
 	  <EmbeddedResource Remove="Components\Identity\**" />
 	  <EmbeddedResource Remove="Components\Reports\**" />
+	  <EmbeddedResource Remove="Components\StaticData\**" />
 	  <EmbeddedResource Remove="Configuration\Models\**" />
 	  <EmbeddedResource Remove="i18ntext\**" />
 	  <None Remove="Components\Application\**" />
@@ -37,22 +40,12 @@
 	  <None Remove="Components\Form\**" />
 	  <None Remove="Components\Identity\**" />
 	  <None Remove="Components\Reports\**" />
+	  <None Remove="Components\StaticData\**" />
 	  <None Remove="Configuration\Models\**" />
 	  <None Remove="i18ntext\**" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Components\StaticData\Views\CollectionForm.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\CollectionList.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\CollectionTypeForm.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\CollectionTypeList.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\CountryList.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\CountyList.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\MeasureUnitForm.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\MeasureUnitList.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\SpeciesForm.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\SpeciesList.razor.cs" />
-	  <Compile Remove="Components\StaticData\Views\StaticDataPanel.razor.cs" />
 	  <Compile Remove="Configuration\Constants.cs" />
 	  <Compile Remove="Configuration\I18n.cs" />
 	  <Compile Remove="Configuration\ProfileData.cs" />
@@ -76,17 +69,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Remove="Components\StaticData\Views\CollectionForm.razor" />
-	  <Content Remove="Components\StaticData\Views\CollectionList.razor" />
-	  <Content Remove="Components\StaticData\Views\CollectionTypeForm.razor" />
-	  <Content Remove="Components\StaticData\Views\CollectionTypeList.razor" />
-	  <Content Remove="Components\StaticData\Views\CountryList.razor" />
-	  <Content Remove="Components\StaticData\Views\CountyList.razor" />
-	  <Content Remove="Components\StaticData\Views\MeasureUnitForm.razor" />
-	  <Content Remove="Components\StaticData\Views\MeasureUnitList.razor" />
-	  <Content Remove="Components\StaticData\Views\SpeciesForm.razor" />
-	  <Content Remove="Components\StaticData\Views\SpeciesList.razor" />
-	  <Content Remove="Components\StaticData\Views\StaticDataPanel.razor" />
 	  <Content Remove="Shared\EmptyLayout.razor" />
 	  <Content Remove="Shared\NavMenu.razor" />
 	</ItemGroup>
@@ -110,8 +92,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Components\Home\Views\" />
-	  <Folder Include="Components\StaticData\Views\" />
 	  <Folder Include="Components\Statistics\Views\" />
 	</ItemGroup>
 

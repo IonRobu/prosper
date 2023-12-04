@@ -11,7 +11,6 @@ namespace Core.Components;
 
 internal class StaticDataComponent : Component
 {
-
 	private readonly ICategoryRepository _categoryRepository;
 	private readonly ICardRepository _cardRepository;
 	private readonly IAccountRepository _accountRepository;

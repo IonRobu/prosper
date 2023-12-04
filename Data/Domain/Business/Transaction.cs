@@ -19,6 +19,7 @@ public class Transaction: BusinessEntity<int>
 
 	public DateTime OperationDate { get; set; } = DateTime.UtcNow;
 
+
 	public Category Category { get; set; } = new();
 
 	public Account Account { get; set; } = new();

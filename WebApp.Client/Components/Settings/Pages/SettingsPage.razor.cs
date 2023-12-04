@@ -1,10 +1,8 @@
 ﻿using Methodic.Blazor.UI.Configuration;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
 namespace WebApp.Client.Components.Settings.Pages;
 
-[Authorize]
 public partial class SettingsPage
 {
 	[Parameter]

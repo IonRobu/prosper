@@ -1,4 +1,5 @@
 ﻿using Data.Domain.Static;
+using Data.Domain.Business;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Contexts;
@@ -27,6 +28,7 @@ public class Context : Methodic.Data.Contexts.Entities.Context
 	{
 		base.OnModelCreating(modelBuilder);
 		OnSettingStaticData(modelBuilder);
+		OnSettingTransaction(modelBuilder);
 	}
 
 	private void OnSettingStaticData(ModelBuilder modelBuilder)
@@ -41,6 +43,11 @@ public class Context : Methodic.Data.Contexts.Entities.Context
 		cardEntity
 			.Property(x => x.Name)
 			.IsRequired()
+			.HasMaxLength(250); 
+		
+		cardEntity
+			.Property(x => x.Number)
+			.IsRequired()
 			.HasMaxLength(250);
 
 		var accountEntity = modelBuilder.MapEntity<Account, int>(tableName: nameof(Account));
@@ -49,5 +56,14 @@ public class Context : Methodic.Data.Contexts.Entities.Context
 			.IsRequired()
 			.HasMaxLength(250);
 
+	}
+
+	private void OnSettingTransaction(ModelBuilder modelBuilder)
+	{
+		var transactionEntity = modelBuilder.MapEntity<Transaction, int>(tableName: nameof(Transaction));
+		transactionEntity
+			.Property(x => x.Name)
+			.IsRequired()
+			.HasMaxLength(250);
 	}
 }
