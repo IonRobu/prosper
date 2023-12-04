@@ -1,0 +1,4 @@
+{
+	"ConfigurationProperty_StringValue_DataProvider_Required": "Data provider field is required",
+	"ConfigurationProperty_StringValue_DataConnectionString_Required": "Connection string field is required"
+}

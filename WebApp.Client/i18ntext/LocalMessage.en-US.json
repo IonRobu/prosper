@@ -1,0 +1,7 @@
+{
+	"CollectionType_Name_Required": "Field Name is required",
+	"Collection_Name_Required": "Field Name is required",
+	"Collection_Code_Required": "Field Code is required",
+	"Collection_Type_Required": "Field Type is required",
+	"MeasureUnit_Name_Required": "Field Name is required"
+}

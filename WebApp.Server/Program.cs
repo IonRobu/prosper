@@ -1,4 +1,4 @@
-using WebApi.Backend.Configuration.Extensions;
+using WebApi.Server.Configuration.Extensions;
 
 WebApplication
 	.CreateBuilder(args)

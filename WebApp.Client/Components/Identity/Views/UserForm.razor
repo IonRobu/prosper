@@ -1,0 +1,67 @@
+﻿@inherits FormView<Core.Common.Models.Identity.UserModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<Button CssClass="float-end"
+				Icon="FontIcon.Save"
+				OnClick="async () => await SaveAsync()" />
+	</Actions>
+	<Body>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.UserModel_UserName
+			</Cell>
+			<Cell Size="4">
+				@if (Model.Id != default)
+				{
+					<h5>@Model.UserName</h5>
+				}
+				else
+				{
+					<span><TelerikTextBox @bind-Value="Model.UserName" /></span>
+				}
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.UserModel_Email
+			</Cell>
+			<Cell Size="4">
+				@if (Model.Id != default)
+				{
+					<h5>@Model.Email</h5>
+				}
+				else
+				{
+					<span><TelerikTextBox @bind-Value="Model.Email" /></span>
+				}
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.UserModel_FirstName
+			</Cell>
+			<Cell Size="4">
+				<TelerikTextBox @bind-Value="Model.FirstName" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.UserModel_LastName
+			</Cell>
+			<Cell Size="4">
+				<TelerikTextBox @bind-Value="Model.LastName" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				@I18n.Model.UserModel_PhoneNumber
+			</Cell>
+			<Cell Size="4">
+				<TelerikTextBox @bind-Value="Model.PhoneNumber" />
+			</Cell>
+		</Row>
+	</Body>
+
+</MxView>

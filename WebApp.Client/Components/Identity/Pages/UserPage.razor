@@ -1,0 +1,13 @@
+﻿@page "/users"
+@page "/users/{Route}"
+@page "/users/{Route}/{Id:int}"
+@inherits Page
+
+<MxPage Title="@I18n.Title.Page_UserList">
+	<ViewRoute Name="@RouteIndex">
+		<UserList OnAdd="async () => await GoToFormAsync()" OnEdit="async (long id) => await GoToFormAsync(id)" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteUserForm">
+		<UserForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+</MxPage>

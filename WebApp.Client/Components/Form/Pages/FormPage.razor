@@ -1,0 +1,25 @@
+﻿@inherits Page
+@page "/form-config"
+@page "/form-config/{Route}"
+@page "/form-config/{Route}/{Id:long}"
+
+<MxPage Title="@I18n.Title.Page_FormList">
+	<ViewRoute Name="@RouteIndex">
+		<FormList OnAdd="async () => await GoToFormAsync()"
+				  OnEdit="async (long id) => await GoToFormAsync(id)"
+				  OnDetail="async (long id) => await GoToDetailAsync(id)" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteFormForm">
+		<FormForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteFormDetail">
+		<FormDetail Id="Id"
+					OnEdit="async (long id) => await GoToFormAsync(id)"
+					OnStepDetail="async (long id) => await GoToStepDetailAsync(id)"
+					OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteFormStepDetail">
+		<FormStepDetail Id="Id"
+						OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+</MxPage>

@@ -1,0 +1,689 @@
+﻿@inherits View<ApplicationModel>
+
+<MxView IsLoading="IsLoading">
+	<Body>
+
+		<Row>
+			<Cell Size="12">
+				<div class="border text-sm text-muted p-2 mt-1">
+					<Button Icon="FontIcon.Rotate"
+							Size="@ThemeConstants.Button.Size.Small"
+							CssClass="float-end mx-1"
+							OnClick="async () => await LoadAsync()" />
+					@if (CanBeValidated())
+					{
+						<Button Icon="FontIcon.Check"
+								Text="Validate"
+								Size="@ThemeConstants.Button.Size.Small"
+								CssClass="float-end mx-1"
+								OnClick="async () => await SetStatusAsync(EnumApplicationStatus.Validated)" />
+					}
+					@if (CanBeApproved())
+					{
+						<Button Icon="FontIcon.CheckOutline"
+								Text="Approve"
+								Size="@ThemeConstants.Button.Size.Small"
+								CssClass="float-end mx-1"
+								OnClick="async () => await SetStatusAsync(EnumApplicationStatus.Approved)" />
+					}
+					@if (CanBeRejected())
+					{
+						<Button Icon="FontIcon.MinusOutline"
+								Text="Reject"
+								Size="@ThemeConstants.Button.Size.Small"
+								CssClass="float-end mx-1"
+								OnClick="async () => await SetStatusAsync(EnumApplicationStatus.Rejected)" />
+					}
+					@if (ShouldSendExtraData())
+					{
+						<Button Icon="FontIcon.QuestionCircle"
+								Text="Request extra data"
+								Size="@ThemeConstants.Button.Size.Small"
+								CssClass="float-end mx-1"
+								OnClick="async () => await RequestExtraDataAsync()" />
+					}
+					<div style="clear: both"></div>
+				</div>
+			</Cell>
+		</Row>
+
+		<Row CssClass="summary">
+			<Cell Size="12">
+				<div>
+					<div class="alert alert-secondary" role="alert">
+						<div class="alert-message">
+							<h5 class="font-weight-bold">APPLICATION DETAILS</h5>
+						</div>
+					</div>
+					<Row>
+						<Cell CssClass="col-md-6 col-lg-3">
+							Creation date
+						</Cell>
+						<Cell CssClass="col-md-6 col-lg-3">
+							<strong>@Model.CreationDate.ToString("dd MMM yyyy")</strong>
+						</Cell>
+					</Row>
+					<Row>
+						<Cell CssClass="col-md-6 col-lg-3">
+							Public ID
+						</Cell>
+						<Cell CssClass="col-md-6 col-lg-9">
+							<strong>@Model.PublicId</strong>
+						</Cell>
+					</Row>
+					<Row>
+						<Cell CssClass="col-md-6 col-lg-3">
+							Intern ID
+						</Cell>
+						<Cell CssClass="col-md-6 col-lg-9">
+							<strong>@Model.Id</strong>
+						</Cell>
+					</Row>
+					<Row>
+						<Cell CssClass="col-md-6 col-lg-3">
+							Status
+						</Cell>
+						<Cell CssClass="col-md-6 col-lg-9">
+							<h5 class="@GetStatusTag(Model) me-5" style="min-width: 100px">@I18n.Enums.Get(Model.Status)</h5>
+						</Cell>
+					</Row>
+
+				</div>
+				@if (!new[] { EnumApplicationStatus.Created, EnumApplicationStatus.InWork }.Contains(Model.Status))
+				{
+					<div>
+						<div class="alert alert-secondary" role="alert">
+							<div class="alert-message">
+								<h5 class="font-weight-bold">FILES</h5>
+							</div>
+						</div>
+
+						@*info files*@
+						<Row>
+							<Cell CssClass="col-md-6 col-lg-3">
+								<h6>Info documents</h6>
+							</Cell>
+							<Cell CssClass="col-md-6 col-lg-9">
+								@foreach (var file in Files.Where(x => x.Type == EnumFileType.Summary))
+								{
+									<span>file id = @file.Id</span>
+									<Button Text="Summary file"
+											Icon="FontIcon.FilePdf"
+											FillMode="@ThemeConstants.Button.FillMode.Link"
+											OnClick="async () => await GetDocumentAsync(file)" />
+									<Separator />
+								}
+								@foreach (var file in Files.Where(x => x.Type == EnumFileType.Csv))
+								{
+									<span>file id = @file.Id</span>
+									<Button Text="CSV file"
+											Icon="FontIcon.FilePdf"
+											FillMode="@ThemeConstants.Button.FillMode.Link"
+											OnClick="async () => await GetDocumentAsync(file)" />
+									<Separator />
+								}
+								@* <Button Text="Summary file"
+							Icon="FontIcon.FilePdf"
+							FillMode="@ThemeConstants.Button.FillMode.Link"
+							OnClick="async () => await DownloadSummaryFileAsync()" />
+							<Separator />
+							<Button Text="CSV file"
+							Icon="FontIcon.FilePdf"
+							FillMode="@ThemeConstants.Button.FillMode.Link"
+							OnClick="async () => await DownloadCsvFileAsync()" /> *@
+							</Cell>
+						</Row>
+						<Separator Type="SeparatorType.Line" />
+
+						@*pic file*@
+						@if (Files.Any(x => x.Type == EnumFileType.Pic || x.Type == EnumFileType.PicSigned))
+						{
+							<Row>
+								<Cell CssClass="col-md-6 col-lg-3">
+									<h6>PIC document</h6>
+								</Cell>
+								<Cell CssClass="col-md-6 col-lg-9">
+									@foreach (var file in Files.Where(x => x.Type == EnumFileType.Pic))
+									{
+										<span>file id = @file.Id</span>
+										<Button Text="PIC file"
+												Icon="FontIcon.FileWord"
+												FillMode="@ThemeConstants.Button.FillMode.Link"
+												OnClick="async () => await GetDocumentAsync(file)" />
+										<Separator />
+									}
+
+									@foreach (var file in Files.Where(x => x.Type == EnumFileType.PicSigned))
+									{
+										<span>file id = @file.Id</span>
+										<Button Text="Signed PIC file"
+												Icon="FontIcon.FileWord"
+												FillMode="@ThemeConstants.Button.FillMode.Link"
+												OnClick="async () => await GetDocumentAsync(file)" />
+										<Separator />
+									}
+								</Cell>
+							</Row>
+							<Separator Type="SeparatorType.Line" />
+						}
+
+						@*mat file*@
+						@if (Model.MatFileUploaded)
+						{
+							<Row>
+								<Cell CssClass="col-md-6 col-lg-3">
+									<h6>MAT document</h6>
+								</Cell>
+								<Cell CssClass="col-md-6 col-lg-9">
+									@* <Button Text="MAT file"
+							Icon="FontIcon.FilePdf"
+							FillMode="@ThemeConstants.Button.FillMode.Link"
+							OnClick="async () => await DownloadMatFileAsync()" /> *@
+									@foreach (var file in Files.Where(x => x.Type == EnumFileType.Mat))
+									{
+										<span>file id = @file.Id</span>
+										<Button Text="MAT file"
+												Icon="FontIcon.FileWord"
+												FillMode="@ThemeConstants.Button.FillMode.Link"
+												OnClick="async () => await GetDocumentAsync(file)" />
+										<Separator />
+									}
+								</Cell>
+							</Row>
+							<Separator Type="SeparatorType.Line" />
+						}
+
+						@*cna pic file*@
+						@if (Model.PicFileUploaded)
+						{
+							<Row>
+								<Cell CssClass="col-md-6 col-lg-3">
+									<h6>CNA PIC document</h6>
+								</Cell>
+								<Cell CssClass="col-md-6 col-lg-9">
+									@* <Button Text="CNA PIC file"
+							Icon="FontIcon.FileWord"
+							FillMode="@ThemeConstants.Button.FillMode.Link"
+							OnClick="async () => await DownloadCnaPicFileAsync()" /> *@
+									@foreach (var file in Files.Where(x => x.Type == EnumFileType.Mat))
+									{
+										<span>file id = @file.Id</span>
+										<Button Text="MAT file"
+												Icon="FontIcon.FileWord"
+												FillMode="@ThemeConstants.Button.FillMode.Link"
+												OnClick="async () => await GetDocumentAsync(file)" />
+										<Separator />
+									}
+									@if (Model.PicExtendedFileUploaded)
+									{
+										<Separator />
+										@* <Button Text="Signed CNA PIC document"
+							Icon="FontIcon.FilePdf"
+							FillMode="@ThemeConstants.Button.FillMode.Link"
+							OnClick="async () => await DownloadCnaPicSignedFileAsync()" /> *@
+										@foreach (var file in Files.Where(x => x.Type == EnumFileType.PicCnaSigned))
+										{
+											<span>file id = @file.Id</span>
+											<Button Text="Signed CNA PIC document"
+													Icon="FontIcon.FileWord"
+													FillMode="@ThemeConstants.Button.FillMode.Link"
+													OnClick="async () => await GetDocumentAsync(file)" />
+											<Separator />
+										}
+									}
+									<Separator />
+									<InputFile OnChange="(InputFileChangeEventArgs args) => OnInputFileChangeAsync(args, EnumFileType.PicCnaSigned)" accept=".pdf" />
+									<Separator />
+									<small>Upload CNA PIC signed file</small>
+								</Cell>
+							</Row>
+							<Separator Type="SeparatorType.Line" />
+						}
+
+						@*ircc file*@
+
+						<Row>
+							<Cell CssClass="col-md-6 col-lg-3">
+								<h6>IRCC document</h6>
+							</Cell>
+							<Cell CssClass="col-md-6 col-lg-9">
+								@if (Model.IrccFileUploaded)
+								{
+									@foreach (var file in Files.Where(x => x.Type == EnumFileType.Ircc))
+									{
+										<span>file id = @file.Id</span>
+										<Button Text="IRCC document"
+												Icon="FontIcon.FileWord"
+												FillMode="@ThemeConstants.Button.FillMode.Link"
+												OnClick="async () => await GetDocumentAsync(file)" />
+										<Separator />
+									}
+									@* <Button Text="IRCC file"
+							Icon="FontIcon.FilePdf"
+							FillMode="@ThemeConstants.Button.FillMode.Link"
+							OnClick="async () => await DownloadIrccFileAsync()" /> *@
+								}
+								<Separator />
+								<InputFile OnChange="(InputFileChangeEventArgs args) => OnInputFileChangeAsync(args, EnumFileType.Ircc)" accept=".pdf" />
+								<Separator />
+								<small>Upload IRCC file</small>
+							</Cell>
+						</Row>
+
+					</div>
+				}
+
+
+				@foreach (var step in Model.Steps.Where(x => x.Type != EnumStepType.SummaryStep))
+				{
+					// && x.Status == EnumApplicationExtraDataStatus.Created
+					var extraDataList = Model.ExtraData.Where(x => x.StepPosition == step.Position).ToList();
+					<div>
+						<div class="alert alert-secondary" role="alert">
+							<div class="alert-message">
+								@if (CanAddExtraData())
+								{
+									<Button CssClass="float-end" Icon="FontIcon.InfoCircle" OnClick="() => AddExtraData(step)" />
+								}
+
+								@if (extraDataList.Any())
+								{
+									<h5 class="text-danger float-end me-2">Extra data requested</h5>
+								}
+								<h5 class="font-weight-bold">@I18n.Text.Get(step.Name)?.ToUpper()</h5>
+							</div>
+						</div>
+						@foreach (var item in extraDataList)
+						{
+							var alertType = item.Status == EnumApplicationExtraDataStatus.Created ? "info" :
+							item.Status == EnumApplicationExtraDataStatus.Requested ? "warning" : "success";
+							<Row>
+								<Cell CssClass="col-md-6 col-lg-3"></Cell>
+								<Cell CssClass="col-md-6 col-lg-9">
+									<div class="alert alert-@alertType" role="alert">
+										<div class="alert-message">
+											@item.CreationDate.ToString("dd MMM yyyy hh:mm") | <strong>@item.Status</strong>
+											<Separator />
+											<p>@item.Value</p>
+										</div>
+									</div>
+								</Cell>
+							</Row>
+
+						}
+						@switch (step.Type)
+						{
+							case EnumStepType.SolicitantStep:
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_PersonType
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.PersonType.Name</strong>
+									</Cell>
+								</Row>
+								@if (Model.Solicitant.PersonType.Id == EnumPersonType.LegalEntity)
+								{
+									<Row>
+										<Cell CssClass="col-md-6 col-lg-3">
+											@I18n.Model.SolicitantModel_Organization
+										</Cell>
+										<Cell CssClass="col-md-6 col-lg-9">
+											<strong>@Model.Solicitant.Organization</strong>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell CssClass="col-md-6 col-lg-3">
+											@I18n.Model.SolicitantModel_Position
+										</Cell>
+										<Cell CssClass="col-md-6 col-lg-9">
+											<strong>@Model.Solicitant.Position</strong>
+										</Cell>
+									</Row>
+								}
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_ContactPerson
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.ContactPerson</strong>
+									</Cell>
+								</Row>
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_Email
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.Email</strong>
+									</Cell>
+								</Row>
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_Country
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.Country.Name</strong>
+									</Cell>
+								</Row>
+
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_Address
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.Address</strong>
+									</Cell>
+								</Row>
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_City
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.City</strong>
+									</Cell>
+								</Row>
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_Phone
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.Phone</strong>
+									</Cell>
+								</Row>
+								@if (Model.Solicitant.PersonType.Id == EnumPersonType.LegalEntity)
+								{
+									<Row>
+										<Cell CssClass="col-md-6 col-lg-3">
+											@I18n.Model.SolicitantModel_OrganizationTypes
+										</Cell>
+										<Cell CssClass="col-md-6 col-lg-9">
+											@foreach (var item in Model.Solicitant.OrganizationTypes)
+											{
+												<TelerikChip @key="@item"
+															 Text="@item.Name"
+															 Class="mt-1" />
+											}
+										</Cell>
+									</Row>
+								}
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_ResourceUsages
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										@foreach (var item in Model.Solicitant.ResourceUsages)
+										{
+											<TelerikChip @key="@item"
+														 Text="@item.Name"
+														 Class="mt-1" />
+										}
+									</Cell>
+								</Row>
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_UsageTypes
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<TelerikChip @key="@Model.Solicitant.UsageType"
+													 Text="@Model.Solicitant.UsageType.Name"
+													 Class="mt-1" />
+									</Cell>
+								</Row>
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										@I18n.Model.SolicitantModel_Description
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.Solicitant.Description</strong>
+									</Cell>
+								</Row>
+								break;
+							case EnumStepType.SpeciesStep:
+								@foreach (var request in Model.Requests)
+								{
+									<Row>
+										<Cell Size="3">
+											Taxon
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h4>@GetValueOrDefault(request.Species.Taxon)</h4>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Type
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@I18n.Enums.Get(request.Species.Type)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Phylum
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.Phylum)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Order
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.Order)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Family
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.Family)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Genus
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.Genus)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Author
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.AuthorSpecies)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Subspecies
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.Subspecies)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Author subspecies
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.AuthorSubspecies)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Variety
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.Variety)</h5>
+										</Cell>
+									</Row>
+									<Row>
+										<Cell Size="3">
+											Author variety
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											<h5>@GetValueOrDefault(request.Species.AuthorVariety)</h5>
+										</Cell>
+									</Row>
+
+									<Row>
+										<Cell Size="3">
+											Resources
+										</Cell>
+										<Cell Size="9" CssClass="min-width">
+											@foreach (var resource in request.Resources)
+											{
+												<Row>
+													<Cell Size="3">
+														<span><strong>@resource.Quantity?.ToString("#.#####") <span>@(resource.MeasureUnit?.Name)</span></strong></span>
+													</Cell>
+													<Cell Size="3">
+														<span>In collection: <strong>@(resource.IsInCollection ? "Yes" : "No")</strong></span>
+													</Cell>
+													<Cell Size="6">
+														@if (resource.IsInCollection)
+														{
+															<span>@resource.Collection?.Name</span>
+														}
+														else
+														{
+															<span>
+																<span>@(resource.County?.Name)</span>, lat. @resource.Latitude, long. @resource.Longitude
+															</span>
+														}
+													</Cell>
+												</Row>
+												<Separator Type="SeparatorType.Line" />
+											}
+										</Cell>
+									</Row>
+									<Separator Type="SeparatorType.Line" />
+								}
+								break;
+							case EnumStepType.CalendarStep:
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										<span>FROM</span>
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.StartDate.ToString("dd MMM yyyy")</strong>
+									</Cell>
+								</Row>
+								<Row>
+									<Cell CssClass="col-md-6 col-lg-3">
+										<span>TO</span>
+									</Cell>
+									<Cell CssClass="col-md-6 col-lg-9">
+										<strong>@Model.EndDate.ToString("dd MMM yyyy")</strong>
+									</Cell>
+								</Row>
+								break;
+							case EnumStepType.ShareBenefitsStep:
+								<Row>
+									<Cell Size="3" CssClass="min-width">
+										@I18n.Model.ApplicationModel_MonetaryBenefitTypes
+									</Cell>
+									<Cell Size="9" CssClass="min-width">
+										<div class="mt-1">
+											<TelerikChipList Data="Model.MonetaryBenefitTypes"
+															 Removable="false">
+												<ItemTemplate>
+													@{
+														<span class="my-1 max-chip-width">@I18n.Enums.Get(context)</span>
+													}
+												</ItemTemplate>
+											</TelerikChipList>
+										</div>
+									</Cell>
+								</Row>
+								<Row>
+									<Cell Size="3" CssClass="min-width">
+										@I18n.Model.ApplicationModel_NonMonetaryBenefitTypes
+									</Cell>
+									<Cell Size="9" CssClass="min-width">
+										<div class="mt-1">
+											<TelerikChipList Data="Model.NonMonetaryBenefitTypes"
+															 Class="mt1"
+															 Removable="false">
+												<ItemTemplate>
+													@{
+														<span class="my-1 max-chip-width">@I18n.Enums.Get(context)</span>
+													}
+												</ItemTemplate>
+											</TelerikChipList>
+										</div>
+									</Cell>
+								</Row>
+								<Row>
+									<Cell Size="3" CssClass="min-width">
+										@I18n.Model.ApplicationModel_BenefitTypesDescription
+									</Cell>
+									<Cell Size="9" CssClass="min-width">
+										<span class="my-2">@Model.BenefitsDescription</span>
+									</Cell>
+								</Row>
+								break;
+							case EnumStepType.FieldStep:
+								foreach (var field in step.Fields)
+								{
+									var customData = Model.CustomData.SingleOrDefault(x => x.FieldKey == field.Key);
+									if (customData != null)
+									{
+										<Row>
+											<Cell CssClass="col-md-6 col-lg-3">
+												<span class="my-2">@field.Name</span>
+											</Cell>
+											<Cell CssClass="col-md-6 col-lg-9">
+												@if (field.Type == EnumFieldType.Question)
+												{
+													<span class="badge bg-secondary">@customData.Value</span>
+												}
+												else
+												{
+													<h5 class="my-2">@customData.Value</h5>
+												}
+												@{
+													var explanation = field.Explanations.SingleOrDefault(x => x.Value == customData.Value);
+													if (explanation != null)
+													{
+														<Row>
+															<Cell CssClass="col-md-6 col-lg-12">
+																<span class="my-2">@explanation.Explanation</span>
+															</Cell>
+														</Row>
+													}
+												}
+											</Cell>
+										</Row>
+									}
+								}
+								break;
+						}
+					</div>
+				}
+			</Cell>
+		</Row>
+
+		<TelerikWindow Class="demo-window"
+					   Width="50%"
+					   Height="40%"
+					   Modal="true"
+					   Visible="_isWindowVisible">
+			<WindowTitle>
+				<strong>Extra data</strong>
+			</WindowTitle>
+			<WindowActions>
+				<WindowAction Name="Save" Icon="FontIcon.Save" OnClick="async () => await SaveExtraDataAsync()"></WindowAction>
+				<WindowAction Name="Close" OnClick="() => { _isWindowVisible = false; }"></WindowAction>
+			</WindowActions>
+			<WindowContent>
+				<h5>@I18n.Text.Get(Step.Name)</h5>
+				<TelerikTextArea @bind-Value="ExtraData.Value" Class="textarea-class" />
+			</WindowContent>
+		</TelerikWindow>
+	</Body>
+</MxView>

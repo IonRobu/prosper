@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Providers\Caching\**" />
+    <Compile Remove="Providers\Notification\**" />
+    <EmbeddedResource Remove="Providers\Caching\**" />
+    <EmbeddedResource Remove="Providers\Notification\**" />
+    <None Remove="Providers\Caching\**" />
+    <None Remove="Providers\Notification\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Configuration\IdentitySettings.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Methodic.Core" Version="1.0.0-preview6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+<TelerikRootComponent>
+	<div class="wrapper">
+		<Sidebar />
+		<div class="main">
+			<Navbar />
+			<main class="content">
+				<div class="container-fluid p-0 h-100">
+					@if (!IsLoaded)
+					{
+						<Loading />
+					}
+					else
+					{
+						<Info Translate="x => x.ToString()" />
+						<div class="card flex-fill w-100 h-100 p-2">
+							@Body
+						</div>
+					}
+				</div>
+			</main>
+			@*<NavFooter />*@
+		</div>
+	</div>
+</TelerikRootComponent>

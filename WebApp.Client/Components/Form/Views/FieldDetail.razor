@@ -1,0 +1,138 @@
+﻿@inherits View<FieldModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<Button CssClass="float-end"
+				Icon="FontIcon.Pencil"
+				OnClick="() => Edit()" />
+	</Actions>
+	<Body>
+		<DataField Label="@I18n.Model.FieldModel_Name" LabelSize="2">
+			<Content>
+				<label>@Model.Name</label>
+			</Content>
+		</DataField>
+		<DataField Label="@I18n.Model.FieldModel_Title" LabelSize="2">
+			<Content>
+				<label>@Model.Title</label>
+			</Content>
+		</DataField>
+		@if (!string.IsNullOrEmpty(Model.Info))
+		{
+			<DataField Label="@I18n.Model.FieldModel_Info" LabelSize="2">
+				<Content>
+					<label>@Model.Info</label>
+				</Content>
+			</DataField>
+		}
+		@if (!string.IsNullOrEmpty(Model.Description))
+		{
+			<DataField Label="@I18n.Model.FieldModel_Description" LabelSize="2">
+				<Content>
+					<label>@Model.Description</label>
+				</Content>
+			</DataField>
+		}
+		<DataField Label="@I18n.Model.FieldModel_Type" LabelSize="2">
+			<Content>
+				<label>@Model.Type</label>
+			</Content>
+		</DataField>
+		@if (FieldListTypes.Any())
+		{
+			<DataField Label="@I18n.Model.FieldModel_ListType" LabelSize="2">
+				<Content>
+					<label>@I18n.Enums.Get(Model.ListType)</label>
+				</Content>
+			</DataField>
+		}
+		@if (Model.Type == EnumFieldType.Question || Model.Type == EnumFieldType.DropDown)
+		{
+			<Separator />
+			<div>
+				<OptionMenu>
+					<Items>
+						<OptionItem Text="Add" OnClick="() => EditFieldExplanation()" />
+					</Items>
+				</OptionMenu>
+				<h4 class="text-small">Explanations</h4>
+			</div>
+			<hr />
+			@if (Model.Explanations.Any())
+			{
+				<TelerikListView Data="Model.Explanations"
+								 Class="k-card-list-item"
+								 Pageable="false">
+					<Template>
+						<div class="d-flex align-items-start">
+							<div class="flex-grow-1">
+								<OptionMenu>
+									<Items>
+										<OptionItem Text="Edit" OnClick="() => EditFieldExplanation(context)" />
+										<OptionItem Text="Delete" OnClick="async () => await DeleteFieldExplanationAsync(context)" />
+									</Items>
+								</OptionMenu>
+								<small class="font-weight-bold">@context.Value</small>
+								<Separator />
+								<small>@context.Explanation</small>
+							</div>
+						</div>
+						<hr />
+					</Template>
+				</TelerikListView>
+			}
+			else
+			{
+				<div class="alert alert-info" role="alert">
+					<div class="alert-message">
+						There are no explanations
+					</div>
+				</div>
+			}
+		}
+		<TelerikWindow Class="demo-window"
+					   Width="70%"
+					   Height="400px"
+					   Modal="true"
+					   Centered="true"
+					   Visible="_isWindowVisible">
+			<WindowTitle>
+				<strong>Field explanation</strong>
+			</WindowTitle>
+			<WindowActions>
+				<WindowAction Name="Save" Icon="FontIcon.Save" OnClick="async () => await SaveFieldExplanationAsync()"></WindowAction>
+				<WindowAction Name="Close" OnClick="() => { _isWindowVisible = false; }"></WindowAction>
+			</WindowActions>
+			<WindowContent>
+				<form class="k-form k-form-md">
+					<fieldset class="k-form-fieldset">
+						<label class="k-form-field">
+							<span>Value</span>
+							<Separator />
+							@if (FieldExplanation.Id == 0)
+							{
+								<TelerikDropDownList Data="ExplanationValues"
+													 Value="FieldExplanation.Value"
+													 ValueChanged="@((string x) => OnTypeChange(x))"
+													 DefaultText=""
+													 Width="70%">
+								</TelerikDropDownList>
+							}
+							else
+							{
+								<strong>@FieldExplanation.Value</strong>
+							}
+						</label>
+						<label class="k-form-field">
+							<span>Explanation</span>
+							<Separator />
+							<TelerikTextArea Class="textarea-class"
+							@bind-Value="FieldExplanation.Explanation" />
+						</label>
+					</fieldset>
+				</form>
+			</WindowContent>
+		</TelerikWindow>
+	</Body>
+</MxView>

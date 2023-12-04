@@ -7,9 +7,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prosper.Mobile", "Prosper.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Server", "WebApp.Server\WebApp.Server.csproj", "{05798E8F-5CE8-43E7-8F4D-91DBE7173168}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.UI", "WebApp.UI\WebApp.UI.csproj", "{04BBCEF5-57FF-4F53-B583-0D331E91913D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp.Client", "WebApp.Client\WebApp.Client.csproj", "{04BBCEF5-57FF-4F53-B583-0D331E91913D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Common", "Core.Common\Core.Common.csproj", "{F44589D7-FC80-4013-967A-2FD433658F69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Common", "Core.Common\Core.Common.csproj", "{F44589D7-FC80-4013-967A-2FD433658F69}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{A4ECC214-3373-4CFA-86C9-0154951ACDDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{7AFCDD3C-F13D-47D4-A6AF-CDCBC51CEB95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Configuration", "Configuration\Configuration.csproj", "{9441F54F-9014-4EB4-83CF-84A522B3844C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity", "Identity\Identity.csproj", "{8E478521-7F89-4847-8EF9-0B355CC5F008}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,8 +26,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{96856166-23BF-4FD8-87FF-A1D7421828C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{96856166-23BF-4FD8-87FF-A1D7421828C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{96856166-23BF-4FD8-87FF-A1D7421828C1}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{96856166-23BF-4FD8-87FF-A1D7421828C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96856166-23BF-4FD8-87FF-A1D7421828C1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05798E8F-5CE8-43E7-8F4D-91DBE7173168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -34,6 +40,22 @@ Global
 		{F44589D7-FC80-4013-967A-2FD433658F69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F44589D7-FC80-4013-967A-2FD433658F69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F44589D7-FC80-4013-967A-2FD433658F69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4ECC214-3373-4CFA-86C9-0154951ACDDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4ECC214-3373-4CFA-86C9-0154951ACDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4ECC214-3373-4CFA-86C9-0154951ACDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4ECC214-3373-4CFA-86C9-0154951ACDDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AFCDD3C-F13D-47D4-A6AF-CDCBC51CEB95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AFCDD3C-F13D-47D4-A6AF-CDCBC51CEB95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AFCDD3C-F13D-47D4-A6AF-CDCBC51CEB95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AFCDD3C-F13D-47D4-A6AF-CDCBC51CEB95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9441F54F-9014-4EB4-83CF-84A522B3844C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9441F54F-9014-4EB4-83CF-84A522B3844C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9441F54F-9014-4EB4-83CF-84A522B3844C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9441F54F-9014-4EB4-83CF-84A522B3844C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E478521-7F89-4847-8EF9-0B355CC5F008}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E478521-7F89-4847-8EF9-0B355CC5F008}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E478521-7F89-4847-8EF9-0B355CC5F008}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E478521-7F89-4847-8EF9-0B355CC5F008}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

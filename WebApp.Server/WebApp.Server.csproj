@@ -7,9 +7,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Configuration\Utils\**" />
 	  <Compile Remove="Models\**" />
+	  <Content Remove="Configuration\Utils\**" />
 	  <Content Remove="Models\**" />
+	  <EmbeddedResource Remove="Configuration\Utils\**" />
 	  <EmbeddedResource Remove="Models\**" />
+	  <None Remove="Configuration\Utils\**" />
 	  <None Remove="Models\**" />
 	</ItemGroup>
 
@@ -20,7 +24,6 @@
 	  <Compile Remove="Controllers\DocumentController.cs" />
 	  <Compile Remove="Controllers\FormController.cs" />
 	  <Compile Remove="Controllers\IdentityController.cs" />
-	  <Compile Remove="Controllers\StaticDataController.cs" />
 	  <Compile Remove="Controllers\UtilsController.cs" />
 	</ItemGroup>
 
@@ -31,6 +34,11 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\src\Configuration\Configuration.csproj" />
+		<ProjectReference Include="..\WebApp.Client\WebApp.Client.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

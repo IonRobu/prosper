@@ -1,0 +1,15 @@
+{
+	"FieldModel_Name": "Name_RO",
+	"FieldModel_Title": "Title_RO",
+	"FieldModel_Description": "Description_RO",
+	"FieldModel_Info": "Info_RO",
+	"FieldModel_Type": "Type_RO",
+	"FieldModel_ListType": "List type_RO",
+	"FormModel_Name": "Denumire_RO",
+	"FormModel_Description": "Descriere_RO",
+	"FormModel_ApplicationType": "Tip solicitare_RO",
+	"FormModel_PersonType": "Tip persoana_RO",
+	"FormStepModel_Name": "Denumire_RO",
+	"FormStepModel_Description": "Descriere_RO",
+	"FormStepModel_StepType": "Tip pas_RO"
+}

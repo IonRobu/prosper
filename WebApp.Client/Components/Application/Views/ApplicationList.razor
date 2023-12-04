@@ -1,0 +1,147 @@
+﻿@inherits PageListView<ApplicationModel>
+
+<MxView>
+	<Actions>
+		<Button Icon="FontIcon.ArrowRotateCcw"
+				CssClass="float-end"
+				FillMode="@ThemeConstants.Button.FillMode.Link"
+				OnClick="() =>  GridViewRef.Rebind()" />
+		<div style="clear: both"></div>
+	</Actions>
+	<Body>
+		<div class="alert alert-primary alert-outline" role="alert">
+			<div class="alert-message">
+				<Row>
+					<Cell Size="4" CssClass="min-width">
+						<label for="ApplicationStatus" class="k-label k-form-label">Status</label>
+						<TelerikDropDownList @bind-Value="QueryInfo.Status"
+											 Data="EnumData.ApplicationStatusList"
+											 Id="ApplicationStatus"
+											 ValueField="Id"
+											 TextField="Name"
+											 DefaultText="">
+						</TelerikDropDownList>
+					</Cell>
+					<Cell Size="2" CssClass="min-width">
+						<label for="SolicitantName" class="k-label k-form-label">Id</label>
+						<TelerikNumericTextBox @bind-Value="QueryInfo.Id"
+											   Arrows="false"
+											   Id="SolicitantName" />
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="4" CssClass="min-width">
+						<label for="SolicitantName" class="k-label k-form-label">Applicant name</label>
+						<TelerikTextBox @bind-Value="QueryInfo.SolicitantName"
+										Id="SolicitantName" />
+					</Cell>
+					<Cell Size="4" CssClass="min-width">
+						<label for="SolicitantEmail" class="k-label k-form-label">Applicant email</label>
+						<TelerikTextBox @bind-Value="QueryInfo.SolicitantEmail"
+										Id="SolicitantEmail" />
+					</Cell>
+					<Cell Size="4" CssClass="min-width">
+						<label for="SolicitantPhone" class="k-label k-form-label">Applicant phone</label>
+						<TelerikTextBox @bind-Value="QueryInfo.SolicitantPhone"
+										Id="SolicitantPhone" />
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="12" CssClass="min-width">
+						<Button Icon="FontIcon.FilterClear"
+								CssClass="float-end ms-1"
+								OnClick="() => ResetFilter()"
+								Text="Reset filter"
+								Color="@ThemeConstants.Button.ThemeColor.Dark"
+								Size="@ThemeConstants.Button.Size.Small" />
+						<Button Icon="FontIcon.Filter"
+								CssClass="float-end"
+								OnClick="() => Filter()"
+								Text="Filter"
+								Color="@ThemeConstants.Button.ThemeColor.Dark"
+								Size="@ThemeConstants.Button.Size.Small" />
+					</Cell>
+				</Row>
+			</div>
+		</div>
+		<TelerikGrid @ref="GridViewRef"
+					 TItem="ApplicationModel"
+					 OnRead="ReadItemsAsync"
+					 Resizable="true"
+					 Pageable="true"
+					 Sortable="true"
+					 PageSize="15">
+			<GridColumns>
+				<GridColumn Field="Id" Title="Id" Width="10%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<span><strong>@item.Solicitant.Id</strong></span>
+						}
+					</Template>
+				</GridColumn>
+				<GridColumn Field="Solicitant.ContactPerson" Title="Name" Width="20%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<span>@item.Solicitant.ContactPerson</span>
+							if (item.Solicitant.PersonType.Id == EnumPersonType.LegalEntity)
+							{
+								<Separator />
+								<span class="text-muted">@item.Solicitant.Organization</span>
+							}
+						}
+					</Template>
+				</GridColumn>
+				<GridColumn Field="Solicitant.PersonType.Id" Title="Person type" Width="20%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<span class="@GetPersonTypeTag(item)" style="min-width: 100px">@I18n.Enums.Get(item.Solicitant.PersonType.Id)</span>
+						}
+					</Template>
+				</GridColumn>
+				<GridColumn Field="CreationDate" Title="Creation date" Width="20%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<span>@item.CreationDate</span>
+						}
+					</Template>
+				</GridColumn>
+				<GridColumn Field="Solicitant.Email" Title="Email address" Width="20%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<span><strong>@item.Solicitant.Email</strong></span>
+						}
+					</Template>
+				</GridColumn>
+				<GridColumn Field="Solicitant.Phone" Title="Phone" Width="20%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<span>@item.Solicitant.Phone</span>
+						}
+					</Template>
+				</GridColumn>
+				<GridColumn Field="Status" Title="Status" Width="15%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<span class="@GetStatusTag(item)" style="min-width: 100px">@I18n.Enums.Get(item.Status)</span>
+						}
+					</Template>
+				</GridColumn>
+				<GridColumn Width="5%">
+					<Template>
+						@{
+							var item = context as ApplicationModel;
+							<Button Icon="FontIcon.Pencil" OnClick="() => Detail(item)" />
+						}
+					</Template>
+				</GridColumn>
+			</GridColumns>
+		</TelerikGrid>
+	</Body>
+</MxView>

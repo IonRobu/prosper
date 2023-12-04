@@ -1,7 +1,7 @@
 using NLog.Web;
 using System.Text.Json.Serialization;
 
-namespace WebApi.Backend.Configuration.Extensions;
+namespace WebApi.Server.Configuration.Extensions;
 
 public static class ProgramExtensions
 {
@@ -17,7 +17,7 @@ public static class ProgramExtensions
 
         builder.Services.AddRazorPages();
         builder.Services.AddSignalR();
-        //builder.Services.AddDefaultConfiguration();
+        builder.Services.AddDefaultConfiguration();
 		builder.Services.AddHttpClient();
 
 		builder.Logging.ClearProviders();
@@ -30,11 +30,12 @@ public static class ProgramExtensions
         {
             app.UseExceptionHandler("/Error");
         }
-        //app.Services.ConfigureDefault();
+        app.Services.ConfigureDefault();
 
 		app.UseBlazorFrameworkFiles();
 		app.UseStaticFiles();
         app.UseRouting();
+        app.UseIdentity();
         app.MapControllers();
         //app.MapHub<NotificationHub>("/api/notificationhub");
         app.MapFallbackToFile("index.html");

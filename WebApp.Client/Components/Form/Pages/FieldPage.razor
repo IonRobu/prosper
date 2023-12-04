@@ -1,0 +1,20 @@
+﻿@inherits Page
+@page "/field-config"
+@page "/field-config/{Route}"
+@page "/field-config/{Route}/{Id:long}"
+
+<MxPage Title="@I18n.Title.Page_FieldList">
+	<ViewRoute Name="@RouteIndex">
+		<FieldList OnAdd="async () => await GoToFormAsync()"
+				   OnEdit="async (long id) => await GoToFormAsync(id)"
+				   OnDetail="async (long id) => await GoToDetailAsync(id, false)" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteFieldForm">
+		<FieldForm Id="Id" OnClosed="async (id) => await GoToDetailAsync(id, true)" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteFieldDetail">
+		<FieldDetail Id="Id"
+					 OnEdit="async (long id) => await GoToFormAsync(id)"
+					 OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+</MxPage>

@@ -1,0 +1,7 @@
+{
+	"UserModel_IsLocked_False": "Activ",
+	"UserModel_IsLocked_True": "Inactiv",
+	"PasswordConfirm": "Parola a fost resetata. Accesati ecranul de login [translate]",
+	"EmailConfirm": "Adresa de email a fost confirmata. Accesati ecranul de login [translate]",
+	"PasswordGetToken": "Un e-mail a fost trimis pe [translate]"
+}

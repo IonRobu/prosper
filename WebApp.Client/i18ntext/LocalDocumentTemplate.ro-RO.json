@@ -1,0 +1,15 @@
+{
+	"PersonAddress": "Adresa parte",
+	"Address": "Adresa",
+	"Locality": "Localitate",
+	"Country": "Tara",
+	"Bank": "Banca",
+	"Court": "Instanta de judecata",
+	"Currency": "Moneda",
+	"Amount": "Plata parte",
+	"BankAccount": "Cont bancar parte",
+	"Part": "Parte",
+	"Representant": "Reprezentant parte",
+	"Project": "Dosar",
+	"Title": "Titlu"
+}
