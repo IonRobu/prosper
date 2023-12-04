@@ -1,5 +1,5 @@
 ﻿@inherits FormView<TransactionModel>
-form
+
 <MxView>
 	<Actions>
 		&nbsp;
@@ -10,11 +10,71 @@ form
 	<Body>
 		<Row>
 			<Cell Size="2">
+				Category
+			</Cell>
+			<Cell Size="4">
+				<TelerikDropDownList @bind-Value="Model.CategoryId"
+									 Data="CategoryList"
+									 ValueField="Id"
+									 TextField="Name"
+									 DefaultText="" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				Card
+			</Cell>
+			<Cell Size="4">
+				<TelerikDropDownList @bind-Value="Model.CardId"
+									 Data="CardList"
+									 ValueField="Id"
+									 TextField="Name"
+									 DefaultText="" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				Account
+			</Cell>
+			<Cell Size="4">
+				<TelerikDropDownList @bind-Value="Model.AccountId"
+									 Data="AccountList"
+									 ValueField="Id"
+									 TextField="Name"
+									 DefaultText="" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
 				Name
 			</Cell>
 			<Cell Size="8">
 				<TelerikTextBox @bind-Value="Model.Name" Width="50%" Class="min-width" />
 			</Cell>
 		</Row>
+		<Row>
+			<Cell Size="2">
+				Amount
+			</Cell>
+			<Cell Size="8">
+				<TelerikNumericTextBox @bind-Value="Model.Amount" Width="50%" Class="min-width" />
+			</Cell>
+		</Row>
+		<Row>
+			<Cell Size="2">
+				Is income
+			</Cell>
+			<Cell Size="8">
+				<TelerikSwitch @bind-Value="Model.IsIncome" />
+			</Cell>
+		</Row>
+		@* <Row>
+			<Cell Size="2">
+				Name
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Name" Width="50%" Class="min-width" />
+			</Cell>
+		</Row> *@
 	</Body>
 </MxView>

@@ -5,9 +5,9 @@ using Data.Domain.Business;
 
 namespace Data.Configuration.Mappings;
 
-internal class StaticDataMappingProfile : Profile
+internal class MappingProfile : Profile
 {
-	public StaticDataMappingProfile()
+	public MappingProfile()
 	{
 		Map();
 	}
@@ -25,8 +25,13 @@ internal class StaticDataMappingProfile : Profile
 
 		CreateMap<Transaction, TransactionModel>(MemberList.Source);
 		CreateMap<TransactionModel, Transaction>(MemberList.Source)
-			.ForMember(x => x.Category, opts => opts.Ignore())
-			.ForMember(x => x.Card, opts => opts.Ignore())
-			.ForMember(x => x.Account, opts => opts.Ignore());
+			.ForPath(x => x.Category, opts => opts.Ignore())//??? not ignoring
+			.ForPath(x => x.Card, opts => opts.Ignore())
+			.ForPath(x => x.Account, opts => opts.Ignore())
+			.AfterMap((src, dest) => {
+				dest.Category = null;
+				dest.Card = null;
+				dest.Account = null;
+			});
 	}
 }

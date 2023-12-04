@@ -18,5 +18,17 @@ public class TransactionModelValidator : ModelValidator<TransactionModel>
 		RuleFor(x => x.Name)
 			.NotEmpty()
 			.WithMessage("Transaction name required");
+
+		RuleFor(x => x.CategoryId)
+			.NotEmpty()
+			.WithMessage("Category required");
+
+		RuleFor(x => x.CardId)
+			.NotEmpty()
+			.WithMessage("Card required");
+
+		RuleFor(x => x.AccountId)
+			.NotEmpty()
+			.WithMessage("Account required");
 	}
 }

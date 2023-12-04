@@ -22,6 +22,6 @@ public partial class IndexPage
 
 	public async Task GoToFormAsync(int id)
 	{
-		await Navigation.GoToAsync(RouteTransactionForm, 0);
+		await Navigation.GoToAsync(RouteTransactionForm, id);
 	}
 }
