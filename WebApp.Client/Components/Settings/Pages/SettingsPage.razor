@@ -3,25 +3,34 @@
 @page "/settings/{Route}"
 @page "/settings/{Route}/{Id:int}"
 
-<h3>Settings</h3>
+<MxPage Title="Settings">
+	<ViewRoute Name="@RouteIndex">
+		<StaticDataPanel OnSelected="async (item) => await GoToListAsync(item)" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteCategoryList">
+		<CategoryList OnAdd='async () => await GoToFormAsync("Category", 0)'
+					  OnEdit='async(id) => await GoToFormAsync("Category", id)' />
+	</ViewRoute>
+	<ViewRoute Name="@RouteCategoryForm">
+		<CategoryForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteCardList">
+		<CardList OnAdd='async () => await GoToFormAsync("Card", 0)'
+				  OnEdit='async(id) => await GoToFormAsync("Card", id)' />
+	</ViewRoute>
+	<ViewRoute Name="@RouteCardForm">
+		<CardForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteAccountList">
+		<AccountList OnAdd='async () => await GoToFormAsync("Account", 0)'
+					 OnEdit='async(id) => await GoToFormAsync("Account", id)' />
+	</ViewRoute>
+	<ViewRoute Name="@RouteAccountForm">
+		<AccountForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+</MxPage>
 
-<ViewRoute Name="@RouteIndex">
-	<StaticDataPanel OnSelected="async (item) => await GoToListAsync(item)" />
-</ViewRoute>
-<ViewRoute Name="@RouteCategoryList">
-	<CategoryList OnAdd='async () => await GoToFormAsync("Category", 0)'
-				  OnEdit='async(id) => await GoToFormAsync("Category", id)' />
-</ViewRoute>
-<ViewRoute Name="@RouteCategoryForm">
-	<CategoryForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
-</ViewRoute>
-<ViewRoute Name="@RouteCardList">
-	<CardList OnAdd='async () => await GoToFormAsync("Card", 0)'
-			  OnEdit='async(id) => await GoToFormAsync("Card", id)' />
-</ViewRoute>
-<ViewRoute Name="@RouteCardForm">
-	<CardForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
-</ViewRoute>
+
 
 @* 	<ViewRoute Name="@RouteCollectionTypeList">
 		<CollectionTypeList OnAdd='async () => await GoToFormAsync("CollectionType", 0)'

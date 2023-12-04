@@ -22,6 +22,12 @@ public partial class SettingsPage
 	[RouteName]
 	public const string RouteCardForm = "card-form";
 
+	[RouteName]
+	public const string RouteAccountList = "account-list";
+
+	[RouteName]
+	public const string RouteAccountForm = "account-form";
+
 	public async Task GoToListAsync(string item)
 	{
 		var route = "";
@@ -32,6 +38,9 @@ public partial class SettingsPage
 				break;
 			case "Card":
 				route = RouteCardList;
+				break;
+			case "Account":
+				route = RouteAccountList;
 				break;
 		}
 		await Navigation.GoToAsync(route);
@@ -48,15 +57,9 @@ public partial class SettingsPage
 			case "Card":
 				route = RouteCardForm;
 				break;
-				//case "CollectionType":
-				//	route = RouteCollectionTypeForm;
-				//	break;
-				//case "Species":
-				//	route = RouteSpeciesForm;
-				//	break;
-				//case "MeasureUnit":
-				//	route = RouteMeasureUnitForm;
-				//	break;
+			case "Account":
+				route = RouteAccountForm;
+				break;
 		}
 		await Navigation.GoToAsync(route, id);
 	}

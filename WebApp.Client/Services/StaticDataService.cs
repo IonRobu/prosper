@@ -88,4 +88,34 @@ public class StaticDataService : HttpServiceBase
 		.ResponseAsync<CardModel>();
 		return result;
 	}
+
+	public async Task<PageList<AccountModel>> GetAccountPageAsync(AccountQueryInfo queryInfo)
+	{
+		var result = await RequestAsync(RouteHelper.StaticData.GetAccountPage, queryInfo, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<PageList<AccountModel>>();
+		return result;
+	}
+
+	public async Task<AccountModel> GetAccountByIdAsync(long id)
+	{
+		var result = await RequestAsync($"{RouteHelper.StaticData.GetAccountById}?id={id}", opts =>
+		{
+			opts.AsGetMethod();
+		})
+		.ResponseAsync<AccountModel>();
+		return result;
+	}
+
+	public async Task<AccountModel> SaveAccountAsync(AccountModel model)
+	{
+		var result = await RequestAsync(RouteHelper.StaticData.SaveAccount, model, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<AccountModel>();
+		return result;
+	}
 }
