@@ -89,6 +89,16 @@ public class StaticDataService : HttpServiceBase
 		return result;
 	}
 
+	public async Task<bool> DeleteCardAsync(CardModel model)
+	{
+		var result = await RequestAsync(RouteHelper.StaticData.DeleteCard, model, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<bool>();
+		return result;
+	}
+
 	public async Task<PageList<AccountModel>> GetAccountPageAsync(AccountQueryInfo queryInfo)
 	{
 		var result = await RequestAsync(RouteHelper.StaticData.GetAccountPage, queryInfo, opts =>
@@ -116,6 +126,16 @@ public class StaticDataService : HttpServiceBase
 			opts.AsPostMethod();
 		})
 		.ResponseAsync<AccountModel>();
+		return result;
+	}
+
+	public async Task<bool> DeleteAccountAsync(AccountModel model)
+	{
+		var result = await RequestAsync(RouteHelper.StaticData.DeleteAccount, model, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<bool>();
 		return result;
 	}
 }

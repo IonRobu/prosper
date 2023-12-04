@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Components;
 using Telerik.Blazor;
 using Telerik.Blazor.Components;
 using Telerik.DataSource;
-using Telerik.FontIcons;
-using WebApp.Client.Configuration;
 using WebApp.Client.Services;
 
 namespace WebApp.Client.Components.Settings.Views;
@@ -118,7 +116,6 @@ public partial class CategoryList
 		if (confirmed)
 		{
 			var result = await StaticDataService.DeleteCategoryAsync(item);
-			Console.Write(result);
 			RebindGrid();
 			StateHasChanged();
 			return result;

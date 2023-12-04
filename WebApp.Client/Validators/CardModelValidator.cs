@@ -18,5 +18,9 @@ public class CardModelValidator : ModelValidator<CardModel>
 		RuleFor(x => x.Name)
 			.NotEmpty()
 			.WithMessage("Card name required");
+
+		RuleFor(x => x.Number)
+			.NotEmpty()
+			.WithMessage("Card number required");
 	}
 }

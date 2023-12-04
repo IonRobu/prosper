@@ -52,7 +52,7 @@ public class StaticDataController : ApiController
 
 
 	[HttpPost(RouteHelper.StaticData.GetCardPage)]
-	public ActionResult GetCardPage([FromBody] QueryInfo queryInfo)
+	public ActionResult GetCardPage([FromBody] CardQueryInfo queryInfo)
 	{
 		var result = _staticDataService.GetCardPage(queryInfo);
 		return Result(result);
@@ -72,10 +72,17 @@ public class StaticDataController : ApiController
 		return Result(result);
 	}
 
+	[HttpPost(RouteHelper.StaticData.DeleteCard)]
+	public async Task<ActionResult> DeleteCardAsync(CardModel model)
+	{
+		var result = await _staticDataService.DeleteCardAsync(model);
+		return Result(result);
+	}
+
 
 
 	[HttpPost(RouteHelper.StaticData.GetAccountPage)]
-	public ActionResult GetAccountPage([FromBody] QueryInfo queryInfo)
+	public ActionResult GetAccountPage([FromBody] AccountQueryInfo queryInfo)
 	{
 		var result = _staticDataService.GetAccountPage(queryInfo);
 		return Result(result);
@@ -92,6 +99,13 @@ public class StaticDataController : ApiController
 	public async Task<ActionResult> SaveAccountAsync(AccountModel model)
 	{
 		var result = await _staticDataService.SaveAccountAsync(model);
+		return Result(result);
+	}
+
+	[HttpPost(RouteHelper.StaticData.DeleteAccount)]
+	public async Task<ActionResult> DeleteAccountAsync(AccountModel model)
+	{
+		var result = await _staticDataService.DeleteAccountAsync(model);
 		return Result(result);
 	}
 }

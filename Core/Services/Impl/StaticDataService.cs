@@ -38,7 +38,7 @@ internal class StaticDataService : Service, IStaticDataService
 	}
 
 
-	public Result<PageList<CardModel>> GetCardPage(QueryInfo queryInfo)
+	public Result<PageList<CardModel>> GetCardPage(CardQueryInfo queryInfo)
 	{
 		return _staticDataComponent.GetCardPage(queryInfo);
 	}
@@ -53,8 +53,13 @@ internal class StaticDataService : Service, IStaticDataService
 		return await _staticDataComponent.SaveCardAsync(model);
 	}
 
+	public async Task<Result<bool>> DeleteCardAsync(CardModel model)
+	{
+		return await _staticDataComponent.DeleteCardAsync(model);
+	}
 
-	public Result<PageList<AccountModel>> GetAccountPage(QueryInfo queryInfo)
+
+	public Result<PageList<AccountModel>> GetAccountPage(AccountQueryInfo queryInfo)
 	{
 		return _staticDataComponent.GetAccountPage(queryInfo);
 	}
@@ -67,5 +72,10 @@ internal class StaticDataService : Service, IStaticDataService
 	public async Task<Result<AccountModel>> SaveAccountAsync(AccountModel model)
 	{
 		return await _staticDataComponent.SaveAccountAsync(model);
+	}
+
+	public async Task<Result<bool>> DeleteAccountAsync(AccountModel model)
+	{
+		return await _staticDataComponent.DeleteAccountAsync(model);
 	}
 }

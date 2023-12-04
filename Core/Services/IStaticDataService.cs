@@ -15,15 +15,19 @@ public interface IStaticDataService : IService
 
 	Task<Result<bool>> DeleteCategoryAsync(CategoryModel model);
 
-	Result<PageList<CardModel>> GetCardPage(QueryInfo queryInfo);
+	Result<PageList<CardModel>> GetCardPage(CardQueryInfo queryInfo);
 
 	Result<CardModel> GetCardById(int id);
 
 	Task<Result<CardModel>> SaveCardAsync(CardModel model);
 
-	Result<PageList<AccountModel>> GetAccountPage(QueryInfo queryInfo);
+	Task<Result<bool>> DeleteCardAsync(CardModel model);
+
+	Result<PageList<AccountModel>> GetAccountPage(AccountQueryInfo queryInfo);
 
 	Result<AccountModel> GetAccountById(int id);
 
 	Task<Result<AccountModel>> SaveAccountAsync(AccountModel model);
+
+	Task<Result<bool>> DeleteAccountAsync(AccountModel model);
 }

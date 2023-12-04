@@ -1,20 +1,45 @@
 ﻿@inherits FormView<CardModel>
 
-<MxView>
-	<Actions>
-		&nbsp;
-		<Button CssClass="float-end"
-				Icon="FontIcon.Save"
-				OnClick="async () => await SaveAsync()" />
-	</Actions>
+<MxView Title="Card form" LayoutStyle="ViewLayoutStyle.Simple">
 	<Body>
-		<Row>
-			<Cell Size="2">
-				Name
-			</Cell>
-			<Cell Size="8">
-				<TelerikTextBox @bind-Value="Model.Name" Width="50%" Class="min-width" />
-			</Cell>
-		</Row>
+		<MxCard Bordered="true">
+			<CardBody>
+				<Row>
+					<Cell Size="2"></Cell>
+					<Cell Size="8">
+						<Row>
+							<Cell Size="12" CssClass="min-width">
+								<Button CssClass="float-end"
+										Icon="FontIcon.Save"
+										OnClick="async () => await SaveAsync()" />
+							</Cell>
+						</Row>
+						<Separator Type="SeparatorType.Line" />
+						<Row>
+							<Cell Size="12">
+								<span>Name</span>
+								<Separator />
+								<TelerikTextBox @bind-Value="Model.Name" Width="70%" Class="min-width" />
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="12">
+								<span>Number</span>
+								<Separator />
+								<TelerikTextBox @bind-Value="Model.Number" Width="70%" Class="min-width" />
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="12">
+								<span>Description</span>
+								<Separator />
+								<TelerikTextArea @bind-Value="Model.Description" Width="70%" Class="min-width textarea" />
+							</Cell>
+						</Row>
+					</Cell>
+					<Cell Size="2"></Cell>
+				</Row>
+			</CardBody>
+		</MxCard>
 	</Body>
 </MxView>

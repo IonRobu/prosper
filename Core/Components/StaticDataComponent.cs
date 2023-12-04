@@ -61,7 +61,7 @@ internal class StaticDataComponent : Component
 	}
 
 
-	public Result<PageList<CardModel>> GetCardPage(QueryInfo queryInfo)
+	public Result<PageList<CardModel>> GetCardPage(CardQueryInfo queryInfo)
 	{
 		return Execute<PageList<CardModel>>((result) =>
 		{
@@ -86,8 +86,16 @@ internal class StaticDataComponent : Component
 		});
 	}
 
+	public async Task<Result<bool>> DeleteCardAsync(CardModel model)
+	{
+		return await ExecuteAsync<bool>(async result =>
+		{
+			result.Data = await _cardRepository.DeleteAsync(model);
+		});
+	}
 
-	public Result<PageList<AccountModel>> GetAccountPage(QueryInfo queryInfo)
+
+	public Result<PageList<AccountModel>> GetAccountPage(AccountQueryInfo queryInfo)
 	{
 		return Execute<PageList<AccountModel>>((result) =>
 		{
@@ -109,6 +117,14 @@ internal class StaticDataComponent : Component
 		{
 			await _accountRepository.SaveAsync(model);
 			result.Data = model;
+		});
+	}
+
+	public async Task<Result<bool>> DeleteAccountAsync(AccountModel model)
+	{
+		return await ExecuteAsync<bool>(async result =>
+		{
+			result.Data = await _accountRepository.DeleteAsync(model);
 		});
 	}
 }

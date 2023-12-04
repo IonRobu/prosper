@@ -34,6 +34,8 @@ public class RouteHelper
 
 		public const string SaveCard = "card_save";
 
+		public const string DeleteCard = "card_delete";
+
 
 		public const string GetAccountList = "account_get_list";
 
@@ -42,5 +44,7 @@ public class RouteHelper
 		public const string GetAccountById = "account_get_by_id";
 
 		public const string SaveAccount = "account_save";
+
+		public const string DeleteAccount = "account_delete";
 	}
 }

@@ -31,7 +31,7 @@
 
 						<Separator Type="SeparatorType.Line" />
 						<TelerikListView @ref="list"
-							Class="mt-5"
+										 Class="mt-5"
 										 TItem="CategoryModel"
 										 OnRead="ReadItemsAsync"
 										 Pageable="true"
@@ -45,11 +45,14 @@
 												Tooltip="Delete category" />
 										<Button Icon="FontIcon.Pencil"
 												CssClass="float-end"
-												OnClick="() => Edit(context)"												
+												OnClick="() => Edit(context)"
 												Tooltip="Edit category" />
 										<span><strong>@context.Name</strong></span>
-										<Separator />
-										<label><small class="text-muted mt-2 text-justify">@context.Description</small></label>
+										@if (!string.IsNullOrEmpty(context.Description))
+										{
+											<Separator />
+											<label><small class="text-muted mt-2 text-justify">@context.Description</small></label>
+										}
 										<Separator Type="SeparatorType.Line" />
 									</Cell>
 								</Row>
@@ -90,7 +93,7 @@
 								Size="@ThemeConstants.Button.Size.Large" />
 					</Cell>
 				</Row>
-				
+
 			</WindowContent>
 		</TelerikWindow>
 	</Body>

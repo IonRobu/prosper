@@ -5,4 +5,6 @@ namespace Core.Common.Queries;
 public class CardQueryInfo : QueryInfo
 {
 	public string Name { get; set; }
+
+	public string Number { get; set; }
 }

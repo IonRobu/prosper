@@ -7,5 +7,5 @@ namespace Core.Repositories;
 
 public interface ICardRepository : IRepository<CardModel, int>
 {
-	PageList<CardModel> GetCardPage(CategoryQueryInfo queryInfo);
+	PageList<CardModel> GetPage(CardQueryInfo queryInfo);
 }
