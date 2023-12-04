@@ -7,40 +7,25 @@
 				<Row>
 					<Cell Size="1"></Cell>
 					<Cell Size="10">
-
-						<MxCard Bordered="true">
-							<CardBody>
-								<Row>
-									<Cell Size="4" CssClass="min-width">
-										<label for="Name" class="k-label k-form-label">Name</label>
-										<TelerikTextBox @bind-Value="QueryInfo.Name"
-														Id="Name" />
-									</Cell>
-								</Row>
-								<Separator Type="SeparatorType.Line" />
-								<Row>
-									<Cell Size="12" CssClass="min-width">
-										<Button Icon="FontIcon.FilterClear"
-												CssClass="float-end ms-1 button-purple"
-												OnClick="() => ResetFilter()"
-												Size="@ThemeConstants.Button.Size.Large" />
-										<Button Icon="FontIcon.Filter"
-												CssClass="float-end button-purple"
-												OnClick="() => RebindGrid()"
-												Tooltip="Filter list"
-												Size="@ThemeConstants.Button.Size.Large" />
-									</Cell>
-								</Row>
-							</CardBody>
-						</MxCard>
-
-						<Separator Type="SeparatorType.Line" />
 						<Row>
 							<Cell Size="12" CssClass="min-width">
 								<Button Icon="FontIcon.Plus"
-										CssClass="float-end ms-2 button-purple"
+										CssClass="float-end ms-2"
 										OnClick="() => Edit()"
 										Tooltip="Add new category" />
+								<Button Icon="FontIcon.FilterClear"
+										CssClass="float-end ms-2"
+										OnClick="() => ResetFilter()" />
+								<Button Icon="FontIcon.Filter"
+										CssClass="float-end ms-2"
+										OnClick="() => ShowFilter()"
+										Tooltip="Filter list" />
+								<OptionMenu CssClass="ms-2">
+									<Items>
+										<OptionItem Text="@SortText" OnClick="() => SortList()" />
+									</Items>
+								</OptionMenu>
+								<span class="float-end pt-1">Sort by:</span>
 							</Cell>
 						</Row>
 
@@ -50,14 +35,6 @@
 										 OnRead="ReadItemsAsync"
 										 Pageable="true"
 										 PageSize="15">
-							<HeaderTemplate>
-								<Button Icon="@SortIcon"
-										FillMode="@ThemeConstants.Button.FillMode.Flat"
-										CssClass="mb-3"
-										Tooltip="Sort category list"
-										OnClick="() => SortList()"
-										Size="@ThemeConstants.Button.Size.Large" />
-							</HeaderTemplate>
 							<Template>
 								<Row Padding="0">
 									<Cell Size="12">
@@ -81,5 +58,37 @@
 			</CardBody>
 		</MxCard>
 		<TelerikTooltip TargetSelector="button[title]" Position="TooltipPosition.Top" ShowOn="@TooltipShowEvent.Hover" Id="position-tooltip"></TelerikTooltip>
+		<TelerikWindow Class="demo-window"
+					   Width="50%"
+					   Height="auto"
+					   Modal="true"
+					   Visible="IsWindowVisible">
+			<WindowTitle>
+				<strong>Filter list</strong>
+			</WindowTitle>
+			<WindowActions>
+				<WindowAction Name="Close" OnClick="() => { IsWindowVisible = false; }"></WindowAction>
+			</WindowActions>
+			<WindowContent>
+				<Row>
+					<Cell Size="4" CssClass="min-width">
+						<label for="Name" class="k-label k-form-label">Name</label>
+						<TelerikTextBox @bind-Value="QueryInfo.Name"
+										Id="Name" />
+					</Cell>
+				</Row>
+				<Separator Type="SeparatorType.Line" />
+				<Row>
+					<Cell Size="12" CssClass="min-width">
+						<Button Icon="FontIcon.Check"
+								CssClass="float-end"
+								OnClick="() => ApplyFilter()"
+								Tooltip="Filter list"
+								Size="@ThemeConstants.Button.Size.Large" />
+					</Cell>
+				</Row>
+				
+			</WindowContent>
+		</TelerikWindow>
 	</Body>
 </MxView>

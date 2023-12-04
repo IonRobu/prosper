@@ -34,7 +34,9 @@ public partial class CategoryList
 
 	private bool IsAscending { get; set; } = true;
 
-	private FontIcon SortIcon => IsAscending ? FontIcon.ArrowUp : FontIcon.ArrowDown;
+	private bool IsWindowVisible { get; set; }
+
+	private string SortText => "Name " + (IsAscending ? "asc" : "desc");
 
 	public CategoryList()
 	{
@@ -72,6 +74,19 @@ public partial class CategoryList
 	protected void RebindGrid()
 	{
 		list.Rebind();
+	}
+
+	protected void ShowFilter()
+	{
+		IsWindowVisible = true;
+		StateHasChanged();
+	}
+
+	protected void ApplyFilter()
+	{
+		IsWindowVisible = false;
+		RebindGrid();
+		StateHasChanged();
 	}
 
 	private void ResetFilter()
