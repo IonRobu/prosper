@@ -16,29 +16,11 @@ public partial class SettingsPage
 	[RouteName]
 	public const string RouteCategoryForm = "category-form";
 
-	//[RouteName]
-	//public const string RouteCollectionTypeList = "collection-type-list";
+	[RouteName]
+	public const string RouteCardList = "card-list";
 
-	//[RouteName]
-	//public const string RouteCollectionTypeForm = "collection-type-form";
-
-	//[RouteName]
-	//public const string RouteMeasureUnitList = "measure-unit-list";
-
-	//[RouteName]
-	//public const string RouteMeasureUnitForm = "measure-unit-form";
-
-	//[RouteName]
-	//public const string RouteSpeciesList = "species-list";
-
-	//[RouteName]
-	//public const string RouteSpeciesForm = "species-form";
-
-	//[RouteName]
-	//public const string RouteCountryList = "country-list";
-
-	//[RouteName]
-	//public const string RouteCountyList = "county-list";
+	[RouteName]
+	public const string RouteCardForm = "card-form";
 
 	public async Task GoToListAsync(string item)
 	{
@@ -48,21 +30,9 @@ public partial class SettingsPage
 			case "Category":
 				route = RouteCategoryList;
 				break;
-			//case "CollectionType":
-			//	route = RouteCollectionTypeList;
-			//	break;
-			//case "Species":
-			//	route = RouteSpeciesList;
-			//	break;
-			//case "MeasureUnit":
-			//	route = RouteMeasureUnitList;
-			//	break;
-			//case "Country":
-			//	route = RouteCountryList;
-			//	break;
-			//case "County":
-			//	route = RouteCountyList;
-			//	break;
+			case "Card":
+				route = RouteCardList;
+				break;
 		}
 		await Navigation.GoToAsync(route);
 	}
@@ -75,15 +45,18 @@ public partial class SettingsPage
 			case "Category":
 				route = RouteCategoryForm;
 				break;
-			//case "CollectionType":
-			//	route = RouteCollectionTypeForm;
-			//	break;
-			//case "Species":
-			//	route = RouteSpeciesForm;
-			//	break;
-			//case "MeasureUnit":
-			//	route = RouteMeasureUnitForm;
-			//	break;
+			case "Card":
+				route = RouteCardForm;
+				break;
+				//case "CollectionType":
+				//	route = RouteCollectionTypeForm;
+				//	break;
+				//case "Species":
+				//	route = RouteSpeciesForm;
+				//	break;
+				//case "MeasureUnit":
+				//	route = RouteMeasureUnitForm;
+				//	break;
 		}
 		await Navigation.GoToAsync(route, id);
 	}

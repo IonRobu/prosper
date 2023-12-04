@@ -1,6 +1,6 @@
-﻿@inherits PageListView<CategoryModel>
+﻿@inherits PageListView<CardModel>
 
-<MxView Title="Category list">
+<MxView Title="Card list">
 	<Actions>
 		<OptionMenu>
 			<Items>
@@ -38,17 +38,17 @@
 			</div>
 		</div>
 		<TelerikGrid @ref="list"
-					 TItem="CategoryModel"
+					 TItem="CardModel"
 					 OnRead="ReadItemsAsync"
 					 Resizable="true"
 					 Pageable="true"
 					 Sortable="true"
 					 PageSize="15">
 			<GridColumns>
-				<GridColumn Field=@nameof(CategoryModel.Name) Title="Name" Width="120px">
+				<GridColumn Field=@nameof(CardModel.Name) Title="Name" Width="120px">
 					<Template>
 						@{
-							var item = context as CategoryModel;
+							var item = context as CardModel;
 							<span class="cursor-pointer" @onclick="() => Edit(item)"><strong>@item.Name</strong></span>
 						}
 					</Template>

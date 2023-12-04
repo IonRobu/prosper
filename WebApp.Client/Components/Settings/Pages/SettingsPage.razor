@@ -15,6 +15,14 @@
 <ViewRoute Name="@RouteCategoryForm">
 	<CategoryForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
 </ViewRoute>
+<ViewRoute Name="@RouteCardList">
+	<CardList OnAdd='async () => await GoToFormAsync("Card", 0)'
+			  OnEdit='async(id) => await GoToFormAsync("Card", id)' />
+</ViewRoute>
+<ViewRoute Name="@RouteCardForm">
+	<CardForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+</ViewRoute>
+
 @* 	<ViewRoute Name="@RouteCollectionTypeList">
 		<CollectionTypeList OnAdd='async () => await GoToFormAsync("CollectionType", 0)'
 							OnEdit='async (id) => await GoToFormAsync("CollectionType", id)' />

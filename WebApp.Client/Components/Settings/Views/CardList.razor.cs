@@ -8,7 +8,7 @@ using WebApp.Client.Services;
 
 namespace WebApp.Client.Components.Settings.Views;
 
-public partial class CategoryList
+public partial class CardList
 {
 	[Parameter]
 	public Action<int> OnDetail { get; set; }
@@ -30,18 +30,18 @@ public partial class CategoryList
 	//[Inject]
 	//private EnumData EnumData { get; set; }
 
-	private CategoryQueryInfo QueryInfo { get; set; } = new();
+	private CardQueryInfo QueryInfo { get; set; } = new();
 
-	private TelerikGrid<CategoryModel> list;
+	private TelerikGrid<CardModel> list;
 
-	public CategoryList()
+	public CardList()
 	{
 		LazyBinding = true;
 	}
 
 	protected async Task ReadItemsAsync(GridReadEventArgs args)
 	{
-		var info = args.Request.GetQueryInfo<CategoryQueryInfo>();
+		var info = args.Request.GetQueryInfo<CardQueryInfo>();
 		QueryInfo.SortInfo = info.SortInfo;
 		QueryInfo.Page = info.Page;
 		QueryInfo.PageSize = info.PageSize;
@@ -52,10 +52,10 @@ public partial class CategoryList
 
 	protected override async Task LoadAsync()
 	{
-		Source = await StaticDataService.GetCategoryPageAsync(QueryInfo);
+		Source = await StaticDataService.GetCardPageAsync(QueryInfo);
 	}
 
-	private void Edit(CategoryModel item)
+	private void Edit(CardModel item)
 	{
 		OnEdit?.Invoke(item.Id);
 	}
