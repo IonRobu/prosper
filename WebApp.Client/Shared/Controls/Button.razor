@@ -4,9 +4,11 @@
 {
 	<TelerikButton OnClick="() => OnClick?.Invoke()"
 				   Icon="@Icon"
-				   Class=@CssClass
-				   FillMode="@FillMode"
+				   Class="@CssClass"
+				   FillMode="@FillMode" 
+				   Rounded="@ThemeConstants.Button.Rounded.Full"
 				   Size="@Size"
+				   Title="@Tooltip"
 				   ThemeColor="@Color"
 				   Enabled="!Disabled">
 		@Text
@@ -16,9 +18,11 @@ else
 {
 	<TelerikButton OnClick="() => OnClick?.Invoke()"
 				   Icon="@Icon"
-				   Class=@CssClass
-				   FillMode="@FillMode"
+				   Class="@CssClass"
+				   FillMode="@FillMode" 
+				   Rounded="@ThemeConstants.Button.Rounded.Full"
 				   Size="@Size"
+				   Title="@Tooltip"
 				   ThemeColor="@Color"
 				   Enabled="!Disabled">
 	</TelerikButton>

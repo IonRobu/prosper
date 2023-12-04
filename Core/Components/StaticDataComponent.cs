@@ -5,7 +5,6 @@ using Methodic.Common.Messages;
 using Methodic.Common.Util;
 using Methodic.Core.Components;
 using Methodic.Core.Configuration.Settings;
-using Methodic.Core.Providers.Caching;
 
 namespace Core.Components;
 

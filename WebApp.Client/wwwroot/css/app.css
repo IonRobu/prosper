@@ -35,3 +35,7 @@ html, body {
 .min-col-width {
     min-width: 30px !important;
 }
+
+.button-purple1 {
+    color: purple !important;
+}

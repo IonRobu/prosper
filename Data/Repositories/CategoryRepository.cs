@@ -22,7 +22,7 @@ internal class CategoryRepository : Repository<CategoryModel, Category, int>, IC
 		
 	}
 
-	public PageList<CategoryModel> GetCategoryPage(CategoryQueryInfo queryInfo)
+	public PageList<CategoryModel> GetPage(CategoryQueryInfo queryInfo)
 	{
 		var info = new QueryInfo<Category>(queryInfo);
 		info.AddSortInfo(nameof(Category.Name), x => x.Name);

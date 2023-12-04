@@ -7,5 +7,5 @@ namespace Core.Repositories;
 
 public interface ICategoryRepository : IRepository<CategoryModel, int>
 {
-	PageList<CategoryModel> GetCategoryPage(CategoryQueryInfo queryInfo);
+	PageList<CategoryModel> GetPage(CategoryQueryInfo queryInfo);
 }

@@ -47,7 +47,6 @@
 
 	<ItemGroup>
 	  <Compile Remove="Configuration\Constants.cs" />
-	  <Compile Remove="Configuration\I18n.cs" />
 	  <Compile Remove="Configuration\ProfileData.cs" />
 	  <Compile Remove="Configuration\SessionState.cs" />
 	  <Compile Remove="Services\ApplicationService.cs" />
@@ -148,14 +147,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="i18ntext\LocalDocumentTemplate.ro-RO.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="i18ntext\LocalDocumentTemplate.en-US.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <AdditionalFiles Remove="i18ntext\LocalTitle.ro-RO.json" />
 	</ItemGroup>
 
@@ -201,14 +192,6 @@
 
 	<ItemGroup>
 	  <AdditionalFiles Remove="i18ntext\LocalEnums.en-US.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AdditionalFiles Remove="i18ntext\LocalDocumentTemplate.ro-RO.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <AdditionalFiles Remove="i18ntext\LocalDocumentTemplate.en-US.json" />
 	</ItemGroup>
 
 	<ItemGroup>

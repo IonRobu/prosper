@@ -1,9 +1,11 @@
 ﻿using Core.Common.Models;
 using Core.Common.Queries;
+using Methodic.Common.Util;
 using Microsoft.AspNetCore.Components;
 using Telerik.Blazor;
 using Telerik.Blazor.Components;
 using Telerik.DataSource;
+using Telerik.FontIcons;
 using WebApp.Client.Services;
 
 namespace WebApp.Client.Components.Settings.Views;
@@ -25,24 +27,23 @@ public partial class CategoryList
 	[Inject]
 	private StaticDataService StaticDataService { get; set; }
 
-	
-
-	//[Inject]
-	//private EnumData EnumData { get; set; }
-
 	private CategoryQueryInfo QueryInfo { get; set; } = new();
 
-	private TelerikGrid<CategoryModel> list;
+	private TelerikListView<CategoryModel> list;
+
+	private bool IsAscending { get; set; } = true;
+
+	private FontIcon SortIcon => IsAscending ? FontIcon.ArrowUp : FontIcon.ArrowDown;
 
 	public CategoryList()
 	{
 		LazyBinding = true;
+		SetSortInfo();
 	}
 
-	protected async Task ReadItemsAsync(GridReadEventArgs args)
+	protected async Task ReadItemsAsync(ListViewReadEventArgs args)
 	{
 		var info = args.Request.GetQueryInfo<CategoryQueryInfo>();
-		QueryInfo.SortInfo = info.SortInfo;
 		QueryInfo.Page = info.Page;
 		QueryInfo.PageSize = info.PageSize;
 		await LoadAsync();
@@ -55,12 +56,20 @@ public partial class CategoryList
 		Source = await StaticDataService.GetCategoryPageAsync(QueryInfo);
 	}
 
-	private void Edit(CategoryModel item)
+	private void Edit(CategoryModel item = null)
 	{
-		OnEdit?.Invoke(item.Id);
+		if (item == null)
+		{
+			OnAdd?.Invoke();
+		}
+		else
+		{
+			OnEdit?.Invoke(item.Id);
+		}
+
 	}
 
-	protected void ApplyFilter()
+	protected void RebindGrid()
 	{
 		list.Rebind();
 	}
@@ -68,13 +77,23 @@ public partial class CategoryList
 	private void ResetFilter()
 	{
 		QueryInfo.Name = null;
-		//QueryInfo.Type = null;
-		//QueryInfo.Phylum = null;
-		ApplyFilter();
+		RebindGrid();
 	}
 
-	private void Form()
+	private void SortList()
 	{
-		OnAdd?.Invoke();
+		IsAscending = !IsAscending;
+		SetSortInfo();
+		RebindGrid();
+	}
+
+	private void SetSortInfo()
+	{
+		QueryInfo.SortInfo.Clear();
+		QueryInfo.SortInfo.Add(new SortInfo
+		{
+			Field = "Name",
+			IsAscending = IsAscending
+		});
 	}
 }
