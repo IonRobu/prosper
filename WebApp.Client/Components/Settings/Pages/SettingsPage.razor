@@ -1,5 +1,44 @@
 ﻿@inherits Page
 @page "/settings"
 @page "/settings/{Route}"
+@page "/settings/{Route}/{Id:int}"
 
 <h3>Settings</h3>
+
+<ViewRoute Name="@RouteIndex">
+	<StaticDataPanel OnSelected="async (item) => await GoToListAsync(item)" />
+</ViewRoute>
+<ViewRoute Name="@RouteCategoryList">
+	<CategoryList OnAdd='async () => await GoToFormAsync("Collection", 0)'
+				  OnEdit='async(id) => await GoToFormAsync("Collection", id)' />
+</ViewRoute>
+<ViewRoute Name="@RouteCategoryForm">
+	<CategoryForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+</ViewRoute>
+@* 	<ViewRoute Name="@RouteCollectionTypeList">
+		<CollectionTypeList OnAdd='async () => await GoToFormAsync("CollectionType", 0)'
+							OnEdit='async (id) => await GoToFormAsync("CollectionType", id)' />
+	</ViewRoute>
+	<ViewRoute Name="@RouteCollectionTypeForm">
+		<CollectionTypeForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteMeasureUnitList">
+		<MeasureUnitList OnAdd='async () => await GoToFormAsync("MeasureUnit", 0)'
+						 OnEdit='async (id) => await GoToFormAsync("MeasureUnit", id)' />
+	</ViewRoute>
+	<ViewRoute Name="@RouteMeasureUnitForm">
+		<MeasureUnitForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteSpeciesList">
+		<SpeciesList OnAdd='async () => await GoToFormAsync("Species", 0)'
+					 OnEdit='async(id) => await GoToFormAsync("Species", id)' />
+	</ViewRoute>
+	<ViewRoute Name="@RouteSpeciesForm">
+		<SpeciesForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+	</ViewRoute>
+	<ViewRoute Name="@RouteCountryList">
+		<CountryList />
+	</ViewRoute>
+	<ViewRoute Name="@RouteCountyList">
+		<CountyList />
+	</ViewRoute> *@

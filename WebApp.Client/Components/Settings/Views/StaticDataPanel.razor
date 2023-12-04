@@ -1,0 +1,44 @@
+﻿@inherits View<CategoryModel>
+
+<MxView>
+	<Body>
+		<Row>
+			<Cell Size="3">
+				<TelerikCard Class="m-2">
+					<CardHeader class="px-4 pt-4">
+						<div @onclick='() => SelectStaticData("Category")' class="cursor-pointer">
+							<h5 class="card-title mb-0">Categories</h5>
+						</div>
+					</CardHeader>
+					<CardBody class="px-4 pt-2">
+						<p>Transaction category list</p>
+					</CardBody>
+				</TelerikCard>
+			</Cell>
+			<Cell Size="3">
+				<TelerikCard Class="m-2">
+					<CardHeader class="px-4 pt-4">
+						<div @onclick='() => SelectStaticData("Card")' class=" cursor-pointer">
+							<h5 class="card-title mb-0">Cards</h5>
+						</div>
+					</CardHeader>
+					<CardBody class="px-4 pt-2">
+						<p>Transaction card list</p>
+					</CardBody>
+				</TelerikCard>
+			</Cell>
+			<Cell Size="3">
+				<TelerikCard Class="m-2">
+					<CardHeader class="px-4 pt-4">
+						<div @onclick='() => SelectStaticData("Account")' class="cursor-pointer">
+							<h5 class="card-title mb-0">Resource type collections</h5>
+						</div>						
+					</CardHeader>
+					<CardBody class="px-4 pt-2">
+						<p>Transaction account list</p>
+					</CardBody>
+				</TelerikCard>
+			</Cell>
+		</Row>
+	</Body>
+</MxView>

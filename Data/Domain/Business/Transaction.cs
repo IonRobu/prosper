@@ -23,5 +23,5 @@ public class Transaction: BusinessEntity<int>
 
 	public Account Account { get; set; } = new();
 
-	public CardModel Card { get; set; } = new();
+	public Card Card { get; set; } = new();
 }

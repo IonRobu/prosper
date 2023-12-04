@@ -1,0 +1,20 @@
+﻿@inherits FormView<CategoryModel>
+
+<MxView>
+	<Actions>
+		&nbsp;
+		<Button CssClass="float-end"
+				Icon="FontIcon.Save"
+				OnClick="async () => await SaveAsync()" />
+	</Actions>
+	<Body>
+		<Row>
+			<Cell Size="2">
+				Name
+			</Cell>
+			<Cell Size="8">
+				<TelerikTextBox @bind-Value="Model.Name" Width="50%" Class="min-width" />
+			</Cell>
+		</Row>
+	</Body>
+</MxView>

@@ -42,6 +42,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="Configuration\Data\store.db">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="Configuration\Settings\admin.db">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

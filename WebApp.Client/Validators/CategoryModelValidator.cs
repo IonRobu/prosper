@@ -2,11 +2,11 @@
 using FluentValidation;
 using Methodic.Common.Util;
 
-namespace WebApp.Backend.Validators;
+namespace WebApp.Client.Validators;
 
-public class CollectionModelValidator : ModelValidator<CollectionModel>
+public class CategoryModelValidator : ModelValidator<CategoryModel>
 {
-	public CollectionModelValidator()
+	public CategoryModelValidator()
 	{
 		SetRules();
 	}
@@ -17,6 +17,6 @@ public class CollectionModelValidator : ModelValidator<CollectionModel>
 
 		RuleFor(x => x.Name)
 			.NotEmpty()
-			.WithMessage("Collection_Name_Required");
+			.WithMessage("Category name required");
 	}
 }

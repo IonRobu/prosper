@@ -1,5 +1,8 @@
-﻿using Methodic.Blazor.UI.Configuration;
+﻿using Core.Common.Models;
+using Core.Common.Util;
+using Methodic.Blazor.UI.Configuration;
 using Methodic.Blazor.UI.Services;
+using Methodic.Common.Util;
 
 namespace WebApp.Client.Services;
 
@@ -15,35 +18,35 @@ public class StaticDataService : HttpServiceBase
 
 	}
 
-	//public async Task<PageList<CollectionModel>> GetCollectionPageAsync(CollectionQueryInfo queryInfo)
-	//{
-	//	var result = await RequestAsync(RouteHelper.StaticData.GetCollectionPage, queryInfo, opts =>
-	//	{
-	//		opts.AsPostMethod();
-	//	})
-	//	.ResponseAsync<PageList<CollectionModel>>();
-	//	return result;
-	//}
+	public async Task<PageList<CategoryModel>> GetCategoryPageAsync(QueryInfo queryInfo)
+	{
+		var result = await RequestAsync(RouteHelper.StaticData.GetCategoryPage, queryInfo, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<PageList<CategoryModel>>();
+		return result;
+	}
 
-	//public async Task<CollectionModel> GetCollectionByIdAsync(long id)
-	//{
-	//	var result = await RequestAsync($"{RouteHelper.StaticData.GetCollectionById}?id={id}", opts =>
-	//	{
-	//		opts.AsGetMethod();
-	//	})
-	//	.ResponseAsync<CollectionModel>();
-	//	return result;
-	//}
+	public async Task<CategoryModel> GetCategoryByIdAsync(long id)
+	{
+		var result = await RequestAsync($"{RouteHelper.StaticData.GetCategoryById}?id={id}", opts =>
+		{
+			opts.AsGetMethod();
+		})
+		.ResponseAsync<CategoryModel>();
+		return result;
+	}
 
-	//public async Task<CollectionModel> SaveCollectionAsync(CollectionModel model)
-	//{
-	//	var result = await RequestAsync(RouteHelper.StaticData.SaveCollection, model, opts =>
-	//	{
-	//		opts.AsPostMethod();
-	//	})
-	//	.ResponseAsync<CollectionModel>();
-	//	return result;
-	//}
+	public async Task<CategoryModel> SaveCategoryAsync(CategoryModel model)
+	{
+		var result = await RequestAsync(RouteHelper.StaticData.SaveCategory, model, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<CategoryModel>();
+		return result;
+	}
 
 	//public async Task<bool> DeleteCollectionAsync(CollectionModel model)
 	//{

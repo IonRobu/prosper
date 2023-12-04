@@ -65,7 +65,6 @@
 	  <Compile Remove="Services\Service.cs" />
 	  <Compile Remove="Shared\EmptyLayout.razor.cs" />
 	  <Compile Remove="Shared\NavMenu.razor.cs" />
-	  <Compile Remove="Validators\CollectionModelValidator.cs" />
 	  <Compile Remove="Validators\CollectionTypeModelValidator.cs" />
 	  <Compile Remove="Validators\FieldModelValidator.cs" />
 	  <Compile Remove="Validators\FormModelValidator.cs" />
@@ -111,11 +110,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Components\Settings\Views\" />
-	  <Folder Include="Components\Statistics\Views\" />
 	  <Folder Include="Components\Home\Views\" />
 	  <Folder Include="Components\StaticData\Views\" />
-	  <Folder Include="Validators\" />
+	  <Folder Include="Components\Statistics\Views\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -179,14 +176,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="i18ntext\Admin\MethodicAdminMessage.en-US.json" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Remove="i18ntext\Admin\MethodicAdmin.en-US.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <AdditionalFiles Remove="i18ntext\LocalTitle.ro-RO.json" />
 	</ItemGroup>
 
@@ -240,6 +229,18 @@
 
 	<ItemGroup>
 	  <AdditionalFiles Remove="i18ntext\LocalDocumentTemplate.en-US.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Remove="i18ntext\Admin\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="i18ntext\Admin\MethodicAdminMessage.en-US.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="i18ntext\Admin\MethodicAdmin.en-US.json" />
 	</ItemGroup>
 
 	<ItemGroup>

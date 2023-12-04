@@ -1,0 +1,68 @@
+﻿@inherits PageListView<CategoryModel>
+
+<MxView>
+	<Actions>
+		<OptionMenu>
+			<Items>
+				<OptionItem Text="Add" OnClick="() => Form()" />
+			</Items>			
+		</OptionMenu>
+	</Actions>
+	<Body>
+		<div class="alert alert-primary alert-outline" role="alert">
+			<div class="alert-message">
+
+				<Row>
+					<Cell Size="4" CssClass="min-width">
+						<label for="Name" class="k-label k-form-label">Name</label>
+						<TelerikTextBox @bind-Value="QueryInfo.Name"
+										Id="Name" />
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="12" CssClass="min-width">
+						<Button Icon="FontIcon.FilterClear"
+								CssClass="float-end ms-1"
+								OnClick="() => ResetFilter()"
+								Text="Reset filter"
+								Color="@ThemeConstants.Button.ThemeColor.Dark"
+								Size="@ThemeConstants.Button.Size.Small" />
+						<Button Icon="FontIcon.Filter"
+								CssClass="float-end"
+								OnClick="() => ApplyFilter()"
+								Text="Filter"
+								Color="@ThemeConstants.Button.ThemeColor.Dark"
+								Size="@ThemeConstants.Button.Size.Small" />
+					</Cell>
+				</Row>
+			</div>
+		</div>
+		<TelerikGrid @ref="list"
+					 TItem="CategoryModel"
+					 OnRead="ReadItemsAsync"
+					 Resizable="true"
+					 Pageable="true"
+					 Sortable="true"
+					 PageSize="15">
+			<GridColumns>
+				<GridColumn Field=@nameof(CategoryModel.Name) Title="Name" Width="120px">
+					<Template>
+						@{
+							var item = context as CategoryModel;
+							<span class="cursor-pointer" @onclick="() => Edit(item)"><strong>@item.Name</strong></span>
+						}
+					</Template>
+				</GridColumn>
+				
+				@*<GridColumn Width="50px">
+					<Template>
+						@{
+							var item = context as SpeciesModel;
+							<Button Icon="FontIcon.Pencil" CssClass="float-end" OnClick="() => Edit(item)" />
+						}
+					</Template>
+				</GridColumn>*@
+			</GridColumns>
+		</TelerikGrid>
+	</Body>
+</MxView>

@@ -4,6 +4,8 @@ namespace Core.Common.Models;
 
 public class TransactionModel : Model
 {
+	public int Id { get; set; }
+
 	public int CategoryId { get; set; }
 
 	public int AccountId { get; set; }
