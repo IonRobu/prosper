@@ -18,6 +18,8 @@ public class TransactionModel : Model
 
 	public bool IsIncome { get; set; }
 
+	public string Description { get; set; }
+
 	public DateTime OperationDate { get; set; } = DateTime.UtcNow;
 
 	public CategoryModel Category { get; set; } = new();

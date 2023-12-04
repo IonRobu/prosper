@@ -2,5 +2,6 @@
 	"Application_Description": "Nagoya back-end application",
 	"Application_Title": "Nagoya",
 	"SettingsPage_index": "Settings page",
-	"SettingsPage_category_list": "Category list"
+	"SettingsPage_category_list": "Category list",
+	"SettingsPage_category_form": "Edit category"
 }

@@ -9,4 +9,6 @@ public class CardModel : Model
 	public string Name { get; set; }
 
 	public string Number { get; set; }
+
+	public string Description { get; set; }
 }

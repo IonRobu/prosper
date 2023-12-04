@@ -31,6 +31,7 @@
 
 						<Separator Type="SeparatorType.Line" />
 						<TelerikListView @ref="list"
+							Class="mt-5"
 										 TItem="CategoryModel"
 										 OnRead="ReadItemsAsync"
 										 Pageable="true"
@@ -38,15 +39,17 @@
 							<Template>
 								<Row Padding="0">
 									<Cell Size="12">
-										<span><strong>@context.Name</strong></span>
 										<Button Icon="FontIcon.Trash"
 												CssClass="float-end ms-2 button-purple"
 												OnClick="async () => await DeleteAsync(context)"
 												Tooltip="Delete category" />
 										<Button Icon="FontIcon.Pencil"
-												CssClass="float-end button-purple"
+												CssClass="float-end"
 												OnClick="() => Edit(context)"												
 												Tooltip="Edit category" />
+										<span><strong>@context.Name</strong></span>
+										<Separator />
+										<label><small class="text-muted mt-2 text-justify">@context.Description</small></label>
 										<Separator Type="SeparatorType.Line" />
 									</Cell>
 								</Row>

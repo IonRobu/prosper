@@ -17,6 +17,8 @@ public class Transaction: BusinessEntity<int>
 
 	public bool IsIncome { get; set; }
 
+	public string Description { get; set; }
+
 	public DateTime OperationDate { get; set; } = DateTime.UtcNow;
 
 

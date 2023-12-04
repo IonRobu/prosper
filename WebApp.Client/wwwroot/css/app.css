@@ -39,3 +39,11 @@ html, body {
 .button-purple1 {
     color: purple !important;
 }
+
+.textarea {
+    min-height: 200px;
+}
+
+.text-justify {
+    text-align: justify;
+}

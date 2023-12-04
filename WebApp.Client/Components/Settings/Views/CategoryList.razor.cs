@@ -36,7 +36,7 @@ public partial class CategoryList
 
 	private bool IsWindowVisible { get; set; }
 
-	private string SortText => "Name " + (IsAscending ? "asc" : "desc");
+	private string SortText => "Name " + (IsAscending ? "descending" : "ascending");
 
 	public CategoryList()
 	{
