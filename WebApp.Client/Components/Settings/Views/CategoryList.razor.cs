@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Components;
 using Telerik.Blazor;
 using Telerik.Blazor.Components;
 using Telerik.DataSource;
+using Telerik.FontIcons;
+using WebApp.Client.Configuration;
 using WebApp.Client.Services;
 
 namespace WebApp.Client.Components.Settings.Views;
@@ -22,6 +24,9 @@ public partial class CategoryList
 
 	[CascadingParameter]
 	public DialogFactory Dialogs { get; set; }
+
+	[Inject]
+	private I18n I18n { get; set; }
 
 	[Inject]
 	private StaticDataService StaticDataService { get; set; }
@@ -121,5 +126,15 @@ public partial class CategoryList
 			return result;
 		}
 		return false;
+	}
+
+	private string GetTextClass(CategoryModel item)
+	{
+		return item.IsFixed ? "" : "text-muted";
+	}
+
+	private FontIcon GetIcon(CategoryModel item)
+	{
+		return item.IsFixed ? FontIcon.Pin : FontIcon.BorderRadius;
 	}
 }

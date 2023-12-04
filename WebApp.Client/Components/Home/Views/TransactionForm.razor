@@ -1,80 +1,118 @@
 ﻿@inherits FormView<TransactionModel>
 
 <MxView>
-	<Actions>
-		&nbsp;
-		<Button CssClass="float-end"
-				Icon="FontIcon.Save"
-				OnClick="async () => await SaveAsync()" />
-	</Actions>
+	@* <Actions>
+	&nbsp;
+	<Button CssClass="float-end"
+	Icon="FontIcon.Save"
+	OnClick="async () => await SaveAsync()" />
+	</Actions> *@
 	<Body>
-		<Row>
-			<Cell Size="2">
-				Category
-			</Cell>
-			<Cell Size="4">
-				<TelerikDropDownList @bind-Value="Model.CategoryId"
-									 Data="CategoryList"
-									 ValueField="Id"
-									 TextField="Name"
-									 DefaultText="" />
-			</Cell>
-		</Row>
-		<Row>
-			<Cell Size="2">
-				Card
-			</Cell>
-			<Cell Size="4">
-				<TelerikDropDownList @bind-Value="Model.CardId"
-									 Data="CardList"
-									 ValueField="Id"
-									 TextField="Name"
-									 DefaultText="" />
-			</Cell>
-		</Row>
-		<Row>
-			<Cell Size="2">
-				Account
-			</Cell>
-			<Cell Size="4">
-				<TelerikDropDownList @bind-Value="Model.AccountId"
-									 Data="AccountList"
-									 ValueField="Id"
-									 TextField="Name"
-									 DefaultText="" />
-			</Cell>
-		</Row>
-		<Row>
-			<Cell Size="2">
-				Name
-			</Cell>
-			<Cell Size="8">
-				<TelerikTextBox @bind-Value="Model.Name" Width="50%" Class="min-width" />
-			</Cell>
-		</Row>
-		<Row>
-			<Cell Size="2">
-				Amount
-			</Cell>
-			<Cell Size="8">
-				<TelerikNumericTextBox @bind-Value="Model.Amount" Width="50%" Class="min-width" />
-			</Cell>
-		</Row>
-		<Row>
-			<Cell Size="2">
-				Is income
-			</Cell>
-			<Cell Size="8">
-				<TelerikSwitch @bind-Value="Model.IsIncome" />
-			</Cell>
-		</Row>
-		@* <Row>
-			<Cell Size="2">
-				Name
-			</Cell>
-			<Cell Size="8">
-				<TelerikTextBox @bind-Value="Model.Name" Width="50%" Class="min-width" />
-			</Cell>
-		</Row> *@
+		<MxCard Bordered="true">
+			<CardBody>
+				<Row>
+					<Cell Size="2"></Cell>
+					<Cell Size="8">
+						<Row>
+							<Cell Size="12" CssClass="min-width">
+								<Button CssClass="float-end"
+										Icon="FontIcon.Save"
+										OnClick="async () => await SaveAsync()" />
+							</Cell>
+						</Row>
+						<Separator Type="SeparatorType.Line" />
+						<Row>
+							<Cell Size="12">
+								<span>Category</span>
+								<Separator />
+								<TelerikDropDownList Value="Model.CategoryId"
+													 Data="CategoryList"
+													 ValueField="Id"
+													 TextField="Name"
+													 ValueChanged="@((int x) => OnCategoryChange(x))"
+													 Width="40%"
+													 DefaultText="">
+									<ItemTemplate>
+										<TelerikFontIcon Icon="@GetIcon(context)" Size="@ThemeConstants.FontIcon.Size.Large" Class="me-2" />
+										<span>@context.Name</span>
+									</ItemTemplate>
+								</TelerikDropDownList>
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="12">
+								<span>Card</span>
+								<Separator />
+								<TelerikDropDownList Value="Model.CardId"
+													 Data="CardList"
+													 ValueField="Id"
+													 TextField="Name"
+													 ValueChanged="@((int x) => OnCardChange(x))"
+													 Width="40%"
+													 DefaultText="">
+									<ItemTemplate>
+										<Row>
+											<Cell Size="12">
+												<span>@context.Name</span>
+											</Cell>
+										</Row>
+									</ItemTemplate>
+								</TelerikDropDownList>
+								@if (SelectedCard.Id > 0)
+								{
+									<Separator />
+									<small class="text-muted">Card number: <strong>@SelectedCard.Number</strong></small>
+								}
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="12">
+								<span>Account</span>
+								<Separator />
+								<TelerikDropDownList @bind-Value="Model.AccountId"
+													 Data="AccountList"
+													 ValueField="Id"
+													 TextField="Name"
+													 Width="40%"
+													 DefaultText="" />
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="12">
+								<span>Name</span>
+								<Separator />
+								<TelerikTextBox @bind-Value="Model.Name" Width="60%" Class="min-width" />
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="12">
+								<span>Amount (£)</span>
+								<Separator />
+								<TelerikNumericTextBox @bind-Value="Model.Amount" Width="30%" Class="min-width" />
+								@if (SelectedCategory.IsFixed)
+								{
+									<Separator />
+									<small class="text-muted">Fixed transaction, occures <strong>@I18n.Enums.Get(SelectedCategory.Frequency)</strong></small>
+								}
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="8">
+								<span>Is income</span>
+								<Separator />
+								<TelerikSwitch @bind-Value="Model.IsIncome" />
+							</Cell>
+						</Row>
+						<Row>
+							<Cell Size="8">
+								<span>Operation date</span>
+								<Separator />
+								<TelerikDatePicker @bind-Value="Model.OperationDate" Width="30%" />
+							</Cell>
+						</Row>
+					</Cell>
+				</Row>
+			</CardBody>
+		</MxCard>
 	</Body>
 </MxView>

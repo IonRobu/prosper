@@ -40,14 +40,27 @@
 								<Row Padding="0">
 									<Cell Size="12">
 										<Button Icon="FontIcon.Trash"
-												CssClass="float-end ms-2 button-purple"
+												CssClass="float-end ms-2"
 												OnClick="async () => await DeleteAsync(context)"
 												Tooltip="Delete category" />
 										<Button Icon="FontIcon.Pencil"
 												CssClass="float-end"
 												OnClick="() => Edit(context)"
 												Tooltip="Edit category" />
-										<span><strong>@context.Name</strong></span>
+										
+										<h4 class="font-weight-bold @GetTextClass(context)">
+											<TelerikFontIcon Icon="@GetIcon(context)" Size="@ThemeConstants.FontIcon.Size.Large" Class="me-2" />@context.Name
+											@if (context.IsFixed)
+											{
+												<small class="text-muted mt-2 text-justify"> (fixed)</small>
+											}
+										</h4>
+										@if (context.IsFixed)
+										{
+											<span class="text-primary mt-2">@I18n.Enums.Get(context.Frequency)</span>
+											<span class="ms-1 me-1">|</span>
+											<span class="text-primary mt-2">@context.Amount.Value.ToString("#0.00") £</span>
+										}
 										@if (!string.IsNullOrEmpty(context.Description))
 										{
 											<Separator />

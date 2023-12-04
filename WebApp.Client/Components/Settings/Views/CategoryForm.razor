@@ -29,6 +29,37 @@
 								<TelerikTextArea @bind-Value="Model.Description" Width="70%" Class="min-width textarea" />
 							</Cell>
 						</Row>
+						<Row>
+							<Cell Size="12">
+								<span>Is fixed</span>
+								<Separator />
+								<TelerikSwitch @bind-Value="Model.IsFixed" />
+							</Cell>
+						</Row>
+						@if(Model.IsFixed)
+						{
+							<Row>
+								<Cell Size="12" CssClass="min-width">
+									<span for="Frequency">Frequency</span>
+									<Separator />
+									<TelerikDropDownList @bind-Value="Model.Frequency"
+														 Data="EnumData.CategoryFrequencyList"
+														 Id="Frequency"
+														 ValueField="Id"
+														 TextField="Name" 
+														 Width="30%"
+														 DefaultText="">
+									</TelerikDropDownList>
+								</Cell>
+							</Row>
+							<Row>
+								<Cell Size="12">
+									<span>Amount (£)</span>
+									<Separator />
+									<TelerikNumericTextBox @bind-Value="Model.Amount" Width="30%" Class="min-width" />
+								</Cell>
+							</Row>
+						}						
 					</Cell>
 					<Cell Size="2"></Cell>
 				</Row>

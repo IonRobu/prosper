@@ -17,7 +17,7 @@ public class TransactionModelValidator : ModelValidator<TransactionModel>
 
 		RuleFor(x => x.Name)
 			.NotEmpty()
-			.WithMessage("Transaction name required");
+			.WithMessage("Name required");
 
 		RuleFor(x => x.CategoryId)
 			.NotEmpty()
@@ -30,5 +30,17 @@ public class TransactionModelValidator : ModelValidator<TransactionModel>
 		RuleFor(x => x.AccountId)
 			.NotEmpty()
 			.WithMessage("Account required");
+
+		RuleFor(x => x.OperationDate)
+			.GreaterThan(new DateTime(1900, 1, 1))
+			.WithMessage("Operation date required");
+
+		RuleFor(x => x.OperationDate)
+			.LessThan(new DateTime(2100, 1, 1))
+			.WithMessage("Operation date required");
+
+		RuleFor(x => x.Amount)
+			.GreaterThan(0)
+			.WithMessage("Amount must be a positive value");
 	}
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
 using Toolbelt.Blazor.I18nText.Interfaces;
 using WebApp.Client;
+using WebApp.Client.Configuration;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -26,10 +27,8 @@ builder.Services.AddTelerikBlazor();
 builder.Services.DisableTrialForTelerik();
 builder.Services.AddBlazorDownloadFile();
 
-//builder.Services
-//	.AddScoped<ProfileData>()
-//	.AddScoped<SessionState>()
-//	.AddScoped<EnumData>();
+builder.Services
+	.AddScoped<EnumData>();
 
 builder.Logging.AddConfiguration(
 	builder.Configuration.GetSection("Logging")

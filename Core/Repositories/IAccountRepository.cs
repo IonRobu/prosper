@@ -7,5 +7,5 @@ namespace Core.Repositories;
 
 public interface IAccountRepository : IRepository<AccountModel, int>
 {
-	PageList<AccountModel> GetCardPage(AccountQueryInfo queryInfo);
+	PageList<AccountModel> GetPage(AccountQueryInfo queryInfo);
 }

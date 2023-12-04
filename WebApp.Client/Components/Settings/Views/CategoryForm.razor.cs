@@ -1,6 +1,7 @@
 ﻿using Core.Common.Models;
 using Methodic.Common.Messages;
 using Microsoft.AspNetCore.Components;
+using WebApp.Client.Configuration;
 using WebApp.Client.Services;
 using WebApp.Client.Validators;
 
@@ -19,6 +20,9 @@ public partial class CategoryForm
 
 	[Inject]
 	private CategoryModelValidator Validator { get; set; }
+
+	[Inject]
+	private EnumData EnumData { get; set; }
 
 	protected override async Task LoadAsync()
 	{
@@ -42,5 +46,15 @@ public partial class CategoryForm
 	protected override List<Message> Validate(CategoryModel model)
 	{
 		return Validator.PerformValidation(model);
+	}
+
+	protected override Task<bool> OnEntityUpdatingAsync(CategoryModel model)
+	{
+		if (!model.IsFixed)
+		{
+			model.Frequency = null;
+			model.Amount = null;
+		}
+		return base.OnEntityUpdatingAsync(model);
 	}
 }

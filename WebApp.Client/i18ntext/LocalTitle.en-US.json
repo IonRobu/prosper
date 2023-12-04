@@ -3,5 +3,8 @@
 	"Application_Title": "Nagoya",
 	"SettingsPage_index": "Settings page",
 	"SettingsPage_category_list": "Category list",
-	"SettingsPage_category_form": "Edit category"
+	"SettingsPage_category_form": "Edit category",
+	"SettingsPage_account_list": "Account list",
+	"IndexPage_transaction_form": "Edit transaction",
+	"IndexPage_index":  "Dashboard page"
 }

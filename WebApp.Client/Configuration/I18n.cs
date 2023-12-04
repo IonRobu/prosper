@@ -10,8 +10,8 @@ public class I18n : II18n
 	//private readonly Lazy<LocalText> _text;
 	//public LocalText Text => _text.Value;
 
-	//private readonly Lazy<LocalEnums> _enums;
-	//public LocalEnums Enums => _enums.Value;
+	private readonly Lazy<LocalEnums> _enums;
+	public LocalEnums Enums => _enums.Value;
 
 
 	private readonly Lazy<LocalTitle> _title;
@@ -33,7 +33,7 @@ public class I18n : II18n
 		_i18nProvider = i18nProvider;
 		_title = new Lazy<LocalTitle>(() => _i18nProvider.GetTable<LocalTitle>(), true);
 		//_model = new Lazy<LocalModel>(() => _i18nProvider.GetTable<LocalModel>(), true);
-		//_enums = new Lazy<LocalEnums>(() => _i18nProvider.GetTable<LocalEnums>(), true);
+		_enums = new Lazy<LocalEnums>(() => _i18nProvider.GetTable<LocalEnums>(), true);
 		//_text = new Lazy<LocalText>(() => _i18nProvider.GetTable<LocalText>(), true);
 		//_message = new Lazy<LocalMessage>(() => _i18nProvider.GetTable<LocalMessage>(), true);
 		//_labels = new Lazy<LocalLabels>(() => _i18nProvider.GetTable<LocalLabels>(), true);

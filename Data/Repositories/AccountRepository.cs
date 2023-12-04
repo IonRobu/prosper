@@ -22,7 +22,7 @@ internal class AccountRepository : Repository<AccountModel, Account, int>, IAcco
 
 	}
 
-	public PageList<AccountModel> GetCardPage(AccountQueryInfo queryInfo)
+	public PageList<AccountModel> GetPage(AccountQueryInfo queryInfo)
 	{
 		var info = new QueryInfo<Account>(queryInfo);
 		info.AddSortInfo(nameof(Account.Name), x => x.Name);
