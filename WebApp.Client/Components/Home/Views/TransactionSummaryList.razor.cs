@@ -1,5 +1,6 @@
 ﻿using Core.Common.Models;
 using Core.Common.Queries;
+using Methodic.Common.Models.Common;
 using Methodic.Common.Util;
 using Microsoft.AspNetCore.Components;
 using Telerik.Blazor;
@@ -33,9 +34,19 @@ public partial class TransactionSummaryList
 
 	private string SortText => "Name " + (IsAscending ? "descending" : "ascending");
 
+	//public DateTime? StartValue { get; set; } = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day).AddDays(-7);
+	//public DateTime? EndValue { get; set; } = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day);
+	public CalendarView View { get; set; } = CalendarView.Decade;
+	public TelerikDateRangePicker<DateTime?> PickerRef { get; set; }
+
 	public TransactionSummaryList()
 	{
 		LazyBinding = true;
+		QueryInfo = new TransactionQueryInfo
+		{
+			MinDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day).AddDays(-7),
+			MaxDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)
+		};
 		SetSortInfo();
 	}
 
@@ -106,7 +117,7 @@ public partial class TransactionSummaryList
 	}
 	private string GetAmountCss(decimal value)
 	{
-		if(value == 0)
+		if (value == 0)
 		{
 			return "text-primary";
 		}
@@ -117,4 +128,49 @@ public partial class TransactionSummaryList
 	{
 		return item.Category.IsFixed ? FontIcon.Pin : FontIcon.BorderRadius;
 	}
+
+	//private void OnChangeHandler(DateRangePickerChangeEventArgs e)
+	//{
+	//	QueryInfo.MinDate = (DateTime)e.StartValue;
+	//	QueryInfo.MaxDate = (DateTime)e.EndValue;
+	//	//Console.WriteLine($"e.Target = {e.Target},e.StartValue = {e.StartValue},e.EndValue = {e.EndValue}");
+	//	//PickerRef.Close();
+	//}
+
+	async Task ViewChangeHandler(CalendarView currView)
+	{
+		Console.WriteLine($"The user is now looking at the {currView} calendar view");
+	}
+
+	private void SetCalendarView(CalendarView value)
+	{
+		View = value;
+		PickerRef.View = value;
+		PickerRef.Refresh();
+		StateHasChanged();
+	}
+
+	//private List<CommonModel<int>> GetWeeksForYear()
+	//{
+	//	var jan1 = new DateTime(DateTime.Today.Year, 1, 1);
+	//	//beware different cultures, see other answers
+	//	var startOfFirstWeek = jan1.AddDays(1 - (int)(jan1.DayOfWeek));
+	//	var weeks =
+	//		Enumerable
+	//			.Range(0, 54)
+	//			.Select(i => new {
+	//				weekStart = startOfFirstWeek.AddDays(i * 7)
+	//			})
+	//			.TakeWhile(x => x.weekStart.Year <= jan1.Year)
+	//			.Select(x => new {
+	//				x.weekStart,
+	//				weekFinish = x.weekStart.AddDays(6)
+	//			})
+	//			.SkipWhile(x => x.weekFinish < jan1.AddDays(1))
+	//			.Select((x, i) => new CommonModel<int> {
+	//				Name = $"{x.weekStart} - {x.weekFinish}",
+	//				Id = i + 1
+	//			}).ToList();
+	//	return weeks;
+	//}
 }

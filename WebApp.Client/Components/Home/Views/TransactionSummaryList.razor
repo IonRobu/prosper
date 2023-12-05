@@ -16,6 +16,12 @@
 										CssClass="float-end ms-2"
 										OnClick="() => ShowFilter()"
 										Tooltip="Filter list" />
+
+								@* @foreach (var item in GetWeeksForYear())
+								{
+								<span>@item.Id - @item.Name</span>
+								<Separator />
+								} *@
 							</Cell>
 						</Row>
 						<Separator Type="SeparatorType.Line" />
@@ -103,6 +109,21 @@
 						<label for="Name" class="k-label k-form-label">Name</label>
 						<TelerikTextBox @bind-Value="QueryInfo.Name"
 										Id="Name" />
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="4" CssClass="min-width">
+						<TelerikDateRangePicker @bind-StartValue="QueryInfo.MinDate"
+												@bind-EndValue="QueryInfo.MaxDate"
+												@ref="PickerRef"
+												@bind-View="@View">
+							<HeaderTemplate>
+								<span class="k-spacer"></span>
+								<Button OnClick="() => SetCalendarView(CalendarView.Decade)" Text="Years" Icon="FontIcon.ParameterDateTime" />
+								<Button OnClick="() => SetCalendarView(CalendarView.Year)" Text="Months" Icon="FontIcon.CalendarDate" />
+								<Button OnClick="() => SetCalendarView(CalendarView.Month)" Text="Days" Icon="FontIcon.Calendar" />
+							</HeaderTemplate>
+						</TelerikDateRangePicker>
 					</Cell>
 				</Row>
 				<Separator Type="SeparatorType.Line" />

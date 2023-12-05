@@ -72,22 +72,26 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 	public List<TransactionSummaryModel> GetSummary(TransactionQueryInfo queryInfo)
 	{
 		var info = GetQueryInfo(queryInfo);
-		var transactionQuery = Query().Include(x => x.Category).Where(info.Filter).Distinct();
+		var transactionQuery = Query().Include(x => x.Category).Where(info.Filter).Distinct().ToList();
 		var categoryQuery = Context.Get<Category, int>()
 			.Include(x => x.Transactions)
-				.ThenInclude(x => x.Account);
+			.ThenInclude(x => x.Account)
+			.ToList();
 
-		var query = (from category in categoryQuery join transaction in transactionQuery on category.Id equals transaction.CategoryId
-					select category).Distinct().QueryList<Category, int, CategoryModel>(x => Mapper.Map<Category, CategoryModel>(x), info);
+		var query = (from category in categoryQuery
+					 join transaction in transactionQuery on category.Id equals transaction.CategoryId
+					 select category)
+				.Distinct()
+				.ToList();
 
 
 		var model = query.Select(x => new TransactionSummaryModel
 		{
 			Category = x.Name,
-			IncomeCount = x.Transactions.Count(x => x.IsIncome),
-			ExpenseCount = x.Transactions.Count(x => !x.IsIncome),
-			IncomeTotal = x.Transactions.Where(x => x.IsIncome).Sum(x => x.Amount),
-			ExpenseTotal = x.Transactions.Where(x => !x.IsIncome).Sum(x => x.Amount),
+			IncomeCount = x.Transactions.Where(info.Filter.Compile()).Count(x => x.IsIncome),
+			ExpenseCount = x.Transactions.Where(info.Filter.Compile()).Count(x => !x.IsIncome),
+			IncomeTotal = x.Transactions.Where(info.Filter.Compile()).Where(x => x.IsIncome).Sum(x => x.Amount),
+			ExpenseTotal = x.Transactions.Where(info.Filter.Compile()).Where(x => !x.IsIncome).Sum(x => x.Amount),
 		}
 		).ToList();
 		return model;
