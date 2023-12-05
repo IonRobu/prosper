@@ -1,0 +1,42 @@
+﻿@inherits View
+
+<MxView LayoutStyle="ViewLayoutStyle.Simple">
+	<Body>
+		<MxCard Bordered="true">
+			<CardBody>
+				<Row>
+					<Cell Size="1"></Cell>
+					<Cell Size="10">
+						<TelerikChart Height="230px">
+                    <ChartTitle Text="Revenue Trend per Product" />
+                    <ChartSubtitle Text="The revenue trend per Product over a calendar year"></ChartSubtitle>
+
+                    <ChartSeriesItems>
+                        @foreach (var item in ChartData.ProductAggregation)
+                        {
+                            <ChartSeries Type="ChartSeriesType.Line"
+                                         Name="@item.ProductName"
+                                         Data="@item.ProductRevenueAndSales"
+                                         CategoryField="@nameof(ProductRevenueAndSalesModel.Category)"
+                                         Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
+                                         Style="ChartSeriesStyle.Smooth">
+                                <ChartSeriesMarkers Visible="false" />
+                                <ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
+                            </ChartSeries>
+                        }
+                    </ChartSeriesItems>
+
+                    <ChartValueAxes>
+                        <ChartValueAxis Name="RevenueAxis">
+                            <ChartValueAxisTitle Text="Revenue" />
+                            <ChartValueAxisLabels Format="{0:C}M" />
+                        </ChartValueAxis>
+                    </ChartValueAxes>
+                </TelerikChart>
+					</Cell>
+					<Cell Size="1"></Cell>
+				</Row>
+			</CardBody>
+		</MxCard>
+	</Body>
+</MxView>
