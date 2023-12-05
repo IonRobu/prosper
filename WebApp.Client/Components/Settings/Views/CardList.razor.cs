@@ -34,12 +34,10 @@ public partial class CardList
 
 	private bool IsWindowVisible { get; set; }
 
-	private string SortText => "Name " + (IsAscending ? "descending" : "ascending");
-
 	public CardList()
 	{
 		LazyBinding = true;
-		SetSortInfo();
+		SetSortInfo("Name");
 	}
 
 	protected async Task ReadItemsAsync(ListViewReadEventArgs args)
@@ -90,22 +88,24 @@ public partial class CardList
 	private void ResetFilter()
 	{
 		QueryInfo.Name = null;
+		QueryInfo.Number = null;
 		RebindGrid();
+		StateHasChanged();
 	}
 
-	private void SortList()
+	private void SortList(string field)
 	{
 		IsAscending = !IsAscending;
-		SetSortInfo();
+		SetSortInfo(field);
 		RebindGrid();
 	}
 
-	private void SetSortInfo()
+	private void SetSortInfo(string field)
 	{
 		QueryInfo.SortInfo.Clear();
 		QueryInfo.SortInfo.Add(new SortInfo
 		{
-			Field = "Name",
+			Field = field,
 			IsAscending = IsAscending
 		});
 	}

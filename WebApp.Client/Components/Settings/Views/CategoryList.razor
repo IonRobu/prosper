@@ -22,7 +22,8 @@
 										Tooltip="Filter list" />
 								<OptionMenu CssClass="ms-2">
 									<Items>
-										<OptionItem Text="@SortText" OnClick="() => SortList()" />
+										<OptionItem Text="@("Name " + (IsAscending ? "descending" : "ascending"))" OnClick='() => SortList("Name")' />
+										<OptionItem Text="@("Fixed " + (IsAscending ? "descending" : "ascending"))" OnClick='() => SortList("IsFixed")' />
 									</Items>
 								</OptionMenu>
 								<span class="float-end pt-1">Sort by:</span>
@@ -94,6 +95,20 @@
 						<label for="Name" class="k-label k-form-label">Name</label>
 						<TelerikTextBox @bind-Value="QueryInfo.Name"
 										Id="Name" />
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="4" CssClass="min-width">
+						<label for="IsFixed" class="k-label k-form-label">Is fixed</label>
+						<Separator />
+						<TelerikDropDownList @bind-Value="QueryInfo.IsFixed"
+											 Data="IsFixedOptions"
+											 Id="IsFixed"
+											 ValueField="Id"
+											 TextField="Name"
+											 Width="30%"
+											 DefaultText="">
+						</TelerikDropDownList>
 					</Cell>
 				</Row>
 				<Separator Type="SeparatorType.Line" />

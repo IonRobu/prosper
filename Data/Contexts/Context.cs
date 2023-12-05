@@ -1,5 +1,5 @@
-﻿using Data.Domain.Static;
-using Data.Domain.Business;
+﻿using Data.Domain.Business;
+using Data.Domain.Static;
 using Microsoft.EntityFrameworkCore;
 
 namespace Data.Contexts;
@@ -29,13 +29,24 @@ public class Context : Methodic.Data.Contexts.Entities.Context
 		base.OnModelCreating(modelBuilder);
 		OnSettingStaticData(modelBuilder);
 		OnSettingTransaction(modelBuilder);
+		//modelBuilder.UseCollation("NOCASE");
+
+		//foreach (var property in modelBuilder.Model.GetEntityTypes()
+		//										.SelectMany(t => t.GetProperties())
+		//										.Where(p => p.ClrType == typeof(string)))
+		//{
+		//	property.SetCollation("NOCASE");
+		//	property.SetColumnType("TEXT COLLATE NOCASE");
+		//}
 	}
 
 	private void OnSettingStaticData(ModelBuilder modelBuilder)
 	{
 		var categoryEntity = modelBuilder.MapEntity<Category, int>(tableName: nameof(Category));
+
 		categoryEntity
 			.Property(x => x.Name)
+			//.UseCollation("NOCASE")
 			.IsRequired()
 			.HasMaxLength(250);
 

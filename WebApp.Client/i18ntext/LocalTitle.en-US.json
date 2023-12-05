@@ -9,5 +9,8 @@
 	"IndexPage_index": "Dashboard page",
 	"TransactionPage_index": "Transactions page",
 	"TransactionPage_transaction_form": "Edit transaction",
-	"DashboardPage_index": "Dashboard page"
+	"DashboardPage_index": "Dashboard page",
+	"SettingsPage_card_list": "Card list",
+	"SettingsPage_card_form": "Edit card",
+	"SettingsPage_account_form": "Edit account"
 }

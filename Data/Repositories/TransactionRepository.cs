@@ -92,6 +92,11 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 			ExpenseCount = x.Transactions.Where(info.Filter.Compile()).Count(x => !x.IsIncome),
 			IncomeTotal = x.Transactions.Where(info.Filter.Compile()).Where(x => x.IsIncome).Sum(x => x.Amount),
 			ExpenseTotal = x.Transactions.Where(info.Filter.Compile()).Where(x => !x.IsIncome).Sum(x => x.Amount),
+			Transactions = x.Transactions.Select(x => new TransactionModel
+			{
+				Amount = x.Amount,
+				IsIncome = x.IsIncome
+			}).ToList()
 		}
 		).ToList();
 		return model;
@@ -107,7 +112,7 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 		info.AddSortInfo(nameof(Transaction.OperationDate), x => x.OperationDate);
 		if (!string.IsNullOrEmpty(queryInfo.Name))
 		{
-			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Name));
+			info.Filter = info.Filter.And(x => EF.Functions.Like(x.Name, $"%{queryInfo.Name}%"));
 		}
 		if (queryInfo.MinDate != null)
 		{

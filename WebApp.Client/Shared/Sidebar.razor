@@ -7,24 +7,27 @@
 					<div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
 						<div class="simplebar-content" style="padding: 0px;">
 							<a class="sidebar-brand">
-								<img src="/images/logo.jpg" width="50" height="50"/>
-
-								<span class="align-middle me-3">Prosper</span>
+								<img src="/images/logo.jpg" class="img-fluid rounded-circle me-1" width="100" height="100" />
+								<Separator />
+								<span class="align-middle me-3">Atomic I&E Organiser</span>
 							</a>
 
 							<ul class="sidebar-nav">
 								<li class="sidebar-item">
 									<a class="sidebar-link">
-										<span class="align-middle" @onclick="async () => await GoToItemAsync(typeof(DashboardPage))">Dashboard</span>
+										<TelerikFontIcon Icon="FontIcon.ChartLine" ThemeColor="@ThemeConstants.FontIcon.ThemeColor.Primary"/>
+										<span class="align-middle ms-2" @onclick="async () => await GoToItemAsync(typeof(DashboardPage))">Dashboard</span>
 									</a>
 								</li>
 								<li class="sidebar-item">
 									<a class="sidebar-link">
+										<TelerikFontIcon Icon="FontIcon.DocumentManager" ThemeColor="@ThemeConstants.FontIcon.ThemeColor.Primary" />
 										<span class="align-middle" @onclick="async () => await GoToItemAsync(typeof(TransactionPage))">Transactions</span>
 									</a>
 								</li>
 								<li class="sidebar-item">
 									<a class="sidebar-link">
+										<TelerikFontIcon Icon="FontIcon.Gear" ThemeColor="@ThemeConstants.FontIcon.ThemeColor.Primary" />
 										<span class="align-middle" @onclick="async () => await GoToItemAsync(typeof(SettingsPage))">Settings</span>
 									</a>
 								</li>

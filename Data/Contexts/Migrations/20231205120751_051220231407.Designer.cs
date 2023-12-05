@@ -3,6 +3,7 @@ using System;
 using Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,12 +11,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20231205120751_051220231407")]
+    partial class _051220231407
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
+            modelBuilder
+                .UseCollation("NOCASE")
+                .HasAnnotation("ProductVersion", "7.0.3");
 
             modelBuilder.Entity("Data.Domain.Business.Transaction", b =>
                 {
@@ -42,7 +47,8 @@ namespace Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.Property<bool>("IsIncome")
                         .HasColumnType("INTEGER");
@@ -50,7 +56,8 @@ namespace Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.Property<DateTime>("OperationDate")
                         .HasColumnType("TEXT");
@@ -73,7 +80,8 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("INTEGER");
@@ -81,7 +89,8 @@ namespace Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.HasKey("Id");
 
@@ -95,7 +104,8 @@ namespace Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("INTEGER");
@@ -103,12 +113,14 @@ namespace Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.Property<string>("Number")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.HasKey("Id");
 
@@ -125,7 +137,8 @@ namespace Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.Property<int?>("Frequency")
                         .HasColumnType("INTEGER");
@@ -139,7 +152,8 @@ namespace Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT COLLATE NOCASE")
+                        .UseCollation("NOCASE");
 
                     b.HasKey("Id");
 

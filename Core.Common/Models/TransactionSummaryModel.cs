@@ -17,5 +17,12 @@ public class TransactionSummaryModel : Model
 	public decimal NetLossTotal => IncomeTotal - ExpenseTotal;
 
 	public int TotalTransactions => IncomeCount + ExpenseCount;
+
+	public List<TransactionModel> Transactions { get; set; } = new();
 }
 
+
+public class TransactionAmountModel : Model
+{
+	public decimal Amount { get; set; }
+}

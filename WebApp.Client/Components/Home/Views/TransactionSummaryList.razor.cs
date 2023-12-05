@@ -1,9 +1,6 @@
 ﻿using Core.Common.Models;
 using Core.Common.Queries;
-using Methodic.Common.Models.Common;
-using Methodic.Common.Util;
 using Microsoft.AspNetCore.Components;
-using Telerik.Blazor;
 using Telerik.Blazor.Components;
 using Telerik.DataSource;
 using Telerik.FontIcons;
@@ -28,26 +25,17 @@ public partial class TransactionSummaryList
 
 	private TelerikListView<TransactionSummaryModel> list;
 
-	private bool IsAscending { get; set; } = true;
-
 	private bool IsWindowVisible { get; set; }
 
-	private string SortText => "Name " + (IsAscending ? "descending" : "ascending");
+	private List<CardModel> CardList { get; set; } = new();
 
-	//public DateTime? StartValue { get; set; } = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day).AddDays(-7);
-	//public DateTime? EndValue { get; set; } = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day);
-	public CalendarView View { get; set; } = CalendarView.Decade;
-	public TelerikDateRangePicker<DateTime?> PickerRef { get; set; }
+	private List<AccountModel> AccountList { get; set; } = new();
+
+	private CardModel SelectedCard { get; set; } = new();
 
 	public TransactionSummaryList()
 	{
 		LazyBinding = true;
-		QueryInfo = new TransactionQueryInfo
-		{
-			MinDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day).AddDays(-7),
-			MaxDate = new DateTime(DateTime.UtcNow.Year, DateTime.UtcNow.Month, DateTime.UtcNow.Day)
-		};
-		SetSortInfo();
 	}
 
 	protected async Task ReadItemsAsync(ListViewReadEventArgs args)
@@ -62,6 +50,8 @@ public partial class TransactionSummaryList
 	protected override async Task LoadAsync()
 	{
 		Source = await TransactionService.GetTransactionSummaryAsync(QueryInfo);
+		CardList = (await StaticDataService.GetCardPageAsync(new CardQueryInfo { PageSize = 0 })).Items;
+		AccountList = (await StaticDataService.GetAccountPageAsync(new AccountQueryInfo { PageSize = 0 })).Items;
 	}
 
 	protected void RebindGrid()
@@ -85,36 +75,15 @@ public partial class TransactionSummaryList
 	private void ResetFilter()
 	{
 		QueryInfo.Name = null;
+		QueryInfo.MinDate = null;
+		QueryInfo.MaxDate = null;
+		QueryInfo.CategoryId = null;
+		QueryInfo.CardId = null;
+		QueryInfo.AccountId = null;
+		SelectedCard = new();
 		RebindGrid();
 	}
 
-	private void SortList()
-	{
-		IsAscending = !IsAscending;
-		SetSortInfo();
-		RebindGrid();
-		StateHasChanged();
-	}
-
-	private void SetSortInfo()
-	{
-		QueryInfo.SortInfo.Clear();
-		QueryInfo.SortInfo.Add(new SortInfo
-		{
-			Field = "CategoryName",
-			IsAscending = IsAscending
-		});
-	}
-
-	private string GetAmountText(TransactionModel item)
-	{
-		return item.IsIncome ? $"{item.Amount.ToString("#0.00")}" : $"-{item.Amount.ToString("#0.00")}";
-	}
-
-	private string GetAmountCss(TransactionModel item)
-	{
-		return item.IsIncome ? "text-success" : "text-danger";
-	}
 	private string GetAmountCss(decimal value)
 	{
 		if (value == 0)
@@ -124,53 +93,9 @@ public partial class TransactionSummaryList
 		return value > 0 ? "text-success" : "text-danger";
 	}
 
-	private FontIcon GetIcon(TransactionModel item)
+	private void OnCardChange(int? value)
 	{
-		return item.Category.IsFixed ? FontIcon.Pin : FontIcon.BorderRadius;
+		QueryInfo.CardId = value;
+		SelectedCard = CardList.Single(x => x.Id == value);
 	}
-
-	//private void OnChangeHandler(DateRangePickerChangeEventArgs e)
-	//{
-	//	QueryInfo.MinDate = (DateTime)e.StartValue;
-	//	QueryInfo.MaxDate = (DateTime)e.EndValue;
-	//	//Console.WriteLine($"e.Target = {e.Target},e.StartValue = {e.StartValue},e.EndValue = {e.EndValue}");
-	//	//PickerRef.Close();
-	//}
-
-	async Task ViewChangeHandler(CalendarView currView)
-	{
-		Console.WriteLine($"The user is now looking at the {currView} calendar view");
-	}
-
-	private void SetCalendarView(CalendarView value)
-	{
-		View = value;
-		PickerRef.View = value;
-		PickerRef.Refresh();
-		StateHasChanged();
-	}
-
-	//private List<CommonModel<int>> GetWeeksForYear()
-	//{
-	//	var jan1 = new DateTime(DateTime.Today.Year, 1, 1);
-	//	//beware different cultures, see other answers
-	//	var startOfFirstWeek = jan1.AddDays(1 - (int)(jan1.DayOfWeek));
-	//	var weeks =
-	//		Enumerable
-	//			.Range(0, 54)
-	//			.Select(i => new {
-	//				weekStart = startOfFirstWeek.AddDays(i * 7)
-	//			})
-	//			.TakeWhile(x => x.weekStart.Year <= jan1.Year)
-	//			.Select(x => new {
-	//				x.weekStart,
-	//				weekFinish = x.weekStart.AddDays(6)
-	//			})
-	//			.SkipWhile(x => x.weekFinish < jan1.AddDays(1))
-	//			.Select((x, i) => new CommonModel<int> {
-	//				Name = $"{x.weekStart} - {x.weekFinish}",
-	//				Id = i + 1
-	//			}).ToList();
-	//	return weeks;
-	//}
 }

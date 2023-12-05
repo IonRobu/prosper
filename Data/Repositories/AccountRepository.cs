@@ -8,6 +8,7 @@ using LinqKit;
 using Methodic.Common.Messages;
 using Methodic.Common.Util;
 using Methodic.Data.Repositories.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
 
@@ -28,7 +29,7 @@ internal class AccountRepository : Repository<AccountModel, Account, int>, IAcco
 		info.AddSortInfo(nameof(Account.Name), x => x.Name);
 		if (!string.IsNullOrEmpty(queryInfo.Name))
 		{
-			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Name));
+			info.Filter = info.Filter.And(x => EF.Functions.Like(x.Name, $"%{queryInfo.Name}%"));
 		}
 		return Query()
 			.QueryPage<Account, int, AccountModel>(Translate, info);

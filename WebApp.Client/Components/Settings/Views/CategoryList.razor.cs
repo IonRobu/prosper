@@ -1,5 +1,6 @@
 ﻿using Core.Common.Models;
 using Core.Common.Queries;
+using Methodic.Common.Models.Common;
 using Methodic.Common.Util;
 using Microsoft.AspNetCore.Components;
 using Telerik.Blazor;
@@ -39,12 +40,18 @@ public partial class CategoryList
 
 	private bool IsWindowVisible { get; set; }
 
-	private string SortText => "Name " + (IsAscending ? "descending" : "ascending");
+	public List<CommonModel<bool?>> IsFixedOptions { get; set; } = new();
 
 	public CategoryList()
 	{
 		LazyBinding = true;
-		SetSortInfo();
+		IsFixedOptions = new List<CommonModel<bool?>>
+		{
+			new CommonModel<bool?> { Name = "", Id = null },
+			new CommonModel<bool?> { Name = "Yes", Id = true },
+			new CommonModel<bool?> { Name = "No", Id = false }
+		};
+		SetSortInfo("Name");
 	}
 
 	protected async Task ReadItemsAsync(ListViewReadEventArgs args)
@@ -95,22 +102,23 @@ public partial class CategoryList
 	private void ResetFilter()
 	{
 		QueryInfo.Name = null;
+		QueryInfo.IsFixed = null;
 		RebindGrid();
 	}
 
-	private void SortList()
+	private void SortList(string field)
 	{
 		IsAscending = !IsAscending;
-		SetSortInfo();
+		SetSortInfo(field);
 		RebindGrid();
 	}
 
-	private void SetSortInfo()
+	private void SetSortInfo(string field)
 	{
 		QueryInfo.SortInfo.Clear();
 		QueryInfo.SortInfo.Add(new SortInfo
 		{
-			Field = "Name",
+			Field = field,
 			IsAscending = IsAscending
 		});
 	}

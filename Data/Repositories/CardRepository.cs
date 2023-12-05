@@ -8,6 +8,7 @@ using LinqKit;
 using Methodic.Common.Messages;
 using Methodic.Common.Util;
 using Methodic.Data.Repositories.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.Repositories;
 
@@ -29,11 +30,11 @@ internal class CardRepository : Repository<CardModel, Card, int>, ICardRepositor
 		info.AddSortInfo(nameof(Card.Number), x => x.Number);
 		if (!string.IsNullOrEmpty(queryInfo.Name))
 		{
-			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Name));
+			info.Filter = info.Filter.And(x => EF.Functions.Like(x.Name, $"%{queryInfo.Name}%"));
 		}
 		if (!string.IsNullOrEmpty(queryInfo.Number))
 		{
-			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Number));
+			info.Filter = info.Filter.And(x => EF.Functions.Like(x.Number, $"%{queryInfo.Number}%"));
 		}
 		return Query()
 			.QueryPage<Card, int, CardModel>(Translate, info);

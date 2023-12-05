@@ -16,12 +16,6 @@
 										CssClass="float-end ms-2"
 										OnClick="() => ShowFilter()"
 										Tooltip="Filter list" />
-
-								@* @foreach (var item in GetWeeksForYear())
-								{
-								<span>@item.Id - @item.Name</span>
-								<Separator />
-								} *@
 							</Cell>
 						</Row>
 						<Separator Type="SeparatorType.Line" />
@@ -49,7 +43,7 @@
 									<Cell Size="12">
 										<Row Padding="0">
 											<Cell Size="6">
-												<h4>@context.Category</h4>
+												<h4>@context.Category (@context.TotalTransactions)</h4>
 											</Cell>
 											<Cell Size="3">
 												<span class="float-end">£ <span class="font-weight-bold @GetAmountCss(context.IncomeTotal)">@context.IncomeTotal.ToString("#0.00")</span></span>
@@ -105,25 +99,58 @@
 			</WindowActions>
 			<WindowContent>
 				<Row>
-					<Cell Size="4" CssClass="min-width">
-						<label for="Name" class="k-label k-form-label">Name</label>
-						<TelerikTextBox @bind-Value="QueryInfo.Name"
-										Id="Name" />
+					<Cell Size="12">
+						<span>Card</span>
+						<Separator />
+						<TelerikDropDownList Value="QueryInfo.CardId"
+											 Data="CardList"
+											 ValueField="Id"
+											 TextField="Name"
+											 ValueChanged="@((int? x) => OnCardChange(x))"
+											 Width="40%"
+											 DefaultText="">
+							<ItemTemplate>
+								<Row>
+									<Cell Size="12">
+										<span>@context.Name</span>
+									</Cell>
+								</Row>
+							</ItemTemplate>
+						</TelerikDropDownList>
+						@if (SelectedCard.Id > 0)
+						{
+							<Separator />
+							<small class="text-muted">Card number: <strong>@SelectedCard.Number</strong></small>
+						}
+					</Cell>
+				</Row>
+
+				<Row>
+					<Cell Size="12">
+						<span>Account</span>
+						<Separator />
+						<TelerikDropDownList @bind-Value="QueryInfo.AccountId"
+											 Data="AccountList"
+											 ValueField="Id"
+											 TextField="Name"
+											 Width="40%"
+											 DefaultText="" />
 					</Cell>
 				</Row>
 				<Row>
-					<Cell Size="4" CssClass="min-width">
-						<TelerikDateRangePicker @bind-StartValue="QueryInfo.MinDate"
-												@bind-EndValue="QueryInfo.MaxDate"
-												@ref="PickerRef"
-												@bind-View="@View">
-							<HeaderTemplate>
-								<span class="k-spacer"></span>
-								<Button OnClick="() => SetCalendarView(CalendarView.Decade)" Text="Years" Icon="FontIcon.ParameterDateTime" />
-								<Button OnClick="() => SetCalendarView(CalendarView.Year)" Text="Months" Icon="FontIcon.CalendarDate" />
-								<Button OnClick="() => SetCalendarView(CalendarView.Month)" Text="Days" Icon="FontIcon.Calendar" />
-							</HeaderTemplate>
-						</TelerikDateRangePicker>
+					<Cell Size="12" CssClass="min-width">
+						<Row>
+							<Cell Size="4">
+								<span>Start date</span>
+								<Separator />
+								<TelerikDatePicker @bind-Value="QueryInfo.MinDate" Width="70%" />
+							</Cell>
+							<Cell Size="4">
+								<span>End date</span>
+								<Separator />
+								<TelerikDatePicker @bind-Value="QueryInfo.MaxDate" Width="70%" />
+							</Cell>
+						</Row>
 					</Cell>
 				</Row>
 				<Separator Type="SeparatorType.Line" />

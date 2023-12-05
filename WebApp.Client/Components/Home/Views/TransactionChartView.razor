@@ -8,31 +8,32 @@
 					<Cell Size="1"></Cell>
 					<Cell Size="10">
 						<TelerikChart Height="230px">
-                    <ChartTitle Text="Revenue Trend per Product" />
-                    <ChartSubtitle Text="The revenue trend per Product over a calendar year"></ChartSubtitle>
+							<ChartTitle Text="Revenue Trend per Product" />
+							<ChartSubtitle Text="The revenue trend per Product over a calendar year"></ChartSubtitle>
 
-                    <ChartSeriesItems>
-                        @foreach (var item in ChartData.ProductAggregation)
-                        {
-                            <ChartSeries Type="ChartSeriesType.Line"
-                                         Name="@item.ProductName"
-                                         Data="@item.ProductRevenueAndSales"
-                                         CategoryField="@nameof(ProductRevenueAndSalesModel.Category)"
-                                         Field="@nameof(ProductRevenueAndSalesModel.Revenue)"
-                                         Style="ChartSeriesStyle.Smooth">
-                                <ChartSeriesMarkers Visible="false" />
-                                <ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
-                            </ChartSeries>
-                        }
-                    </ChartSeriesItems>
+							<ChartSeriesItems>
+								@foreach (var item in Source)
+								{
+									<ChartSeries Type="ChartSeriesType.Line"
+												 Name="@item.Category"
+												 Data="@item.Transactions"
+												 
+												 CategoryField="@nameof(TransactionSummaryModel.Category)"
+												 Field="@nameof(TransactionModel.Amount)"
+												 Style="ChartSeriesStyle.Smooth">
+										<ChartSeriesMarkers Visible="false" />
+										<ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
+									</ChartSeries>
+								}
+							</ChartSeriesItems>
 
-                    <ChartValueAxes>
-                        <ChartValueAxis Name="RevenueAxis">
-                            <ChartValueAxisTitle Text="Revenue" />
-                            <ChartValueAxisLabels Format="{0:C}M" />
-                        </ChartValueAxis>
-                    </ChartValueAxes>
-                </TelerikChart>
+							<ChartValueAxes>
+								<ChartValueAxis Name="RevenueAxis">
+									<ChartValueAxisTitle Text="Revenue" />
+									<ChartValueAxisLabels Format="{0:C}M" />
+								</ChartValueAxis>
+							</ChartValueAxes>
+						</TelerikChart>
 					</Cell>
 					<Cell Size="1"></Cell>
 				</Row>
