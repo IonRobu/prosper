@@ -59,6 +59,16 @@ public class TransactionService : HttpServiceBase
 		return result;
 	}
 
+	public async Task<List<TransactionAnalysisModel>> GetTransactionAnalysisAsync()
+	{
+		var result = await RequestAsync(RouteHelper.Transaction.GetAnalysis, opts =>
+		{
+			opts.AsPostMethod();
+		})
+		.ResponseAsync<List<TransactionAnalysisModel>>();
+		return result;
+	}
+
 	public async Task<TransactionModel> SaveTransactionAsync(TransactionModel model)
 	{
 		var result = await RequestAsync(RouteHelper.Transaction.Save, model, opts =>

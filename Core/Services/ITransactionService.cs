@@ -19,5 +19,7 @@ public interface ITransactionService : IService
 
 	Result<List<TransactionSummaryModel>> GetSummary(TransactionQueryInfo queryInfo);
 
+	Result<List<TransactionAnalysisModel>> GetAnalysis();
+
 	Task<Result<bool>> CreateMockTransactionsAsync();
 }

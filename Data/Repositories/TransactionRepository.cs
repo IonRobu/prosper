@@ -102,6 +102,20 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 		return model;
 	}
 
+	public List<TransactionAnalysisModel> GetAnalysis()
+	{
+		var groups = Query().GroupBy(
+				p => p.OperationDate.Year,
+				p => p.IsIncome ? p.Amount : -p.Amount,
+				(key, g) => new { Year = key, Total = g.ToList() }).ToList();
+		var model = groups.Select(x => new TransactionAnalysisModel
+		{
+			Year = x.Year,
+			TotalAmount = x.Total.Sum(x => x)
+		}).ToList();
+		return model;
+	}
+
 	private QueryInfo<Transaction> GetQueryInfo(TransactionQueryInfo queryInfo)
 	{
 		var info = new QueryInfo<Transaction>(queryInfo);

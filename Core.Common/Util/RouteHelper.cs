@@ -14,6 +14,8 @@ public class RouteHelper
 
 		public const string GetSummary = "transaction_get_summary";
 
+		public const string GetAnalysis = "transaction_get_analysis";
+
 		public const string Save = "transaction_save";
 
 		public const string Delete = "transaction_delete";

@@ -7,33 +7,26 @@
 				<Row>
 					<Cell Size="1"></Cell>
 					<Cell Size="10">
-						<TelerikChart Height="230px">
-							<ChartTitle Text="Revenue Trend per Product" />
-							<ChartSubtitle Text="The revenue trend per Product over a calendar year"></ChartSubtitle>
+                        <TelerikChart>
+                            <ChartTitle Text="Yearly net/loss"></ChartTitle>
+                            <ChartTooltip Visible="true"></ChartTooltip>
+                            <ChartLegend Position="ChartLegendPosition.Bottom"></ChartLegend>
 
-							<ChartSeriesItems>
-								@foreach (var item in Source)
-								{
-									<ChartSeries Type="ChartSeriesType.Line"
-												 Name="@item.Category"
-												 Data="@item.Transactions"
-												 
-												 CategoryField="@nameof(TransactionSummaryModel.Category)"
-												 Field="@nameof(TransactionModel.Amount)"
-												 Style="ChartSeriesStyle.Smooth">
-										<ChartSeriesMarkers Visible="false" />
-										<ChartSeriesTooltip Visible="true"></ChartSeriesTooltip>
-									</ChartSeries>
-								}
-							</ChartSeriesItems>
+                            <ChartSeriesItems>
+                                <ChartSeries Type="ChartSeriesType.Line"
+                                             Data="@Source"
+                                             Width="2"
+                                             DashType="@DashType.DashDot"
+                                             Style="ChartSeriesStyle.Smooth"
+                                             Field="TotalAmount">
+                                </ChartSeries>
+                            </ChartSeriesItems>
 
-							<ChartValueAxes>
-								<ChartValueAxis Name="RevenueAxis">
-									<ChartValueAxisTitle Text="Revenue" />
-									<ChartValueAxisLabels Format="{0:C}M" />
-								</ChartValueAxis>
-							</ChartValueAxes>
-						</TelerikChart>
+                            <ChartCategoryAxes>
+                                <ChartCategoryAxis Categories="@Source.Select(x => (object)x.Year).ToArray()"></ChartCategoryAxis>
+                            </ChartCategoryAxes>
+
+                        </TelerikChart>
 					</Cell>
 					<Cell Size="1"></Cell>
 				</Row>

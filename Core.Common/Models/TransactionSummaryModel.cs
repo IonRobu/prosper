@@ -20,9 +20,3 @@ public class TransactionSummaryModel : Model
 
 	public List<TransactionModel> Transactions { get; set; } = new();
 }
-
-
-public class TransactionAmountModel : Model
-{
-	public decimal Amount { get; set; }
-}

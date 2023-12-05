@@ -12,4 +12,6 @@ public interface ITransactionRepository : IRepository<TransactionModel, int>
 	TransactionStatisticsModel GetStatistics(TransactionQueryInfo queryInfo);
 
 	List<TransactionSummaryModel> GetSummary(TransactionQueryInfo queryInfo);
+
+	List<TransactionAnalysisModel> GetAnalysis();
 }

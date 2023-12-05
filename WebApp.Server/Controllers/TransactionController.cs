@@ -46,6 +46,13 @@ public class TransactionController : ApiController
 		return Result(result);
 	}
 
+	[HttpPost(RouteHelper.Transaction.GetAnalysis)]
+	public ActionResult GetAnalysis()
+	{
+		var result = _transactionService.GetAnalysis();
+		return Result(result);
+	}
+
 	[HttpPost(RouteHelper.Transaction.Save)]
 	public async Task<ActionResult> SaveTransactionAsync(TransactionModel model)
 	{

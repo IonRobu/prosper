@@ -47,6 +47,11 @@ internal class TransactionService : Service, ITransactionService
 		return _transactionComponent.GetSummary(queryInfo);
 	}
 
+	public Result<List<TransactionAnalysisModel>> GetAnalysis()
+	{
+		return _transactionComponent.GetAnalysis();
+	}
+
 	public async Task<Result<bool>> CreateMockTransactionsAsync()
 	{
 		return await _transactionComponent.CreateMockTransactionsAsync();

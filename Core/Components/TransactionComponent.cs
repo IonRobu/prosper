@@ -89,6 +89,14 @@ internal class TransactionComponent : Component
 		});
 	}
 
+	public Result<List<TransactionAnalysisModel>> GetAnalysis()
+	{
+		return Execute<List<TransactionAnalysisModel>>(result =>
+		{
+			result.Data = _transactionRepository.GetAnalysis();
+		});
+	}
+
 	public async Task<Result<bool>> CreateMockTransactionsAsync()
 	{
 		return await ExecuteAsync<bool>(async result =>
