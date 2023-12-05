@@ -32,8 +32,23 @@ internal class TransactionService : Service, ITransactionService
 		return await _transactionComponent.SaveTransactionAsync(model);
 	}
 
+	public async Task<Result<bool>> DeleteTransactionAsync(TransactionModel model)
+	{
+		return await _transactionComponent.DeleteTransactionAsync(model);
+	}
+
 	public Result<TransactionStatisticsModel> GetStatistics(TransactionQueryInfo queryInfo)
 	{
 		return _transactionComponent.GetStatistics(queryInfo);
+	}
+
+	public Result<List<TransactionSummaryModel>> GetSummary(TransactionQueryInfo queryInfo)
+	{
+		return _transactionComponent.GetSummary(queryInfo);
+	}
+
+	public async Task<Result<bool>> CreateMockTransactionsAsync()
+	{
+		return await _transactionComponent.CreateMockTransactionsAsync();
 	}
 }

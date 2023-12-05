@@ -27,5 +27,9 @@ public class TransactionStatisticsModel : Model
 	public decimal NetLossTotal => IncomeTotal - ExpenseTotal;
 
 	public decimal FilteredNetLossTotal => FilteredIncomeTotal - FilteredExpenseTotal;
+
+	public int TotalTransactions => IncomeCount + ExpenseCount;
+
+	public int FilteredTransactions => FilteredIncomeCount + FilteredExpenseCount;
 }
 

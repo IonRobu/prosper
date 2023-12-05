@@ -5,10 +5,33 @@
 
 <MxPage Title="Dashboard">
 	<ViewRoute Name="@RouteIndex">
-		<TransactionList OnAdd='async () => await GoToFormAsync(0)'
-					  OnEdit='async(id) => await GoToFormAsync(id)' />
-	</ViewRoute>
-	<ViewRoute Name="@RouteTransactionForm">
-		<TransactionForm Id="Id" OnClosed="async () => await Navigation.GoBackAsync()" />
+		<TelerikTileLayout Columns="6"
+						   ColumnWidth="300px"
+						   RowHeight="235px"
+						   Reorderable="false"
+						   Resizable="false">
+			<TileLayoutItems>
+				<TileLayoutItem HeaderText="Statistics" ColSpan="6">
+					<Content>
+						<TransactionStatisticsView />
+					</Content>
+				</TileLayoutItem>
+				<TileLayoutItem HeaderText="Summary" RowSpan="3" ColSpan="3">
+					<Content>
+						<TransactionSummaryList />
+					</Content>
+				</TileLayoutItem>
+				<TileLayoutItem HeaderText="Analytics" RowSpan="3" ColSpan="3">
+					<Content>
+						3
+					</Content>
+				</TileLayoutItem>
+				<TileLayoutItem HeaderText="Last added transactions" ColSpan="6">
+					<Content>
+						4
+					</Content>
+				</TileLayoutItem>
+			</TileLayoutItems>
+		</TelerikTileLayout>
 	</ViewRoute>
 </MxPage>

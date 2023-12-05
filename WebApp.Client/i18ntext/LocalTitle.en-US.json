@@ -8,5 +8,6 @@
 	"IndexPage_transaction_form": "Edit transaction",
 	"IndexPage_index": "Dashboard page",
 	"TransactionPage_index": "Transactions page",
-	"TransactionPage_transaction_form": "Edit transaction"
+	"TransactionPage_transaction_form": "Edit transaction",
+	"DashboardPage_index": "Dashboard page"
 }

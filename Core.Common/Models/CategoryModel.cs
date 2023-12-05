@@ -16,4 +16,6 @@ public class CategoryModel : Model
 	public decimal? Amount { get; set; }
 
 	public string Description { get; set; }
+
+	public List<TransactionModel> Transactions { get; set; } = new();
 }

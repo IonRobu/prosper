@@ -6,9 +6,7 @@ public class TransactionQueryInfo : QueryInfo
 {
 	public string Name { get; set; }
 
-	public decimal? MinAmount { get; set; }
-
-	public decimal? MaxAmount { get; set; }
+	public string CategoryName { get; set; }
 
 	public DateTime? MinDate { get; set; }
 

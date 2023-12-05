@@ -11,20 +11,8 @@ using WebApp.Client.Services;
 
 namespace WebApp.Client.Components.Home.Views;
 
-public partial class TransactionList
+public partial class TransactionSummaryList
 {
-	[Parameter]
-	public Action<int> OnDetail { get; set; }
-
-	[Parameter]
-	public Action<int> OnEdit { get; set; }
-
-	[Parameter]
-	public Action OnAdd { get; set; }
-
-	[CascadingParameter]
-	public DialogFactory Dialogs { get; set; }
-
 	[Inject]
 	private I18n I18n { get; set; }
 
@@ -36,9 +24,8 @@ public partial class TransactionList
 
 	private TransactionQueryInfo QueryInfo { get; set; } = new();
 
-	private TransactionStatisticsModel Statistics { get; set; } = new();
 
-	private TelerikListView<TransactionModel> list;
+	private TelerikListView<TransactionSummaryModel> list;
 
 	private bool IsAscending { get; set; } = true;
 
@@ -46,7 +33,7 @@ public partial class TransactionList
 
 	private string SortText => "Name " + (IsAscending ? "descending" : "ascending");
 
-	public TransactionList()
+	public TransactionSummaryList()
 	{
 		LazyBinding = true;
 		SetSortInfo();
@@ -58,31 +45,12 @@ public partial class TransactionList
 		QueryInfo.Page = info.Page;
 		QueryInfo.PageSize = info.PageSize;
 		await LoadAsync();
-		await GetStatisticsAsync();
-		args.Data = Source.Items;
-		args.Total = Source.Filtered;
+		args.Data = Source;
 	}
 
 	protected override async Task LoadAsync()
 	{
-		Source = await TransactionService.GetTransactionPageAsync(QueryInfo);
-	}
-
-	protected async Task GetStatisticsAsync()
-	{
-		Statistics = await TransactionService.GetTransactionStatisticsAsync(QueryInfo);
-	}
-
-	private void Edit(TransactionModel item = null)
-	{
-		if (item == null)
-		{
-			OnAdd?.Invoke();
-		}
-		else
-		{
-			OnEdit?.Invoke(item.Id);
-		}
+		Source = await TransactionService.GetTransactionSummaryAsync(QueryInfo);
 	}
 
 	protected void RebindGrid()
@@ -114,6 +82,7 @@ public partial class TransactionList
 		IsAscending = !IsAscending;
 		SetSortInfo();
 		RebindGrid();
+		StateHasChanged();
 	}
 
 	private void SetSortInfo()
@@ -121,22 +90,9 @@ public partial class TransactionList
 		QueryInfo.SortInfo.Clear();
 		QueryInfo.SortInfo.Add(new SortInfo
 		{
-			Field = "Name",
+			Field = "CategoryName",
 			IsAscending = IsAscending
 		});
-	}
-
-	private async Task<bool> DeleteAsync(TransactionModel item)
-	{
-		var confirmed = await Dialogs.ConfirmAsync("Are you sure you want to delete?", "Confirm operation");
-		if (confirmed)
-		{
-			var result = await TransactionService.DeleteTransactionAsync(item);
-			RebindGrid();
-			StateHasChanged();
-			return result;
-		}
-		return false;
 	}
 
 	private string GetAmountText(TransactionModel item)

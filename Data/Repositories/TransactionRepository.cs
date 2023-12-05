@@ -10,6 +10,7 @@ using Methodic.Common.Util;
 using Methodic.Data.Repositories.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Data.Domain.Static;
 
 namespace Data.Repositories;
 
@@ -64,6 +65,31 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 				.Where(info.Filter)
 				.Count(x => !x.IsIncome),
 		};
+		var temp = GetSummary(queryInfo);
+		return model;
+	}
+
+	public List<TransactionSummaryModel> GetSummary(TransactionQueryInfo queryInfo)
+	{
+		var info = GetQueryInfo(queryInfo);
+		var transactionQuery = Query().Include(x => x.Category).Where(info.Filter).Distinct();
+		var categoryQuery = Context.Get<Category, int>()
+			.Include(x => x.Transactions)
+				.ThenInclude(x => x.Account);
+
+		var query = (from category in categoryQuery join transaction in transactionQuery on category.Id equals transaction.CategoryId
+					select category).Distinct().QueryList<Category, int, CategoryModel>(x => Mapper.Map<Category, CategoryModel>(x), info);
+
+
+		var model = query.Select(x => new TransactionSummaryModel
+		{
+			Category = x.Name,
+			IncomeCount = x.Transactions.Count(x => x.IsIncome),
+			ExpenseCount = x.Transactions.Count(x => !x.IsIncome),
+			IncomeTotal = x.Transactions.Where(x => x.IsIncome).Sum(x => x.Amount),
+			ExpenseTotal = x.Transactions.Where(x => !x.IsIncome).Sum(x => x.Amount),
+		}
+		).ToList();
 		return model;
 	}
 
@@ -73,18 +99,11 @@ internal class TransactionRepository : Repository<TransactionModel, Transaction,
 		info.AddSortInfo(nameof(Transaction.Name), x => x.Name);
 		info.AddSortInfo(nameof(Transaction.Amount), x => x.Amount);
 		info.AddSortInfo(nameof(Transaction.IsIncome), x => x.IsIncome);
+		info.AddSortInfo(nameof(TransactionQueryInfo.CategoryName), x => x.Category.Name);
 		info.AddSortInfo(nameof(Transaction.OperationDate), x => x.OperationDate);
 		if (!string.IsNullOrEmpty(queryInfo.Name))
 		{
 			info.Filter = info.Filter.And(x => x.Name.Contains(queryInfo.Name));
-		}
-		if (queryInfo.MinAmount != null)
-		{
-			info.Filter = info.Filter.And(x => x.Amount >= queryInfo.MinAmount);
-		}
-		if (queryInfo.MaxAmount != null)
-		{
-			info.Filter = info.Filter.And(x => x.Amount <= queryInfo.MaxAmount);
 		}
 		if (queryInfo.MinDate != null)
 		{

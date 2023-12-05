@@ -13,5 +13,11 @@ public interface ITransactionService : IService
 
 	Task<Result<TransactionModel>> SaveTransactionAsync(TransactionModel model);
 
+	Task<Result<bool>> DeleteTransactionAsync(TransactionModel model);
+
 	Result<TransactionStatisticsModel> GetStatistics(TransactionQueryInfo queryInfo);
+
+	Result<List<TransactionSummaryModel>> GetSummary(TransactionQueryInfo queryInfo);
+
+	Task<Result<bool>> CreateMockTransactionsAsync();
 }

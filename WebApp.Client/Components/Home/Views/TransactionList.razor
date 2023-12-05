@@ -7,38 +7,38 @@
 				<Row>
 					<Cell Size="12">
 						<Row>
-							<Cell Size="6">
+							<Cell Size="4">
 								<MxCard Bordered="true">
 									<CardBody >
-										<div class="text-center">
-											<h3>Total income: £ <span class="@GetAmountCss(Statistics.IncomeTotal)">@Statistics.IncomeTotal</span></h3>
+										<div>
+											<h3>Total income: £ <span class="@GetAmountCss(Statistics.IncomeTotal)">@Statistics.IncomeTotal.ToString("#0.00")</span></h3>
 											<h4>Income count: <span class="text-muted"></span>@Statistics.IncomeCount</h4>
-											<h3>Total income (filtered): £ <span class="@GetAmountCss(Statistics.FilteredIncomeTotal)">@Statistics.FilteredIncomeTotal</span></h3>
+											<h3>Total income (filtered): £ <span class="@GetAmountCss(Statistics.FilteredIncomeTotal)">@Statistics.FilteredIncomeTotal.ToString("#0.00")</span></h3>
 											<h4>Income count (filtered): <span class="text-muted"></span>@Statistics.FilteredIncomeCount</h4>
 										</div>										
 									</CardBody>
 								</MxCard>
 							</Cell>
-							<Cell Size="6">
+							<Cell Size="4">
 								<MxCard Bordered="true">
 									<CardBody>
-										<div class="text-center">
-											<h3>Total expense: £ <span class="@GetAmountCss(-Statistics.ExpenseTotal)">@Statistics.ExpenseTotal</span></h3>
+										<div>
+											<h3>Total expense: £ <span class="@GetAmountCss(-Statistics.ExpenseTotal)">@Statistics.ExpenseTotal.ToString("#0.00")</span></h3>
 											<h4>Expense count: <span class="text-muted"></span>@Statistics.ExpenseCount</h4>
-											<h3>Total expense (filtered): £ <span class="@GetAmountCss(-Statistics.FilteredExpenseTotal)">@Statistics.FilteredExpenseTotal</span></h3>
+											<h3>Total expense (filtered): £ <span class="@GetAmountCss(-Statistics.FilteredExpenseTotal)">@Statistics.FilteredExpenseTotal.ToString("#0.00")</span></h3>
 											<h4>Expense count (filtered): <span class="text-muted"></span>@Statistics.FilteredExpenseCount</h4>
 										</div>										
 									</CardBody>
 								</MxCard>
 							</Cell>
-						</Row>
-						<Row>
-							<Cell Size="12">
+							<Cell Size="4">
 								<MxCard Bordered="true">
 									<CardBody>
-										<div class="text-center">
-											<h3>Total Net/Loss: £ <span class="font-weight-bold @GetAmountCss(Statistics.NetLossTotal)">@Statistics.NetLossTotal</span></h3>
-											<h3>Total net/Loss (filtered): £ <span class="font-weight-bold @GetAmountCss(Statistics.FilteredNetLossTotal)">@Statistics.FilteredNetLossTotal</span></h3>
+										<div>
+											<h3>Total Net/Loss: £ <span class="font-weight-bold @GetAmountCss(Statistics.NetLossTotal)">@Statistics.NetLossTotal.ToString("#0.00")</span></h3>
+											<h4>Transactions count: <span class="text-muted"></span>@Statistics.TotalTransactions</h4>
+											<h3>Total net/Loss (filtered): £ <span class="font-weight-bold @GetAmountCss(Statistics.FilteredNetLossTotal)">@Statistics.FilteredNetLossTotal.ToString("#0.00")</span></h3>
+											<h4>Transactions count (filtered): <span class="text-muted"></span>@Statistics.FilteredTransactions</h4>
 										</div>										
 									</CardBody>
 								</MxCard>
@@ -47,6 +47,7 @@
 
 					</Cell>
 				</Row>
+				<Separator Type="SeparatorType.Line" />
 				<Row>
 					<Cell Size="1"></Cell>
 					<Cell Size="10">
@@ -71,7 +72,6 @@
 								<span class="float-end pt-1">Sort by:</span>
 							</Cell>
 						</Row>
-
 						<Separator Type="SeparatorType.Line" />
 						<TelerikListView @ref="list"
 										 Class="mt-5"

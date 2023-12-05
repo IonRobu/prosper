@@ -1,0 +1,42 @@
+﻿@inherits View<TransactionModel>
+
+<MxView LayoutStyle="ViewLayoutStyle.Simple">
+	<Body>
+		<Row Padding="0">
+			<Cell Size="12">
+				<Row Padding="0">
+					<Cell Size="4">
+						<MxCard Bordered="true" HeaderVisible="false" Size="ControlSize.Small" Padding="0">
+							<CardBody>
+								<h5>Total income: £ <span class="@GetAmountCss(Statistics.IncomeTotal) float-end">@Statistics.IncomeTotal.ToString("#0.00")</span></h5>
+								<h6>Income count: <span class="text-muted float-end">@Statistics.IncomeCount</span></h6>
+								<h5>Total income (filtered): £ <span class="@GetAmountCss(Statistics.FilteredIncomeTotal) float-end">@Statistics.FilteredIncomeTotal.ToString("#0.00")</span></h5>
+								<h6>Income count (filtered): <span class="text-muted float-end">@Statistics.FilteredIncomeCount</span></h6>
+							</CardBody>
+						</MxCard>
+					</Cell>
+					<Cell Size="4">
+						<MxCard Bordered="true" HeaderVisible="false" Size="ControlSize.Small" Padding="0">
+							<CardBody>
+								<h5>Total expense: £ <span class="@GetAmountCss(-Statistics.ExpenseTotal) float-end">@Statistics.ExpenseTotal.ToString("#0.00")</span></h5>
+								<h6>Expense count: <span class="text-muted float-end">@Statistics.ExpenseCount</span></h6>
+								<h5>Total expense (filtered): £ <span class="@GetAmountCss(-Statistics.FilteredExpenseTotal) float-end">@Statistics.FilteredExpenseTotal.ToString("#0.00")</span></h5>
+								<h6>Expense count (filtered): <span class="text-muted float-end">@Statistics.FilteredExpenseCount</span></h6>
+							</CardBody>
+						</MxCard>
+					</Cell>
+					<Cell Size="4">
+						<MxCard Bordered="true" HeaderVisible="false" Size="ControlSize.Small" Padding="0">
+							<CardBody>
+								<h5>Total Net/Loss: £ <span class="font-weight-bold @GetAmountCss(Statistics.NetLossTotal) float-end">@Statistics.NetLossTotal.ToString("#0.00")</span></h5>
+								<h6>Transactions count: <span class="text-muted float-end">@Statistics.TotalTransactions</span></h6>
+								<h5>Total net/Loss (filtered): £ <span class="font-weight-bold @GetAmountCss(Statistics.FilteredNetLossTotal) float-end">@Statistics.FilteredNetLossTotal.ToString("#0.00")</span></h5>
+								<h6>Transactions count (filtered): <span class="text-muted float-end">@Statistics.FilteredTransactions</span>@Statistics.FilteredTransactions</h6>
+							</CardBody>
+						</MxCard>
+					</Cell>
+				</Row>
+			</Cell>
+		</Row>
+	</Body>
+</MxView>

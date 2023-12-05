@@ -10,4 +10,6 @@ public interface ITransactionRepository : IRepository<TransactionModel, int>
 	PageList<TransactionModel> GetPage(TransactionQueryInfo queryInfo);
 
 	TransactionStatisticsModel GetStatistics(TransactionQueryInfo queryInfo);
+
+	List<TransactionSummaryModel> GetSummary(TransactionQueryInfo queryInfo);
 }

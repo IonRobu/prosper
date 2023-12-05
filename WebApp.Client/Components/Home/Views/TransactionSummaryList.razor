@@ -1,0 +1,122 @@
+﻿@inherits ListView<TransactionSummaryModel>
+
+<MxView LayoutStyle="ViewLayoutStyle.Simple">
+	<Body>
+		<MxCard Bordered="true">
+			<CardBody>
+				<Row>
+					<Cell Size="1"></Cell>
+					<Cell Size="10">
+						<Row>
+							<Cell Size="12" CssClass="min-width">
+								<Button Icon="FontIcon.FilterClear"
+										CssClass="float-end ms-2"
+										OnClick="() => ResetFilter()" />
+								<Button Icon="FontIcon.Filter"
+										CssClass="float-end ms-2"
+										OnClick="() => ShowFilter()"
+										Tooltip="Filter list" />
+							</Cell>
+						</Row>
+						<Separator Type="SeparatorType.Line" />
+						<TelerikListView @ref="list"
+										 TItem="TransactionSummaryModel"
+										 OnRead="ReadItemsAsync"
+										 Pageable="false">
+							<HeaderTemplate>
+								<Row Padding="0" CssClass="mb-3">
+									<Cell Size="12">
+										<Row Padding="1" CssClass="illustration">
+											<Cell Size="6"></Cell>
+											<Cell Size="3">
+												<span class="float-end">£ <span class="font-weight-bold">INCOME</span></span>
+											</Cell>
+											<Cell Size="3">
+												<span class="float-end">£ <span class="font-weight-bold">EXPENSE</span></span>
+											</Cell>
+										</Row>
+									</Cell>
+								</Row>
+							</HeaderTemplate>
+							<Template>
+								<Row Padding="0">
+									<Cell Size="12">
+										<Row Padding="0">
+											<Cell Size="6">
+												<h4>@context.Category</h4>
+											</Cell>
+											<Cell Size="3">
+												<span class="float-end">£ <span class="font-weight-bold @GetAmountCss(context.IncomeTotal)">@context.IncomeTotal.ToString("#0.00")</span></span>
+												<Separator />
+												<span class="text-muted float-end">Count: <span class="font-weight-bold">@context.IncomeCount</span></span>
+											</Cell>
+											<Cell Size="3">
+												<span class="float-end">£ <span class="font-weight-bold @GetAmountCss(-context.ExpenseTotal)">@context.ExpenseTotal.ToString("#0.00")</span></span>
+												<Separator />
+												<span class="text-muted float-end">Count: <span class="font-weight-bold">@context.ExpenseCount</span></span>
+											</Cell>
+										</Row>
+										<Separator Type="SeparatorType.Line" CssClass="mt-1 mb-2" />
+									</Cell>
+								</Row>
+							</Template>
+							<FooterTemplate>
+								<Row Padding="0">
+									<Cell Size="12">
+										<Row Padding="1" CssClass="illustration">
+											<Cell Size="6"><h4>TOTAL</h4></Cell>
+											<Cell Size="3">
+												<span class="float-end">£ <span class="font-weight-bold @GetAmountCss(Source.Sum(x => x.IncomeTotal))">@Source.Sum(x => x.IncomeTotal).ToString("#0.00")</span></span>
+												<Separator />
+												<span class="text-muted float-end">Count: <span class="font-weight-bold">@Source.Sum(x => x.IncomeCount)</span></span>
+											</Cell>
+											<Cell Size="3">
+												<span class="float-end">£ <span class="font-weight-bold @GetAmountCss(-Source.Sum(x => x.ExpenseTotal))">@Source.Sum(x => x.ExpenseTotal).ToString("#0.00")</span></span>
+												<Separator />
+												<span class="text-muted float-end">Count: <span class="font-weight-bold">@Source.Sum(x => x.ExpenseCount)</span></span>
+											</Cell>
+										</Row>
+									</Cell>
+								</Row>
+							</FooterTemplate>
+						</TelerikListView>
+					</Cell>
+					<Cell Size="1"></Cell>
+				</Row>
+			</CardBody>
+		</MxCard>
+		<TelerikTooltip TargetSelector="button[title]" Position="TooltipPosition.Top" ShowOn="@TooltipShowEvent.Hover" Id="position-tooltip"></TelerikTooltip>
+		<TelerikWindow Class="demo-window"
+					   Width="50%"
+					   Height="auto"
+					   Modal="true"
+					   Visible="IsWindowVisible">
+			<WindowTitle>
+				<strong>Filter list</strong>
+			</WindowTitle>
+			<WindowActions>
+				<WindowAction Name="Close" OnClick="() => { IsWindowVisible = false; }"></WindowAction>
+			</WindowActions>
+			<WindowContent>
+				<Row>
+					<Cell Size="4" CssClass="min-width">
+						<label for="Name" class="k-label k-form-label">Name</label>
+						<TelerikTextBox @bind-Value="QueryInfo.Name"
+										Id="Name" />
+					</Cell>
+				</Row>
+				<Separator Type="SeparatorType.Line" />
+				<Row>
+					<Cell Size="12" CssClass="min-width">
+						<Button Icon="FontIcon.Check"
+								CssClass="float-end"
+								OnClick="() => ApplyFilter()"
+								Tooltip="Filter list"
+								Size="@ThemeConstants.Button.Size.Large" />
+					</Cell>
+				</Row>
+
+			</WindowContent>
+		</TelerikWindow>
+	</Body>
+</MxView>
