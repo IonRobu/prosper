@@ -3,7 +3,6 @@ using Core.Common.Queries;
 using Microsoft.AspNetCore.Components;
 using Telerik.Blazor.Components;
 using Telerik.DataSource;
-using Telerik.FontIcons;
 using WebApp.Client.Configuration;
 using WebApp.Client.Services;
 

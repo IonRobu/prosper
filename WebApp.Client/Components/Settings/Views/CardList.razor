@@ -22,7 +22,6 @@
 										Tooltip="Filter list" />
 								<OptionMenu CssClass="ms-2">
 									<Items>
-										@* <OptionItem Text="@SortText" OnClick="() => SortList()" /> *@
 										<OptionItem Text="@("Name " + (IsAscending ? "descending" : "ascending"))" OnClick='() => SortList("Name")' />
 										<OptionItem Text="@("Number " + (IsAscending ? "descending" : "ascending"))" OnClick='() => SortList("Number")' />
 									</Items>
