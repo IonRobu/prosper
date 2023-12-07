@@ -26,7 +26,6 @@ public partial class Navbar
 	private async Task SignOutAsync()
 	{
 		await IdentityService.LogoutAsync();
-		await Navigation.ClearAsync();
 		await Navigation.GoToAsync(LoginPage.RouteIndex, typeof(LoginPage));
 	}
 }

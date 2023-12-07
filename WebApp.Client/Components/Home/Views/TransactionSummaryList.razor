@@ -140,12 +140,34 @@
 				<Row>
 					<Cell Size="12" CssClass="min-width">
 						<Row>
-							<Cell Size="4">
+							<Cell Size="2">
+								<span>Year</span>
+								<Separator />
+								<TelerikDropDownList Value="SelectedYear"
+													 Data="YearList"
+													 ValueField="Id"
+													 TextField="Name"
+													 ValueChanged="(int? value) => YearChanged(value)"
+													 Width="100%"
+													 DefaultText="" />
+							</Cell>
+							<Cell Size="2">
+								<span>Month</span>
+								<Separator />
+								<TelerikDropDownList Value="SelectedMonth"
+													 Data="MonthList"
+													 ValueField="Id"
+													 TextField="Name"
+													 ValueChanged="(int? value) => MonthChanged(value)"
+													 Width="100%"
+													 DefaultText="" />
+							</Cell>
+							<Cell Size="3">
 								<span>Start date</span>
 								<Separator />
 								<TelerikDatePicker @bind-Value="QueryInfo.MinDate" Width="70%" />
 							</Cell>
-							<Cell Size="4">
+							<Cell Size="3">
 								<span>End date</span>
 								<Separator />
 								<TelerikDatePicker @bind-Value="QueryInfo.MaxDate" Width="70%" />
