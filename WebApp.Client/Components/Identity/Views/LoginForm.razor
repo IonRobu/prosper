@@ -1,0 +1,32 @@
+﻿@inherits View<LoginModel>
+
+<MxView IsLoading="IsLoading" FullSize="false" LayoutStyle="ViewLayoutStyle.Simple">
+	<Body>
+		<TelerikCard>
+			<CardBody>
+				<Row>
+					<Cell Size="12">
+						<FieldLabel Text="Username" />
+						<TelerikTextBox @bind-Value="@Model.UserName" />
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="12">
+						<FieldLabel Text="Password" />
+						<TelerikTextBox @bind-Value="@Model.Password" Password="true" />
+					</Cell>
+				</Row>
+				<Row>
+					<Cell Size="12" CssClass="">
+						<Button CssClass="btn btn-success btn-sm float-end"
+								OnClick="async () => await LoginAsync()"
+								Icon="FontIcon.Unlock"
+								Text="Login">
+						</Button>
+					</Cell>
+				</Row>
+			</CardBody>
+
+		</TelerikCard>
+	</Body>
+</MxView>

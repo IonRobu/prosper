@@ -19,10 +19,8 @@
 
 	<ItemGroup>
 	  <Compile Remove="Controllers\ApplicationController.cs" />
-	  <Compile Remove="Controllers\AuthController.cs" />
 	  <Compile Remove="Controllers\DocumentController.cs" />
 	  <Compile Remove="Controllers\FormController.cs" />
-	  <Compile Remove="Controllers\IdentityController.cs" />
 	  <Compile Remove="Controllers\UtilsController.cs" />
 	</ItemGroup>
 

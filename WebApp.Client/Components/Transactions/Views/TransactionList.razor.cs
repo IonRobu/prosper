@@ -9,7 +9,7 @@ using Telerik.FontIcons;
 using WebApp.Client.Configuration;
 using WebApp.Client.Services;
 
-namespace WebApp.Client.Components.Home.Views;
+namespace WebApp.Client.Components.Transactions.Views;
 
 public partial class TransactionList
 {

@@ -55,4 +55,13 @@ public class RouteHelper
 
 		public const string DeleteAccount = "account_delete";
 	}
+
+	public class Identity
+	{
+		public const string Login = "login";
+
+		public const string Logoff = "logoff";
+
+		public const string GetUserByUsername = "user-get-by-username";
+	}
 }

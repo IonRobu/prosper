@@ -9,10 +9,15 @@ namespace WebApi.Server.Controllers;
 public class IndexController : ApiController
 {
 	private ITransactionService _transactionService;
+	private IIdentityService _identityService;
 
-	public IndexController(ITransactionService transactionService)
+	public IndexController(
+		ITransactionService transactionService,
+		IIdentityService identityService
+	)
 	{
 		_transactionService = transactionService;
+		_identityService = identityService;
 	}
 
 
@@ -27,5 +32,12 @@ public class IndexController : ApiController
 	{
 		var result = await _transactionService.CreateMockTransactionsAsync();
 		return Result(result);
+	}
+
+	[HttpGet("init-membership")]
+	public async Task<ActionResult> InitMembershipAsync()
+	{
+		await _identityService.InitMembershipAsync();
+		return Result(true);
 	}
 }

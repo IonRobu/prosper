@@ -14,48 +14,36 @@
 	  <Compile Remove="Components\Application\**" />
 	  <Compile Remove="Components\Common\**" />
 	  <Compile Remove="Components\Form\**" />
-	  <Compile Remove="Components\Identity\**" />
 	  <Compile Remove="Components\Reports\**" />
 	  <Compile Remove="Components\StaticData\**" />
-	  <Compile Remove="Configuration\Models\**" />
 	  <Compile Remove="i18ntext\**" />
 	  <Content Remove="Components\Application\**" />
 	  <Content Remove="Components\Common\**" />
 	  <Content Remove="Components\Form\**" />
-	  <Content Remove="Components\Identity\**" />
 	  <Content Remove="Components\Reports\**" />
 	  <Content Remove="Components\StaticData\**" />
-	  <Content Remove="Configuration\Models\**" />
 	  <Content Remove="i18ntext\**" />
 	  <EmbeddedResource Remove="Components\Application\**" />
 	  <EmbeddedResource Remove="Components\Common\**" />
 	  <EmbeddedResource Remove="Components\Form\**" />
-	  <EmbeddedResource Remove="Components\Identity\**" />
 	  <EmbeddedResource Remove="Components\Reports\**" />
 	  <EmbeddedResource Remove="Components\StaticData\**" />
-	  <EmbeddedResource Remove="Configuration\Models\**" />
 	  <EmbeddedResource Remove="i18ntext\**" />
 	  <None Remove="Components\Application\**" />
 	  <None Remove="Components\Common\**" />
 	  <None Remove="Components\Form\**" />
-	  <None Remove="Components\Identity\**" />
 	  <None Remove="Components\Reports\**" />
 	  <None Remove="Components\StaticData\**" />
-	  <None Remove="Configuration\Models\**" />
 	  <None Remove="i18ntext\**" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Remove="Configuration\Constants.cs" />
-	  <Compile Remove="Configuration\ProfileData.cs" />
 	  <Compile Remove="Configuration\SessionState.cs" />
 	  <Compile Remove="Services\ApplicationService.cs" />
-	  <Compile Remove="Services\AuthService.cs" />
 	  <Compile Remove="Services\DocumentService.cs" />
 	  <Compile Remove="Services\FormService.cs" />
-	  <Compile Remove="Services\IdentityService.cs" />
 	  <Compile Remove="Services\Service.cs" />
-	  <Compile Remove="Shared\EmptyLayout.razor.cs" />
 	  <Compile Remove="Shared\NavMenu.razor.cs" />
 	  <Compile Remove="Validators\CollectionTypeModelValidator.cs" />
 	  <Compile Remove="Validators\FieldModelValidator.cs" />
@@ -68,7 +56,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Remove="Shared\EmptyLayout.razor" />
 	  <Content Remove="Shared\NavMenu.razor" />
 	</ItemGroup>
 
@@ -208,6 +195,15 @@
 
 	<ItemGroup>
 	  <AdditionalFiles Remove="i18ntext\Admin\MethodicAdmin.en-US.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Components\Identity\Pages\LoginPage.razor" />
+	  <None Include="Components\Identity\Views\LoginForm.razor" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Configuration\Models\" />
 	</ItemGroup>
 
 </Project>

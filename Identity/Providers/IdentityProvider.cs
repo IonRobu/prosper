@@ -52,8 +52,8 @@ internal class IdentityProvider : IdentityProvider<Domain.Business.AppUser, Doma
 				UserName = userName,
 				Email = "irobu82@gmail.com",
 				PhoneNumber = "+40723791174",
-				LastName = "Admin",
-				FirstName = "Justifio",
+				LastName = "Razvan",
+				FirstName = "Derliu",
 				Workspace = null
 			};
 			await CreateUserAsync(model,
@@ -63,27 +63,6 @@ internal class IdentityProvider : IdentityProvider<Domain.Business.AppUser, Doma
 				Constants.OwnerRole);
 		}
 		return true;
-	}
-
-	public async Task<UserModel> SaveUserAsync(UserModel model)
-	{
-		if (model.Id == default)
-		{
-			await CreateUserAsync(model, Constants.DefaultPassword, true, Constants.OperatorRole);
-		}
-		else
-		{
-			await UpdateUserAsync(model.UserName, x =>
-			{
-				x.FirstName = model.FirstName;
-				x.LastName = model.LastName;
-				x.PhoneNumber = model.PhoneNumber;
-				//x.Function = model.Function;
-				//x.PrivacyLevel = model.PrivacyLevel;
-			});
-			// result.Data = model;
-		}
-		return model;
 	}
 
 	public async Task<UserModel> LoginAsync(string userName, string password)

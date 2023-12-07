@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 
-namespace WebApp.Client.Components.Home.Pages;
+namespace WebApp.Client.Components.Transactions.Pages;
 
 [Authorize]
 public partial class TransactionPage

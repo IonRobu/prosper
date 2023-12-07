@@ -28,6 +28,7 @@ builder.Services.DisableTrialForTelerik();
 builder.Services.AddBlazorDownloadFile();
 
 builder.Services
+	.AddScoped<ProfileData>()
 	.AddScoped<EnumData>();
 
 builder.Logging.AddConfiguration(

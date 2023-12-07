@@ -1,6 +1,6 @@
 ﻿using Methodic.Common.Models;
 
-namespace WebApp.Backend.Configuration.Models;
+namespace Core.Common.Models.Identity;
 
 public class LoginModel : Model
 {

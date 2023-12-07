@@ -1,31 +1,32 @@
-﻿using Blazored.LocalStorage;
-using Methodic.Blazor.UI.Configuration;
-using Methodic.Common.Messages;
+﻿using Methodic.Blazor.UI.Configuration;
 using Microsoft.AspNetCore.Components;
+using WebApp.Client.Components.Identity.Pages;
+using WebApp.Client.Configuration;
+using WebApp.Client.Services;
 
 namespace WebApp.Client.Shared;
 
 public partial class Navbar
 {
-	//[Inject]
-	//private IdentityService IdentityService { get; set; }
-
-	//[Inject]
-	//private AuthService AuthService { get; set; }
+	[Inject]
+	private IdentityService IdentityService { get; set; }
 
 	[Inject]
 	private Navigation Navigation { get; set; }
 
-	//[Inject]
-	//private I18n I18n { get; set; }
-
-	//[Inject]
-	//private ProfileData ProfileData { get; set; }
-
 	[Inject]
-	private ILocalStorageService LocalStorage { get; set; }
+	private ProfileData ProfileData { get; set; }
 
-	private List<Message> Messages { get; set; } = new();
+	protected async override Task OnInitializedAsync()
+	{
+		await ProfileData.InitAsync();
+		await base.OnInitializedAsync();
+	}
 
-	
+	private async Task SignOutAsync()
+	{
+		await IdentityService.LogoutAsync();
+		await Navigation.ClearAsync();
+		await Navigation.GoToAsync(LoginPage.RouteIndex, typeof(LoginPage));
+	}
 }
